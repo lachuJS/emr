@@ -1,0 +1,9 @@
+<div id="patient-container">
+  <h4 id="name">{{ patient.name }}</h4><br>
+  <span id="hid">HID: {{ patient.hid }}</span><br>
+  <span id="age">Age: {{ patient.dob | agify }}</span><br>
+  <span id="gender">Gender: {{ patient.gender | genderify }}</span><br>
+  <span id="email">E-mail: {{ patient.email }}</span><br>
+  <span id="phone">Phone: {{ patient.phone }}</span><br>
+  <span id="doj">Date joined: {{ patient.doj | date:'longDate' }}</span>
+</div>
