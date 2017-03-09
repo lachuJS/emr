@@ -1,0 +1,11 @@
+<div>
+  <h4>Diagnosis</h4>
+  <span id="chief-complaints">Chief Complaints: {{ diagnosis.chiefComplaints }}</span>
+  <span id="duration">Durtion: {{ diagnosis.duration }}</span>
+  <span id="examination">Examination: {{ diagnosis.examination }}</span>
+  <app-vitals [vital]="diagnosis.vital"></app-vitals>
+  <app-systemic-examination [systemicExamination]="diagnosis.systemicExamination"></app-systemic-examination>
+  <span id="l-e">L/E: {{diagnosis.le}}</span>
+  <app-diagnosed [diagnosed]="diagnosis.diagnosed"></app-diagnosed>
+  <span id="followup-date" class="date">Next Consultation: {{ diagnosis.followupDate | date:'longDate' }}</span>
+</div>

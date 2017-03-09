@@ -7,12 +7,24 @@ import { PipeModule } from './pipes/pipe.module';
 import { AppComponent } from './app.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
+import { DiagnosisComponent } from './diagnosis/diagnosis.component';
+import { VitalsComponent } from './diagnosis/vitals/vitals.component';
+import { SystemicExaminationComponent } from './diagnosis/systemic-examination/systemic-examination.component';
+import { DiagnosedComponent } from './diagnosis/diagnosed/diagnosed.component';
+import { PrescriptionComponent } from './prescription/prescription.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DoctorComponent,
-    PatientComponent
+    PatientComponent,
+    DiagnosisComponent,
+    VitalsComponent,
+    SystemicExaminationComponent,
+    DiagnosedComponent,
+    PrescriptionComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

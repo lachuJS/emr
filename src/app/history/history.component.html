@@ -1,0 +1,15 @@
+<div id="history-container">
+  <h4>History</h4>
+  <div class="loading" *ngIf="!history">loading...</div>
+  <div *ngIf="history" id="history">
+    <ul id="history-list">
+      <li *ngIf="history.dm" id="dm">DM</li>
+      <li *ngIf="history.htn" id="htn">HTN</li>
+      <li *ngIf="history.ba" id="ba">BA</li>
+      <li *ngIf="history.thyroid" id="thyroid">Thyroid</li>
+      <li *ngIf="history.seizures" id="seizures">Seizures</li>
+    </ul>
+    <h4>Presenting Illness</h4>
+    <p id="presenting-illness">{{ history.presentingIllness }}</p>
+  </div>
+</div>
