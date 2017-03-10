@@ -1,11 +1,10 @@
-export class Patient{
+export class Patient {
   constructor(
     public name: string,
     public hid: number,
+    public gender: boolean,
     public dob: string,
-    public email: string,
-    public gender: boolean, //male=true,female=false
-    public phone: number,
-    public doj: string
+    public phone?: number,
+    public email?: string,
   ){}
 }

@@ -13,6 +13,9 @@ import { SystemicExaminationComponent } from './diagnosis/systemic-examination/s
 import { DiagnosedComponent } from './diagnosis/diagnosed/diagnosed.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { HistoryComponent } from './history/history.component';
+import { HealthLogComponent } from './health-log/health-log.component';
+
+import { HistoryService } from './history/history.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { HistoryComponent } from './history/history.component';
     SystemicExaminationComponent,
     DiagnosedComponent,
     PrescriptionComponent,
-    HistoryComponent
+    HistoryComponent,
+    HealthLogComponent,
+    PatientComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,9 @@ import { HistoryComponent } from './history/history.component';
     HttpModule,
     PipeModule
   ],
-  providers: [],
+  providers: [
+    HistoryService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

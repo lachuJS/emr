@@ -7,7 +7,8 @@ import { History } from './history';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css']
+  styleUrls: ['./history.component.css'],
+  providers: [HistoryService]
 })
 export class HistoryComponent implements OnInit {
   history: History;

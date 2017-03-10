@@ -2,10 +2,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
 import { PipeModule } from '../pipes/pipe.module';
 
 import { PatientComponent } from './patient.component';
+
 import { Patient } from './patient';
 
 describe('PatientComponent', () => {
@@ -16,7 +16,7 @@ describe('PatientComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PatientComponent ],
-      imports: [PipeModule]
+      imports: [ PipeModule ]
     })
     .compileComponents();
   }));
@@ -24,7 +24,7 @@ describe('PatientComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PatientComponent);
     component = fixture.componentInstance;
-    expectedPatient = new Patient('lorem','543','17/08/1995','lorem@ipsum',true,'1223432','10/10/10');
+    expectedPatient = new Patient('lorem',12,true,'17/08/1995',121323);
     component.patient = expectedPatient;
     fixture.detectChanges();
   });
@@ -32,43 +32,28 @@ describe('PatientComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should have a patient container',() => {
-    let de = fixture.debugElement.query(By.css('#patient-container'));
-    expect(de).toBeTruthy();
-  });
-  it('should display name',() => {
-    let de = fixture.debugElement.query(By.css('#name'));
+  it('should display patient name',() => {
+    let de = fixture.debugElement.query(By.css('#patient-name'));
     let el = de.nativeElement;
-    expect(el.textContent).toMatch(new RegExp(expectedPatient.name));
+    expect(el.textContent).toEqual(expectedPatient.name);
   });
-  it('should display hid',() => {
-    let de = fixture.debugElement.query(By.css('#hid'));
+  it('should display patient bio',() => {
+    let de = fixture.debugElement.query(By.css('#patient-bio'));
     let el = de.nativeElement;
-    expect(el.textContent).toMatch(new RegExp(expectedPatient.hid));
+    expect(el.textContent).toEqual('male 21');
   });
-  it('should display gender',() => {
-    let de = fixture.debugElement.query(By.css('#gender'));
+  it('should display patient hid',() => {
+    let de = fixture.debugElement.query(By.css('#patient-hid'));
     let el = de.nativeElement;
-    expect(el.textContent).toMatch(/male/);
+    expect(+el.textContent).toEqual(expectedPatient.hid);
   });
-  it('should display age from dob',() => {
-    let de = fixture.debugElement.query(By.css('#age'));
+  it('should display patient phone',() => {
+    let de = fixture.debugElement.query(By.css('#patient-phone'));
     let el = de.nativeElement;
-    expect(el.textContent).toMatch(/21/);
+    expect(+el.textContent).toEqual(expectedPatient.phone);
   });
-  it('should display email',() => {
-    let de = fixture.debugElement.query(By.css('#email'));
-    let el = de.nativeElement;
-    expect(el.textContent).toMatch(new RegExp(expectedPatient.email));
-  });
-  it('should display phone',() => {
-    let de = fixture.debugElement.query(By.css('#phone'));
-    let el = de.nativeElement;
-    expect(el.textContent).toMatch(new RegExp(expectedPatient.phone));
-  });
-  it('should display date joined',() => {
-    let de = fixture.debugElement.query(By.css('#doj'));
-    let el = de.nativeElement;
-    expect(el.textContent).toMatch(/October 10, 2010/);
+  it('should not display patient email',() => {
+    let de = fixture.debugElement.query(By.css('#patient-email'));
+    expect(de).toBeFalsy();
   });
 });
