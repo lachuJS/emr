@@ -1,0 +1,52 @@
+<div *ngIf="healthLogForm" id="health-log-form-container">
+  <form [formGroup]="healthLogForm" (ngSubmit)="submitForm()">
+    <div id="chief-complaints" formArrayName="chiefComplaints">
+      <label>chief-complaints:
+        <div *ngFor="let complaint of chiefComplaints;let i=index">
+          <label>{{i+1}}:<input type="text" formControlName="i"></label>
+        </div>
+      </label>
+      <button class="add-btn" (click)="addControl(healthLogForm.value.chiefComplaints)">add</button>
+    </div>
+    <div id="examination">
+      <label>examination:
+        <label><input type="radio" formControlName="examination" value="concious">concious</label>
+        <label><input type="radio" formControlName="examination" value="oriented">oriented</label>
+      </label>
+    </div>
+    <div id="vitals" formGroupName="vitals">
+      <label>vitals:
+        <label>PR:<input type="text" formControlName="pr"></label>
+        <label>BP:<input type="text" formControlName="bp"></label>
+        <label>RR:<input type="text" formControlName="rr"></label>
+        <label>temperature:<input type="text" formControlName="temp"></label>
+      </label>
+    </div>
+    <div id="systemic-examination" formGroupName="systemicExamination">
+      <label>systemic examination:
+        <label>CVS:<input type="text" formControlName="cvs"></label>
+        <label>RS:<input type="text" formControlName="rs"></label>
+        <label>CNS:<input type="text" formControlName="cns"></label>
+        <label>P/A:<input type="text" formControlName="pa"></label>
+      </label>
+    </div>
+    <div id="le">
+      <label>L/E:<input type="text" formControlName="le"></label>
+    </div>
+    <div id="final-diagnosis">
+      <label>final diagnosis:<input type="text" formControlName="finalDiagnosis"></label>
+    </div>
+    <div id="next-follow-up">
+      <label>next follow-up:<input type="date" formControlName="nextFollowUp"></label>
+    </div>
+    <div id="prescription" formArrayName="prescription">
+      <label>presctiption:
+        <div *ngFor="let item of prescription;let i=index">
+          <label>{{i+1}}:<input type="text" formControlName="i"></label>
+        </div>
+      </label>
+      <button class="add-btn" (click)="addControl(healthLogForm.value.prescription)">add</button>
+    </div>
+    <button type="submit" [disabled]="healthLogForm.pristine && !healthLogForm.valid" id="submit-btn">save</button>
+  </form>
+</div>
