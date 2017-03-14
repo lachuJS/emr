@@ -12,6 +12,9 @@ import { HealthLogFormComponent } from './health-log-form/health-log-form.compon
 
 import { HistoryService } from './history/history.service';
 import { HealthLogFormService } from './health-log-form/health-log-form.service';
+import { ConsultationComponent } from './consultation/consultation.component';
+import { AppointmentComponent } from './appointment/appointment.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { HealthLogFormService } from './health-log-form/health-log-form.service'
     PatientComponent,
     HistoryComponent,
     PatientComponent,
-    HealthLogFormComponent
+    HealthLogFormComponent,
+    ConsultationComponent,
+    AppointmentComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

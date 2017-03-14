@@ -18,7 +18,6 @@ describe('HealthLogFormComponent', () => {
   let healthLogFormService: HealthLogFormService;
   let healthLogFormServicePostSpy;
   let healthLogFormServiceGetSpy;
-  let healthLogFormServiceGetLastSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -98,20 +97,23 @@ describe('HealthLogFormComponent', () => {
     healthLogFormServiceGetSpy = spyOn(healthLogFormService,'getHealthLog')
     .and.returnValue(Promise.resolve(expectedHealthLogForm));
 
-    healthLogFormServiceGetLastSpy = spyOn(healthLogFormService,'getLastHealthLog')
-    .and.returnValue(Promise.resolve(expectedHealthLogForm));
     //=====================
-    component.healthLogId = undefined;
-    fixture.detectChanges();
+
   });
 
   it('should create', () => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
-  it('should display empty form if healthLogId is undefined',() => {
+  it('should display empty form if healthLogId is null',() => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     expect(component.healthLogForm.value).toEqual(emptyHealthLogForm);
   });
   it('prepareForm should capture form model( deep copy )', () => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     component.healthLogForm.setValue(expectedHealthLogForm);
     fixture.detectChanges();
     const capturedFormModel = component.prepareForm();
@@ -119,12 +121,16 @@ describe('HealthLogFormComponent', () => {
     expect(component.healthLogForm.value.examination).not.toEqual(capturedFormModel.examination);
   });
   it('submit should be disabled if healthLogForm is pristine',() => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     let de = fixture.debugElement.query(By.css('#submit-btn'));
     let el = de.nativeElement;
     el.click();
     expect(healthLogFormServicePostSpy).not.toHaveBeenCalled();
   });
   it('postHealthLog should have been called with param',() => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     component.healthLogForm.setValue(expectedHealthLogForm);
     component.healthLogForm.markAsDirty(); //enable submit button
     fixture.detectChanges();
@@ -134,6 +140,8 @@ describe('HealthLogFormComponent', () => {
     expect(healthLogFormServicePostSpy).toHaveBeenCalledWith(expectedHealthLogForm);
   });
   it('should go back to pristine after save',async(() => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     component.healthLogForm.setValue(expectedHealthLogForm);
     component.healthLogForm.markAsDirty(); //enable submit button
     fixture.detectChanges();
@@ -147,6 +155,8 @@ describe('HealthLogFormComponent', () => {
     })
   }));
   it('should add new control to FormArray chiefComplaints on add-btn click',() => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
     let de = fixture.debugElement.query(By.css('#chief-complaints > .add-btn'));
     let el = de.nativeElement;
@@ -155,6 +165,8 @@ describe('HealthLogFormComponent', () => {
     expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore+1);
   });
   it('should add new control to FormArray prescription on add-btn click',() => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     const lengthBefore = component.healthLogForm.value.prescription.length;
     let de = fixture.debugElement.query(By.css('#prescription > .add-btn'));
     let el = de.nativeElement;
@@ -164,15 +176,28 @@ describe('HealthLogFormComponent', () => {
   });
   //validators
   it('check form validity',() => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     component.healthLogForm.patchValue(expectedValidForm);
     expect(component.healthLogForm.status).toEqual('VALID');
   });
   it('check form INVALID',() => {
+    component.healthLogId = null;
+    fixture.detectChanges();
     component.healthLogForm.patchValue({chiefComplaints:['lorem']});
     expect(component.healthLogForm.status).toEqual('INVALID');
   });
 
   //edit form
+  it('should have called healthLogFormServiceGetSpy onInit',async(() => {
+    const healthLogId = 1
+    component.healthLogId = healthLogId;
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      expect(healthLogFormServiceGetSpy).toHaveBeenCalledWith(healthLogId);
+    })
+  }));
   it('should create edit form if healthLogId is not undefined',async(() => {
     component.healthLogId = 1;
     fixture.detectChanges();
@@ -201,14 +226,6 @@ describe('HealthLogFormComponent', () => {
       el.click();
 
       expect(healthLogFormServicePostSpy).toHaveBeenCalledWith(expectedHealthLogForm);
-    });
-  }));
-  it('should create edit form if healthLogId is null',async(() => {
-    component.healthLogId = null;
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      expect(component.healthLogForm.value).toEqual(expectedHealthLogForm);
     });
   }));
 });

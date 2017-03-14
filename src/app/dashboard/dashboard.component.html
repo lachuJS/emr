@@ -1,0 +1,7 @@
+<div id="dashboard">
+  <div *ngIf="appointments">
+    <div *ngFor="let appointment of appointments">
+      <app-appointment [appointment]="appointment"></app-appointment>
+    </div>
+  </div>
+</div>

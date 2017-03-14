@@ -1,16 +1,32 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { PipeModule } from './pipes/pipe.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
+import { AppointmentsService } from './dashboard/appointments.service';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        DashboardComponent
       ],
-    });
-    TestBed.compileComponents();
+      imports: [ PipeModule ],
+      providers: [ AppointmentsService ]
+    })
+    .overrideComponent(DashboardComponent,{
+      set: {
+        template: `<div id="dashboard-container"></div>`
+      }
+    })
+    .compileComponents();
   });
 
   it('should create the app', async(() => {
@@ -18,17 +34,9 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-
-  it(`should have as title 'app works!'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
-
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
+  it('should display dashboad container',() => {
+    const fixture = TestBed.createComponent(DashboardComponent);
+    let de = fixture.debugElement.query(By.css('#dashboard-container'));
+    expect(de).toBeTruthy();
+  });
 });

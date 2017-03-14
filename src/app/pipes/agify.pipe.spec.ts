@@ -10,6 +10,6 @@ describe('AgifyPipe', () => {
   });
   it('should agify the date',()=>{
     const pipe = new AgifyPipe();
-    expect(pipe.transform('17/08/1995')).toEqual(21);
+    expect(pipe.transform('1995-08-17')).toEqual(21);
   })
 });

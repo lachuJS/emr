@@ -24,7 +24,7 @@ describe('PatientComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PatientComponent);
     component = fixture.componentInstance;
-    expectedPatient = new Patient('lorem',12,true,'17/08/1995',121323);
+    expectedPatient = new Patient('lorem',12,true,'1995-08-17',121323);
     component.patient = expectedPatient;
     fixture.detectChanges();
   });

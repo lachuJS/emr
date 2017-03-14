@@ -18,11 +18,7 @@ export class HealthLogFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private healthLogFormService: HealthLogFormService
-  ) {
-    if(this.healthLogId===undefined){
-      this.createForm();
-    }
-  }
+  ) { }
   createForm(){
     //create form model with empty default/empty values
     this.healthLogForm = this.fb.group({
@@ -94,7 +90,7 @@ export class HealthLogFormComponent implements OnInit {
     this.healthLogFormService.postHealthLog(healthLog)
     .then((status: boolean) => {
       if(status){
-        this.healthLogForm.reset();
+        this.healthLogForm.reset(); //resets form status flags
       }
       //code...
     })
@@ -102,8 +98,8 @@ export class HealthLogFormComponent implements OnInit {
   }
   ngOnInit() {
     //consultation follow up
-    if(this.healthLogId === null){
-      this.healthLogFormService.getLastHealthLog()
+    if(this.healthLogId) {
+      this.healthLogFormService.getHealthLog(this.healthLogId)
       .then((healthLog: HealthLogForm) => {
         this.createEditForm(healthLog);
       })
@@ -112,13 +108,7 @@ export class HealthLogFormComponent implements OnInit {
       });
     }
     else{
-      this.healthLogFormService.getHealthLog(this.healthLogId)
-      .then((healthLog: HealthLogForm) => {
-        this.createEditForm(healthLog);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      this.createForm();
     }
   }
 }

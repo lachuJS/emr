@@ -8,6 +8,5 @@ export class HealthLogFormService {
   constructor() { }
   postHealthLog(healthLog: HealthLogForm): Promise<boolean> {}
   getHealthLog(healthLogId: number): Promise<HealthLogForm> {}
-  getLastHealthLog(): Promise<HealthLogForm> {}
 
 }
