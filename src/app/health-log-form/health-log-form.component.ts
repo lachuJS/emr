@@ -15,16 +15,24 @@ export class HealthLogFormComponent implements OnInit {
   @Input() healthLogId: number;
   healthLogForm: FormGroup;
 
+  get chiefComplaints():  FormArray {
+    return this.healthLogForm.get('chiefComplaints') as FormArray;
+  }
+  get prescription(): FormArray {
+    return this.healthLogForm.get('prescription') as FormArray;
+  }
+
   constructor(
     private fb: FormBuilder,
     private healthLogFormService: HealthLogFormService
-  ) { }
+  ) {
+    this.createForm();
+  }
+
   createForm(){
     //create form model with empty default/empty values
     this.healthLogForm = this.fb.group({
-      chiefComplaints: this.fb.array([
-        ['',Validators.required],
-      ]),
+      chiefComplaints: this.fb.array([]),
       examination: ['concious',Validators.required],
       vitals: this.fb.group({
         pr: undefined,
@@ -41,35 +49,23 @@ export class HealthLogFormComponent implements OnInit {
       le: '',
       finalDiagnosis: ['',Validators.required],
       nextFollowUp: '',
-      prescription: this.fb.array([
-        ['',Validators.required]
-      ])
+      prescription: this.fb.array([])
     });
+    this.addPrescriptionItem();
+    this.addChiefComplaint();
   }
-  createEditForm(healthLog: HealthLogForm){
-    this.healthLogForm = this.fb.group({
-      chiefComplaints: this.fb.array(healthLog.chiefComplaints),
-      examination: healthLog.examination,
-      vitals: this.fb.group({
-        pr: healthLog.vitals.pr,
-        bp: healthLog.vitals.bp,
-        rr: healthLog.vitals.rr,
-        temp: healthLog.vitals.temp
-      }),
-      systemicExamination: this.fb.group({
-        cvs: healthLog.systemicExamination.cvs,
-        rs: healthLog.systemicExamination.rs,
-        cns: healthLog.systemicExamination.cns,
-        pa: healthLog.systemicExamination.pa
-      }),
-      le: healthLog.le,
-      finalDiagnosis: healthLog.finalDiagnosis,
-      nextFollowUp: healthLog.nextFollowUp,
-      prescription: this.fb.array(healthLog.prescription)
-    });
+  addPrescriptionItem(){
+    this.prescription.push(this.fb.control('',Validators.required));
   }
-  addControl(formArray: Array<any>): void{
-    formArray.push('');
+  addChiefComplaint(){
+    this.chiefComplaints.push(this.fb.control('',Validators.required));
+  }
+  validateForm(){
+    //return true for disabled save button
+    if(!this.healthLogForm.pristine && this.healthLogForm.valid){
+      return false;
+    }
+    return true;
   }
   prepareForm(){
     //captures form model
@@ -90,7 +86,7 @@ export class HealthLogFormComponent implements OnInit {
     this.healthLogFormService.postHealthLog(healthLog)
     .then((status: boolean) => {
       if(status){
-        this.healthLogForm.reset(); //resets form status flags
+        this.healthLogForm.markAsPristine(); //disables save until form is dirty
       }
       //code...
     })
@@ -98,17 +94,10 @@ export class HealthLogFormComponent implements OnInit {
   }
   ngOnInit() {
     //consultation follow up
+    //load healthlogs from previous consultations
     if(this.healthLogId) {
-      this.healthLogFormService.getHealthLog(this.healthLogId)
-      .then((healthLog: HealthLogForm) => {
-        this.createEditForm(healthLog);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      //code...
     }
-    else{
-      this.createForm();
-    }
+    //form for current consultation
   }
 }

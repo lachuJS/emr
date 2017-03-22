@@ -187,45 +187,4 @@ describe('HealthLogFormComponent', () => {
     component.healthLogForm.patchValue({chiefComplaints:['lorem']});
     expect(component.healthLogForm.status).toEqual('INVALID');
   });
-
-  //edit form
-  it('should have called healthLogFormServiceGetSpy onInit',async(() => {
-    const healthLogId = 1
-    component.healthLogId = healthLogId;
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      expect(healthLogFormServiceGetSpy).toHaveBeenCalledWith(healthLogId);
-    })
-  }));
-  it('should create edit form if healthLogId is not undefined',async(() => {
-    component.healthLogId = 1;
-    fixture.detectChanges();
-    //wait for getHealthLog
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      expect(component.healthLogForm.value).toEqual(expectedHealthLogForm);
-    });
-  }));
-  it('should get expectedHealthLogForm when submitted',async(() => {
-    component.healthLogId = 1;
-    fixture.detectChanges();
-    //wait for getHealthLog()
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-
-      expectedHealthLogForm.le = 'lorem ipsum';
-      expectedHealthLogForm.chiefComplaints.push('ipsum');
-      component.healthLogForm.value.chiefComplaints[1] = 'ipsum'
-      component.healthLogForm.value.le = 'lorem ipsum';
-      component.healthLogForm.markAsDirty();
-      fixture.detectChanges();
-
-      let de = fixture.debugElement.query(By.css('#submit-btn'));
-      let el = de.nativeElement;
-      el.click();
-
-      expect(healthLogFormServicePostSpy).toHaveBeenCalledWith(expectedHealthLogForm);
-    });
-  }));
 });
