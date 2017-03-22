@@ -18,6 +18,7 @@ import { HistoryService } from './history/history.service';
 import { HealthLogFormService } from './health-log-form/health-log-form.service';
 import { LoginFormService } from './login-form/login-form.service';
 import { AppointmentsService } from './dashboard/appointments.service';
+import { DoctorService } from './doctor/doctor.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AppointmentsService } from './dashboard/appointments.service';
     HistoryService,
     HealthLogFormService,
     LoginFormService,
-    AppointmentsService
+    AppointmentsService,
+    DoctorService
   ],
   bootstrap: [AppComponent]
 })

@@ -4,16 +4,21 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { DoctorComponent } from './doctor.component';
+
+import { DoctorService } from './doctor.service';
+
 import { Doctor } from './doctor';
 
 describe('DoctorComponent', () => {
   let component: DoctorComponent;
   let fixture: ComponentFixture<DoctorComponent>;
-  let expectedDoctor :Doctor;
+  let doctorService: DoctorService;
+  let doctorServiceGetDoctorSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DoctorComponent ]
+      declarations: [ DoctorComponent ],
+      providers: [ DoctorService ]
     })
     .compileComponents();
   }));
@@ -21,36 +26,27 @@ describe('DoctorComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DoctorComponent);
     component = fixture.componentInstance;
-    expectedDoctor = new Doctor('lorem','ipsum','lorem@ipsum','12343324');
-    component.doctor = expectedDoctor;
+
+    //spy
+    doctorService = fixture.debugElement.injector.get(DoctorService);
+    doctorServiceGetDoctorSpy = spyOn(doctorService,'getDoctor')
+    .and.returnValue(Promise.resolve({name:'doctor_name',bio:'MBBS'}));
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should be enclosed in container',() => {
-    let de = fixture.debugElement.query(By.css('#doctor-container'));
-    expect(de).toBeTruthy();
+  it('should call getDoctor service on init',() => {
+    expect(doctorServiceGetDoctorSpy).toHaveBeenCalled();
   });
-  it('should display name',() => {
-    let de = fixture.debugElement.query(By.css('#name'));
-    let el = de.nativeElement;
-    expect(el.textContent).toContain(expectedDoctor.name);
-  });
-  it('should display bio',() => {
-    let de = fixture.debugElement.query(By.css('#bio'));
-    let el = de.nativeElement;
-    expect(el.textContent).toContain(expectedDoctor.bio);
-  });
-  it('should display email',() => {
-    let de = fixture.debugElement.query(By.css('#email'));
-    let el = de.nativeElement;
-    expect(el.textContent).toContain(expectedDoctor.email);
-  });
-  it('should display phone',() => {
-    let de = fixture.debugElement.query(By.css('#phone'));
-    let el = de.nativeElement;
-    expect(el.textContent).toContain(expectedDoctor.phone);
+  it('should display doctor on getDoctor',() => {
+    fixture.whenStable(() => {
+      fixture.detectChanges();
+      let de = fixture.debugElement.query(By.css('#doctor-container'));
+      let el = de.nativeElement;
+      expect(el).toBeTruthy();
+    });
   });
 });

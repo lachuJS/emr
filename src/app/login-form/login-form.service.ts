@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 export class LoginFormService {
 
   constructor() { }
-  authenticate(user: {username: string,password: string}): boolean {}
+  authenticate(user: {username: string,password: string}): Promise<boolean> {
+    //return true if 200 ok
+    return Promise.resolve(true);
+  }
 
 }

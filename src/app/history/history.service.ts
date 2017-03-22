@@ -8,5 +8,14 @@ export class HistoryService {
   constructor() { }
   getHistory(hid: number): Promise<History> {
     //return promise.resolve(history: History)
+    //mock data
+    return Promise.resolve({
+      dm: null,
+      htn: null,
+      ba: null,
+      thyroid: true,
+      seizures: null,
+      presentingIllness: 'lorem'
+    });
   }
 }

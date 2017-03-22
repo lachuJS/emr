@@ -1,6 +1,6 @@
-<div class="doctor-container" id="doctor-container">
+<div  *ngIf="doctor" id="doctor-container">
   <h4 id="name">{{doctor.name}}</h4>
   <span id="bio">{{doctor.bio}}</span>
-  <span id="email">{{doctor.email}}</span>
-  <span id="phone">{{doctor.phone}}</span>
+  <span *ngIf="doctor.email" id="email">{{doctor.email}}</span>
+  <span *ngIf="doctor.phone" id="phone">{{doctor.phone}}</span>
 </div>
