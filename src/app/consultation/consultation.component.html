@@ -1,5 +1,7 @@
 <div id="consultation-container">
   <app-patient [patient]="consultation.patient"></app-patient>
   <app-history [hid]="consultation.patient.hid"></app-history>
-  <app-health-log-form [healthLogId]="healthLogForm"></app-health-log-form>
+  <!-- get health logs if it is a follow up consultation-->
+  <app-health-log *ngIf="consultation.followUp" [appointmentId]="consultation.aid"></app-health-log>
+  <app-health-log-form></app-health-log-form>
 </div>

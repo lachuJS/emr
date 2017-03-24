@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Appointment } from './appointment';
-import { ConsultationComponent } from '../consultation/consultation.component'; 
+import { ConsultationComponent } from '../../consultation/consultation.component'; 
 
 @Component({
   selector: 'app-appointment',

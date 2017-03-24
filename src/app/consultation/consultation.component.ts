@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { PatientComponent } from '../patient/patient.component';
-import { HealthLogFormComponent } from '../health-log-form/health-log-form.component';
-import { HistoryComponent } from '../history/history.component';
+import { PatientComponent } from './patient/patient.component';
+import { HealthLogComponent } from './health-log/health-log.component';
+import { HealthLogFormComponent } from './health-log-form/health-log-form.component';
+import { HistoryComponent } from './history/history.component';
 
 import { Consultation } from './consultation';
 
@@ -14,10 +15,7 @@ import { Consultation } from './consultation';
 })
 export class ConsultationComponent implements OnInit {
   @Input() consultation: Consultation;
-  healthLogForm: number;
   constructor() {}
 
-  ngOnInit() {
-    this.healthLogForm = this.consultation.followUp ? this.consultation.aid : null;
-  }
+  ngOnInit() {}
 }

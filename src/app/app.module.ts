@@ -5,20 +5,21 @@ import { PipeModule } from './pipes/pipe.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { DoctorComponent } from './doctor/doctor.component';
-import { PatientComponent } from './patient/patient.component';
-import { HistoryComponent } from './history/history.component';
-import { HealthLogFormComponent } from './health-log-form/health-log-form.component';
+import { DoctorComponent } from './dashboard/doctor/doctor.component';
+import { PatientComponent } from './consultation/patient/patient.component';
+import { HistoryComponent } from './consultation/history/history.component';
+import { HealthLogFormComponent } from './consultation/health-log-form/health-log-form.component';
 import { ConsultationComponent } from './consultation/consultation.component';
-import { AppointmentComponent } from './appointment/appointment.component';
+import { AppointmentComponent } from './dashboard/appointment/appointment.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { HealthLogComponent } from './consultation/health-log/health-log.component';
 
-import { HistoryService } from './history/history.service';
-import { HealthLogFormService } from './health-log-form/health-log-form.service';
+import { HistoryService } from './consultation/history/history.service';
+import { HealthLogFormService } from './consultation/health-log-form/health-log-form.service';
 import { LoginFormService } from './login-form/login-form.service';
-import { AppointmentsService } from './dashboard/appointments.service';
-import { DoctorService } from './doctor/doctor.service';
+import { DashboardService } from './dashboard/dashboard.service';
+import { HealthLogService } from './consultation/health-log/health-log.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DoctorService } from './doctor/doctor.service';
     ConsultationComponent,
     AppointmentComponent,
     DashboardComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    HealthLogComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,8 +47,8 @@ import { DoctorService } from './doctor/doctor.service';
     HistoryService,
     HealthLogFormService,
     LoginFormService,
-    AppointmentsService,
-    DoctorService
+    DashboardService,
+    HealthLogService
   ],
   bootstrap: [AppComponent]
 })

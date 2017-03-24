@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { Appointment } from '../appointment/appointment';
+import { Doctor } from './doctor/doctor';
+import { Appointment } from './appointment/appointment';
 
 @Injectable()
-export class AppointmentsService {
+export class DashboardService {
 
   constructor() { }
   getAppointments(): Promise<Appointment[]> {

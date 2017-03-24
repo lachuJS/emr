@@ -6,22 +6,19 @@ import { PipeModule } from '../pipes/pipe.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './dashboard.component';
-import { AppointmentComponent } from '../appointment/appointment.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 import { ConsultationComponent } from '../consultation/consultation.component';
-import { PatientComponent } from '../patient/patient.component';
-import { HistoryComponent } from '../history/history.component';
-import { HealthLogFormComponent } from '../health-log-form/health-log-form.component';
 
-import { AppointmentsService } from './appointments.service';
+import { DashboardService } from './dashboard.service';
 
-import { Appointment } from '../appointment/appointment';
+import { Appointment } from './appointment/appointment';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let expectedAppointments: Array<Appointment>;
-  let appointmentsService: AppointmentsService;
-  let appointmentsServiceSpy;
+  let dashboardService: DashboardService;
+  let dashboardServiceSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,15 +26,12 @@ describe('DashboardComponent', () => {
         DashboardComponent,
         AppointmentComponent,
         ConsultationComponent,
-        PatientComponent,
-        HistoryComponent,
-        HealthLogFormComponent
       ],
       imports: [
         PipeModule,
         ReactiveFormsModule
       ],
-      providers: [ AppointmentsService ]
+      providers: [ DashboardService ]
     })
     .overrideComponent(ConsultationComponent,{
       set: {
@@ -74,8 +68,8 @@ describe('DashboardComponent', () => {
       }
     ];
 
-    appointmentsService = fixture.debugElement.injector.get(AppointmentsService);
-    appointmentsServiceSpy = spyOn(appointmentsService,'getAppointments')
+    dashboardService = fixture.debugElement.injector.get(DashboardService);
+    dashboardServiceSpy = spyOn(dashboardService,'getAppointments')
     .and.returnValue(Promise.resolve(expectedAppointments));
 
     fixture.detectChanges();
@@ -83,6 +77,13 @@ describe('DashboardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should have dashboard container',() => {
+    let de = fixture.debugElement.query(By.css('#dashboard-container'));
+    expect(de).toBeTruthy();
+  });
+  it('should have doctor info',() => {
+
   });
   it('should call getAppointments',async(() => {
     fixture.whenStable().then(() => {

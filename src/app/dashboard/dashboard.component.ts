@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Appointment } from '../appointment/appointment';
+import { Doctor } from './doctor/doctor';
+import { Appointment } from './appointment/appointment';
 
-import { AppointmentsService } from './appointments.service';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,13 +11,15 @@ import { AppointmentsService } from './appointments.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  doctor: Doctor;
   appointments: Array<Appointment>;
   constructor(
-    private appointmentsService: AppointmentsService
+    private dashboardService: DashboardService
   ) { }
 
   ngOnInit() {
-    this.appointmentsService.getAppointments()
+    //get appointments of doctor
+    this.dashboardService.getAppointments()
     .then((appointments: Array<Appointment>) => {
       this.appointments = appointments;
     })

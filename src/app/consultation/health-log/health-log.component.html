@@ -1,0 +1,55 @@
+<div *ngIf="healthLogs" id='health-logs-container'>
+  <div *ngFor="let healthLog of healthLogs">
+
+    <div class="health-log">
+      <!--loop chief complaints array-->
+      <div id="chief-complaints">
+        <h4>chief-complaints</h4>
+        <ul *ngFor="let complaint of healthLog.chiefComplaints">
+          <li class="complaint">{{ complaint }}</li>
+        </ul>
+      </div>
+      <!--examination-->
+      <div *ngIf="healthLog.examination">
+        <div id="examination"><b>examination:</b>{{ healthLog.examination }}</div>
+      </div>
+      <!--vitals-->
+      <div *ngIf="healthLog.vitals" id="vitals">
+        <h4>vitals:</h4>
+        <ul>
+          <li>PR: {{ healthLog.vitals.pr }}</li>
+          <li>BP: {{ healthLog.vitals.bp }}</li>
+          <li>RR: {{ healthLog.vitals.rr }}</li>
+          <li>temperature: {{ healthLog.vitals.temp }}</li>
+        </ul>
+      </div>
+      <!--systemic examination-->
+      <div *ngIf="healthLog.systemicExamination" id="systemic-examination">
+        <h4>systemic-examintion:</h4>
+        <ul>
+          <li>CVS: {{ healthLog.systemicExamination.cvs }}</li>
+          <li>RS: {{ healthLog.systemicExamination.rs }}</li>
+          <li>CNS: {{ healthLog.systemicExamination.cns }}</li>
+          <li>P/A: {{ healthLog.systemicExamination.pa }}</li>
+        </ul>
+      </div>
+      <!--L/E-->
+      <div *ngIf="healthLog.le" id="le">
+        <p>{{ healthLog.le }}</p>
+      </div>
+      <!--final diagnosis-->
+      <div id="final-diagnosis">
+        <p><b>diagnosis: {{ healthLog.finalDiagnosis }}</b></p>
+      </div>
+      <!--follow up date-->
+      <div *ngIf="healthLog.nextFollowUp" id="next-follow-up"><p>{{ healthLog.nextFollowUp | date:'longDate' }}</p></div>
+      <!--prescription-->
+      <div *ngIf="healthLog.prescription" id="prescription">
+        <ul *ngFor="let item of prescription;let i=index;">
+          <li>{{ i+1 }}: {{ item }}</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

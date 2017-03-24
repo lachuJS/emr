@@ -4,14 +4,17 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { PipeModule } from '../pipes/pipe.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { ConsultationComponent } from './consultation.component';
-import { PatientComponent } from '../patient/patient.component';
-import { HistoryComponent } from '../history/history.component';
-import { HealthLogFormComponent } from '../health-log-form/health-log-form.component';
+import { PatientComponent } from './patient/patient.component';
+import { HistoryComponent } from './history/history.component';
+import { HealthLogComponent } from './health-log/health-log.component';
+import { HealthLogFormComponent } from './health-log-form/health-log-form.component';
 
-import { HistoryService } from '../history/history.service';
-import { HealthLogFormService } from '../health-log-form/health-log-form.service';
+import { HistoryService } from './history/history.service';
+import { HealthLogService } from './health-log/health-log.service';
+import { HealthLogFormService } from './health-log-form/health-log-form.service';
 
 import { Consultation } from './consultation';
 
@@ -58,6 +61,11 @@ describe('ConsultationComponent', () => {
       return Promise.resolve(expectedHealthLogForm);
     }
   }
+  let healthLogServiceStub = {
+    getHealthLogs: () => {
+      return Promise.resolve([expectedHealthLogForm]);
+    }
+  }
   //===============================
 
   beforeEach(async(() => {
@@ -66,11 +74,13 @@ describe('ConsultationComponent', () => {
         ConsultationComponent,
         PatientComponent,
         HistoryComponent,
-        HealthLogFormComponent
+        HealthLogFormComponent,
+        HealthLogComponent
       ],
       imports: [
         PipeModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CommonModule
       ]
     })
     .overrideComponent(HistoryComponent,{
@@ -83,6 +93,11 @@ describe('ConsultationComponent', () => {
         providers: [{ provide:HealthLogFormService, useValue:healthLogFormServiceStub }]
       }
     })
+    .overrideComponent(HealthLogComponent,{
+      set: {
+        providers: [{ provide: HealthLogService, useValue:healthLogServiceStub }]
+      }
+    })
     .compileComponents();
   }));
 
@@ -91,7 +106,7 @@ describe('ConsultationComponent', () => {
     component = fixture.componentInstance;
 
     component.consultation = {
-      count: 23,
+      aid: 23,
       patient: {
         name: 'lorem',
         hid: 12,
@@ -113,6 +128,10 @@ describe('ConsultationComponent', () => {
   });
   it('should create history component',() => {
     let de = fixture.debugElement.query(By.css('#history-container'));
+    expect(de).toBeTruthy();
+  });
+  it('should create health-logs component',() => {
+    let de = fixture.debugElement.query(By.css('#health-logs-container'));
     expect(de).toBeTruthy();
   });
   it('should create health-log-form component',async(() => {

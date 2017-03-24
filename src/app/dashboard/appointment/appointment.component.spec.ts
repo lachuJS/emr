@@ -2,10 +2,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { PipeModule } from '../pipes/pipe.module';
+import { PipeModule } from '../../pipes/pipe.module';
 
 import { AppointmentComponent } from './appointment.component';
-import { ConsultationComponent } from '../consultation/consultation.component';
+import { ConsultationComponent } from '../../consultation/consultation.component';
 
 describe('AppointmentComponent', () => {
   let component: AppointmentComponent;

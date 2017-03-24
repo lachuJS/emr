@@ -12,7 +12,6 @@ import { HealthLogFormService } from './health-log-form.service';
   styleUrls: ['./health-log-form.component.css']
 })
 export class HealthLogFormComponent implements OnInit {
-  @Input() healthLogId: number;
   healthLogForm: FormGroup;
 
   get chiefComplaints():  FormArray {
@@ -92,12 +91,5 @@ export class HealthLogFormComponent implements OnInit {
     })
     .catch(err => console.log(err));
   }
-  ngOnInit() {
-    //consultation follow up
-    //load healthlogs from previous consultations
-    if(this.healthLogId) {
-      //code...
-    }
-    //form for current consultation
-  }
+  ngOnInit() {}
 }

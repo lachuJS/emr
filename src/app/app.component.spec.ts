@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { AppointmentsService } from './dashboard/appointments.service';
+import { DashboardService } from './dashboard/dashboard.service';
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('AppComponent', () => {
         DashboardComponent
       ],
       imports: [ PipeModule ],
-      providers: [ AppointmentsService ]
+      providers: [ DashboardService ]
     })
     .overrideComponent(DashboardComponent,{
       set: {
