@@ -6,24 +6,28 @@ import { PipeModule } from '../pipes/pipe.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './dashboard.component';
+import { DoctorComponent } from './doctor/doctor.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { ConsultationComponent } from '../consultation/consultation.component';
 
 import { DashboardService } from './dashboard.service';
 
+import { Doctor } from './doctor/doctor';
 import { Appointment } from './appointment/appointment';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+  let expectedDoctor: Doctor;
   let expectedAppointments: Array<Appointment>;
   let dashboardService: DashboardService;
-  let dashboardServiceSpy;
+  let dashboardServiceGetDoctorSpy, dashboardServiceGetAppointmentsSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         DashboardComponent,
+        DoctorComponent,
         AppointmentComponent,
         ConsultationComponent,
       ],
@@ -45,6 +49,10 @@ describe('DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
 
+    expectedDoctor = {
+      name: 'doctor_name',
+      bio: 'MBBS'
+    }
     expectedAppointments = [
       {
           count: 1,
@@ -69,8 +77,10 @@ describe('DashboardComponent', () => {
     ];
 
     dashboardService = fixture.debugElement.injector.get(DashboardService);
-    dashboardServiceSpy = spyOn(dashboardService,'getAppointments')
+    dashboardServiceGetAppointmentsSpy = spyOn(dashboardService,'getAppointments')
     .and.returnValue(Promise.resolve(expectedAppointments));
+    dashboardServiceGetDoctorSpy = spyOn(dashboardService,'getDoctor')
+    .and.returnValue(Promise.resolve(expectedDoctor));
 
     fixture.detectChanges();
   });
@@ -82,13 +92,18 @@ describe('DashboardComponent', () => {
     let de = fixture.debugElement.query(By.css('#dashboard-container'));
     expect(de).toBeTruthy();
   });
-  it('should have doctor info',() => {
-
+  it('should call getDoctor() on init',() => {
+    expect(dashboardServiceGetDoctorSpy).toHaveBeenCalled();
+  });
+  it('should have doctor container',() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      let de = fixture.debugElement.query(By.css('#doctor-container'));
+      expect(de).toBeTruthy();
+    })
   });
   it('should call getAppointments',async(() => {
-    fixture.whenStable().then(() => {
-      expect(component.appointments).toEqual(expectedAppointments);
-    });
+    expect(dashboardServiceGetAppointmentsSpy).toHaveBeenCalled();
   }));
   it('should display two appointment containers',async(() => {
     fixture.whenStable().then(() => {

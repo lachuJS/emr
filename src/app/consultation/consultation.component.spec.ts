@@ -12,17 +12,25 @@ import { HistoryComponent } from './history/history.component';
 import { HealthLogComponent } from './health-log/health-log.component';
 import { HealthLogFormComponent } from './health-log-form/health-log-form.component';
 
-import { HistoryService } from './history/history.service';
-import { HealthLogService } from './health-log/health-log.service';
-import { HealthLogFormService } from './health-log-form/health-log-form.service';
-
-import { Consultation } from './consultation';
+import { ConsultationService } from './consultation.service';
 
 describe('ConsultationComponent', () => {
   let component: ConsultationComponent;
   let fixture: ComponentFixture<ConsultationComponent>;
+  let consultationService: ConsultationService;
+  let consultationServiceGetPatientHistory;
+  let consultationServiceGetAppointmentHealthLogsSpy;
 
-  //child component service stubs
+  let expectedAppointment = {
+    aid: 23,
+    patient: {
+      name: 'lorem',
+      hid: 12,
+      gender: true,
+      dob: '1995-08-17'
+    }
+    followUp: true
+  }
   let expectedHistory = {dm:true,htn:false,ba:false,thyroid:true,seizures:false,presentingIllness:'lorem ipsum'};
   let expectedHealthLogForm = {
     chiefComplaints: ['lorem'],
@@ -45,28 +53,6 @@ describe('ConsultationComponent', () => {
     nextFollowUp: '1995-08-17',
     prescription: ['lorem 25mg']
   }
-  let historyServiceStub = {
-    getHistory: () => {
-      return Promise.resolve(expectedHistory);
-    }
-  }
-  let healthLogFormServiceStub = {
-    postHealthLog: () => {
-      return true;
-    }
-    getHealthLog: () => {
-      return Promise.resolve(expectedHealthLogForm);
-    }
-    getLastHealthLog: () => {
-      return Promise.resolve(expectedHealthLogForm);
-    }
-  }
-  let healthLogServiceStub = {
-    getHealthLogs: () => {
-      return Promise.resolve([expectedHealthLogForm]);
-    }
-  }
-  //===============================
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -81,22 +67,8 @@ describe('ConsultationComponent', () => {
         PipeModule,
         ReactiveFormsModule,
         CommonModule
-      ]
-    })
-    .overrideComponent(HistoryComponent,{
-      set: {
-        providers: [{ provide:HistoryService, useValue:historyServiceStub }]
-      }
-    })
-    .overrideComponent(HealthLogFormComponent,{
-      set: {
-        providers: [{ provide:HealthLogFormService, useValue:healthLogFormServiceStub }]
-      }
-    })
-    .overrideComponent(HealthLogComponent,{
-      set: {
-        providers: [{ provide: HealthLogService, useValue:healthLogServiceStub }]
-      }
+      ],
+      providers: [ ConsultationService ]
     })
     .compileComponents();
   }));
@@ -105,17 +77,14 @@ describe('ConsultationComponent', () => {
     fixture = TestBed.createComponent(ConsultationComponent);
     component = fixture.componentInstance;
 
-    component.consultation = {
-      aid: 23,
-      patient: {
-        name: 'lorem',
-        hid: 12,
-        gender: true,
-        dob: '1995-08-17'
-      }
-      followUp: true
-    }
+    //spies
+    consultationService = fixture.debugElement.injector.get(ConsultationService);
+    consultationServiceGetPatientHistory = spyOn(consultationService,'getPatientHistory')
+    .and.returnValue(Promise.resolve(expectedHistory));
+    consultationServiceGetAppointmentHealthLogsSpy = spyOn(consultationService,'getAppointmentHealthLogs')
+    .and.returnValue(Promise.resolve([expectedHealthLogForm]));
 
+    component.appointment = expectedAppointment;
     fixture.detectChanges();
   });
 
@@ -126,19 +95,59 @@ describe('ConsultationComponent', () => {
     let de = fixture.debugElement.query(By.css('#patient-container'));
     expect(de).toBeTruthy();
   });
-  it('should create history component',() => {
-    let de = fixture.debugElement.query(By.css('#history-container'));
-    expect(de).toBeTruthy();
+  it('should call getPatientHistory on init',() => {
+    expect(consultationServiceGetPatientHistory).toHaveBeenCalledWith(expectedAppointment.patient.hid);
   });
-  it('should create health-logs component',() => {
-    let de = fixture.debugElement.query(By.css('#health-logs-container'));
-    expect(de).toBeTruthy();
-  });
-  it('should create health-log-form component',async(() => {
-    fixture.whenStable().then(
+  it('should create history component',async(() => {
+    fixture.whenStable().then(() => {
       fixture.detectChanges();
-      let de = fixture.debugElement.query(By.css('#health-log-form-container'));
+      let de = fixture.debugElement.query(By.css('#history-container'));
       expect(de).toBeTruthy();
-    )
+    });
   }));
+  it('should call getAppointmentHealthLogs on init',() => {
+    expect(consultationServiceGetAppointmentHealthLogsSpy).toHaveBeenCalledWith(expectedAppointment.aid);
+  });
+  it('should create health-logs component',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      let de = fixture.debugElement.query(By.css('#health-logs-container'));
+      expect(de).toBeTruthy();
+    });
+  }));
+  it('should create health-log-form component',() => {
+    let de = fixture.debugElement.query(By.css('#health-log-form-container'));
+    expect(de).toBeTruthy();
+  });
+  //followUp false
+  describe('followUp is not true',() => {
+    let expectedAppointmentFalseFollowUp: Appointment;
+
+    beforeEach(() => {
+       expectedAppointmentFalseFollowUp = {
+         aid:2,
+         patient:{
+           name:'patient name',
+           hid:2,
+           gender:false,
+           dob:'1996-08-18'
+         },
+         followUp: false
+       }
+       component.appointment = expectedAppointmentFalseFollowUp;
+       fixture.detectChanges();
+    });
+
+    it('should not call getAppointmentHealthLogs',() => {
+      expect(consultationServiceGetAppointmentHealthLogsSpy).toHaveBeenCalled();
+    });
+    it('should not have healthlogs container',async(() => {
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        let de = fixture.debugElement.query(By.css('#health-logs-container'));
+        expect(de).toBeTruthy();
+    }));
+
+  });
+
 });

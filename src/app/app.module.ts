@@ -15,11 +15,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HealthLogComponent } from './consultation/health-log/health-log.component';
 
-import { HistoryService } from './consultation/history/history.service';
-import { HealthLogFormService } from './consultation/health-log-form/health-log-form.service';
-import { LoginFormService } from './login-form/login-form.service';
 import { DashboardService } from './dashboard/dashboard.service';
-import { HealthLogService } from './consultation/health-log/health-log.service';
+import { ConsultationService } from './consultation/consultation.service';
+import { LoginFormService } from './login-form/login-form.service';
 
 @NgModule({
   declarations: [
@@ -44,11 +42,9 @@ import { HealthLogService } from './consultation/health-log/health-log.service';
     FormsModule
   ],
   providers: [
-    HistoryService,
-    HealthLogFormService,
     LoginFormService,
     DashboardService,
-    HealthLogService
+    ConsultationService
   ],
   bootstrap: [AppComponent]
 })

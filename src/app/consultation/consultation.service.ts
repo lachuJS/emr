@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
 
-import { HealthLogForm } from "../health-log-form/health-log-form.data-model";
+import { HealthLogForm } from './health-log-form/health-log-form.data-model';
 
 @Injectable()
-export class HealthLogService {
+export class ConsultationService {
 
   constructor() { }
-  getHealthLogs(appointmentId): Promise<HealthLogForm[]> {
+  getPatientHistory(hid: number): Promise<History> {
+    //return promise.resolve(history: History)
+    //mock data
+    return Promise.resolve({
+      dm: null,
+      htn: null,
+      ba: null,
+      thyroid: true,
+      seizures: null,
+      presentingIllness: 'lorem'
+    });
+  }
+  getAppointmentHealthLogs(appointmentId): Promise<HealthLogForm[]> {
     return Promise.resolve([
       {
         chiefComplaints: ['lorem'],
@@ -51,5 +63,11 @@ export class HealthLogService {
         prescription: ['lorem 25mg']
       }
     ]);
+  }
+  postHealthLog(healthLog: HealthLogForm): Promise<boolean> {
+    //check response code for 201 created
+    return Promise.resolve(true);
+    //if err
+    //call error handler
   }
 }

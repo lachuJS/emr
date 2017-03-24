@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 import { HealthLogForm } from './health-log-form.data-model';
 import { Examination } from './health-log-form.data-model';
 
-import { HealthLogFormService } from './health-log-form.service';
+import { ConsultationService } from '../consultation.service';
 
 @Component({
   selector: 'app-health-log-form',
@@ -23,7 +23,7 @@ export class HealthLogFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private healthLogFormService: HealthLogFormService
+    private consultationService: ConsultationService
   ) {
     this.createForm();
   }
@@ -82,7 +82,7 @@ export class HealthLogFormComponent implements OnInit {
   }
   submitForm() {
     const healthLog = this.prepareForm();
-    this.healthLogFormService.postHealthLog(healthLog)
+    this.consultationService.postHealthLog(healthLog)
     .then((status: boolean) => {
       if(status){
         this.healthLogForm.markAsPristine(); //disables save until form is dirty

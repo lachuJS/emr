@@ -1,7 +1,12 @@
 <div id="dashboard-container">
-  <div *ngIf="appointments">
+  <!--doctor-info-->
+  <app-doctor *ngIf="doctor" [doctor]="doctor"></app-doctor>
+  <!--appointments feed-->
+  <div *ngIf="appointments" id="appointments-container">
     <div *ngFor="let appointment of appointments">
       <app-appointment [appointment]="appointment"></app-appointment>
     </div>
   </div>
+  <!--notifications-->
+  <!--code...-->
 </div>

@@ -7,6 +7,8 @@ import { PipeModule } from '../../pipes/pipe.module';
 import { AppointmentComponent } from './appointment.component';
 import { ConsultationComponent } from '../../consultation/consultation.component';
 
+import { ConsultationService } from '../../consultation/consultation.service';
+
 describe('AppointmentComponent', () => {
   let component: AppointmentComponent;
   let fixture: ComponentFixture<AppointmentComponent>;
@@ -17,7 +19,8 @@ describe('AppointmentComponent', () => {
         AppointmentComponent,
         ConsultationComponent
       ],
-      imports: [ PipeModule ]
+      imports: [ PipeModule ],
+      providers: [ ConsultationService ]
     })
     .overrideComponent(ConsultationComponent,{
       set: {

@@ -5,7 +5,8 @@ import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { HealthLogFormComponent } from './health-log-form.component';
-import { HealthLogFormService } from "./health-log-form.service";
+
+import { ConsultationService } from '../consultation.service';
 
 import { HealthLogForm } from './health-log-form.data-model';
 
@@ -15,9 +16,8 @@ describe('HealthLogFormComponent', () => {
   let emptyHealthLogForm: HealthLogForm;
   let expectedHealthLogForm: HealthLogForm;
   let expectedValidForm: HealthLogForm;
-  let healthLogFormService: HealthLogFormService;
-  let healthLogFormServicePostSpy;
-  let healthLogFormServiceGetSpy;
+  let consultationService: ConsultationService;
+  let consultationServicePostHealthLogSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -26,7 +26,7 @@ describe('HealthLogFormComponent', () => {
         ReactiveFormsModule,
         FormsModule
       ],
-      providers: [ HealthLogFormService ]
+      providers: [ConsultationService]
     })
     .compileComponents();
   }));
@@ -87,17 +87,11 @@ describe('HealthLogFormComponent', () => {
       prescription:['ipsum 25mg']
     }
     //====================
-    /*
-      spies
-    */
-    healthLogFormService = fixture.debugElement.injector.get(HealthLogFormService);
-    healthLogFormServicePostSpy = spyOn(healthLogFormService,'postHealthLog')
-    .and.returnValue(Promise.resolve(true));
-
-    healthLogFormServiceGetSpy = spyOn(healthLogFormService,'getHealthLog')
+    //spies
+    consultationService = fixture.debugElement.injector.get(ConsultationService);
+    consultationServicePostHealthLogSpy = spyOn(consultationService,'postHealthLog')
     .and.returnValue(Promise.resolve(expectedHealthLogForm));
 
-    //=====================
     fixture.detectChanges();
   });
 
@@ -115,7 +109,7 @@ describe('HealthLogFormComponent', () => {
     let de = fixture.debugElement.query(By.css('#submit-btn'));
     let el = de.nativeElement;
     el.click();
-    expect(healthLogFormServicePostSpy).not.toHaveBeenCalled();
+    expect(consultationServicePostHealthLogSpy).not.toHaveBeenCalled();
   });
   it('postHealthLog should have been called with param',() => {
     component.healthLogForm.setValue(expectedHealthLogForm);
@@ -124,7 +118,7 @@ describe('HealthLogFormComponent', () => {
     let de = fixture.debugElement.query(By.css('#submit-btn'));
     let el = de.nativeElement;
     el.click();
-    expect(healthLogFormServicePostSpy).toHaveBeenCalledWith(expectedHealthLogForm);
+    expect(consultationServicePostHealthLogSpy).toHaveBeenCalledWith(expectedHealthLogForm);
   });
   it('should go back to pristine after save',async(() => {
     component.healthLogForm.setValue(expectedHealthLogForm);

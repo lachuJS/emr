@@ -4,5 +4,5 @@
   <p>{{appointment.patient.gender | genderify}} {{appointment.patient.dob | agify}}</p>
   <button id="consult-btn" (click)="openConsultation()">consult</button>
   <!--consultation modal-->
-  <app-consultation *ngIf="consultation" [consultation]="appointment"></app-consultation>
+  <app-consultation *ngIf="consultation" [appointment]="appointment"></app-consultation>
 </div>

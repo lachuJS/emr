@@ -6,22 +6,17 @@ import { CommonModule } from '@angular/common'
 
 import { HealthLogComponent } from './health-log.component';
 
-import { HealthLogService } from './health-log.service';
-
 import { HealthLogForm } from '../health-log-form/health-log-form.data-model';
 
 describe('HealthLogComponent', () => {
   let component: HealthLogComponent;
   let fixture: ComponentFixture<HealthLogComponent>;
-  let healthLogService: HealthLogService;
-  let healthLogServiceGetHealthLogsSpy;
   let expectedHealthLogs: Array<HealthLog>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HealthLogComponent ],
-      imports: [CommonModule],
-      providers: [HealthLogService]
+      imports: [CommonModule]
     })
     .compileComponents();
   }));
@@ -76,57 +71,21 @@ describe('HealthLogComponent', () => {
       }
     ];
 
-    //spy
-    healthLogService = fixture.debugElement.injector.get(HealthLogService);
-    healthLogServiceGetHealthLogsSpy = spyOn(healthLogService,'getHealthLogs');
-    //set return value
-    healthLogServiceGetHealthLogsSpy.and.returnValue(Promise.resolve(expectedHealthLogs));
-
+    //stub Input
+    component.healthLogs = expectedHealthLogs;
+    fixture.detectChanges();
   });
 
-  it('should call getHealthLogs on init', async(() => {
-    component.appointmentId = 1;
-    fixture.detectChanges();
-    expect(healthLogServiceGetHealthLogsSpy).toHaveBeenCalledWith(1);
-  }));
-  it('should get healthLogs set after service returns',async(() => {
-    component.appointmentId = 1;
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(component.healthLogs).toEqual(expectedHealthLogs);
-    })
-  }));
   it('should create health-logs-container',async(() => {
-    component.appointmentId = 1;
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      let de = fixture.debugElement.query(By.css('#health-logs-container'));
-      expect(de).toBeTruthy();
-    });
-  }));
-  it('should not create call getHealthLogs if appointmentId is null',() => {
-    component.appointmentId = null;
-    fixture.detectChanges();
-    expect(healthLogServiceGetHealthLogsSpy).not.toHaveBeenCalled();
-  });
-  it('should not create health-logs-container if appointmentId is null',() => {
-    component.appointmentId = null;
-    fixture.detectChanges();
     let de = fixture.debugElement.query(By.css('#health-logs-container'));
-    expect(de).toBeFalsy();
-  })
+    expect(de).toBeTruthy();
+  }));
 
   //check all elements exist with expectedHealthLogs[1]
   describe('elements',() => {
 
       beforeEach(async(() => {
-        component.appointmentId = 1;
-        //create healthlogs
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          fixture.detectChanges();
-        });
+        component.healthLogs = expectedHealthLogs;
       }));
 
       it('should have complaint list item',() => {
@@ -178,18 +137,10 @@ describe('HealthLogComponent', () => {
           finalDiagnosis: 'flu'
         }
       ]
-      //change return value
-      healthLogServiceGetHealthLogsSpy.and.returnValue(Promise.resolve(validHealthLogs));
-
-    });
-    beforeEach(async(() => {
-      component.appointmentId = 1;
-      //create healthlogs
+      //stub Input
+      component.healthLogs = validHealthLogs;
       fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-      });
-    }));
+    });
 
     it('should have chiefComplaints',() => {
       let de = fixture.debugElement.query(By.css('#chief-complaints'));
@@ -206,10 +157,10 @@ describe('HealthLogComponent', () => {
     it('should not have systemic-examination',() => {
       let de = fixture.debugElement.query(By.css('#systemic-examination'));
       expect(de).toBeFalsy();
-      it('should not have vitals',() => {
-        let de = fixture.debugElement.query(By.css('#vitals'));
-        expect(de).toBeFalsy();
-      });
+    });
+    it('should not have vitals',() => {
+      let de = fixture.debugElement.query(By.css('#vitals'));
+      expect(de).toBeFalsy();
     });
     it('should not have le',() => {
       let de = fixture.debugElement.query(By.css('#le'));

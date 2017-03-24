@@ -1,4 +1,4 @@
-<div id="patient-container">
+<div *ngIf="patient" id="patient-container">
   <h4 id="patient-name">{{ patient.name }}</h4>
   <span id="patient-bio">{{ patient.gender | genderify }} {{ patient.dob | agify }}</span>
   <span id="patient-hid">{{ patient.hid }}</span>

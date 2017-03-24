@@ -7,6 +7,12 @@ import { Appointment } from './appointment/appointment';
 export class DashboardService {
 
   constructor() { }
+  getDoctor(): Promise<Doctor> {
+    return Promise.resolve({
+      name: 'doctor name',
+      bio: 'MBBS'
+    });
+  }
   getAppointments(): Promise<Appointment[]> {
     return Promise.resolve([
       {
