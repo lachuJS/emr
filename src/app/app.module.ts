@@ -18,6 +18,7 @@ import { HealthLogComponent } from './consultation/health-log/health-log.compone
 import { DashboardService } from './dashboard/dashboard.service';
 import { ConsultationService } from './consultation/consultation.service';
 import { LoginFormService } from './login-form/login-form.service';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { LoginFormService } from './login-form/login-form.service';
     DashboardComponent,
     LoginFormComponent,
     HealthLogComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
