@@ -13,6 +13,7 @@ import { ConsultationService } from '../consultation.service';
 })
 export class HealthLogFormComponent implements OnInit {
   healthLogForm: FormGroup;
+  todayDate:Date;
 
   get chiefComplaints():  FormArray {
     return this.healthLogForm.get('chiefComplaints') as FormArray;
@@ -25,6 +26,7 @@ export class HealthLogFormComponent implements OnInit {
     private fb: FormBuilder,
     private consultationService: ConsultationService
   ) {
+    this.todayDate = new Date();
     this.createForm();
   }
 
@@ -58,6 +60,16 @@ export class HealthLogFormComponent implements OnInit {
   }
   addChiefComplaint(){
     this.chiefComplaints.push(this.fb.control('',Validators.required));
+  }
+  removePrescriptionItem(){
+    if(this.prescription.length > 1) {
+      this.prescription.removeAt(this.prescription.length-1);
+    }
+  }
+  removeChiefComplaint(){
+    if(this.chiefComplaints.length > 1) {
+      this.chiefComplaints.removeAt(this.chiefComplaints.length-1);
+    }
   }
   validateForm(){
     //return true for disabled save button

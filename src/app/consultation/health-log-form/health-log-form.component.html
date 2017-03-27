@@ -1,52 +1,122 @@
 <div id="health-log-form-container">
-  <form [formGroup]="healthLogForm" (ngSubmit)="submitForm()">
-    <div id="chief-complaints" formArrayName="chiefComplaints">
-      <label>chief-complaints:
-        <div *ngFor="let complaint of chiefComplaints.controls;let i=index">
-          <label>{{i+1}}:<input type="text" [formControlName]="i"></label>
-        </div>
-      </label>
-      <button type="button" class="add-btn" (click)="addChiefComplaint()">add</button>
-    </div>
-    <div id="examination">
-      <label>examination:
-        <label><input type="radio" formControlName="examination" value="concious">concious</label>
-        <label><input type="radio" formControlName="examination" value="oriented">oriented</label>
-      </label>
-    </div>
-    <div id="vitals" formGroupName="vitals">
-      <label>vitals:
-        <label>PR:<input type="text" formControlName="pr"></label>
-        <label>BP:<input type="text" formControlName="bp"></label>
-        <label>RR:<input type="text" formControlName="rr"></label>
-        <label>temperature:<input type="text" formControlName="temp"></label>
-      </label>
-    </div>
-    <div id="systemic-examination" formGroupName="systemicExamination">
-      <label>systemic examination:
-        <label>CVS:<input type="text" formControlName="cvs"></label>
-        <label>RS:<input type="text" formControlName="rs"></label>
-        <label>CNS:<input type="text" formControlName="cns"></label>
-        <label>P/A:<input type="text" formControlName="pa"></label>
-      </label>
-    </div>
-    <div id="le">
-      <label>L/E:<input type="text" formControlName="le"></label>
-    </div>
-    <div id="final-diagnosis">
-      <label>final diagnosis:<input type="text" formControlName="finalDiagnosis"></label>
-    </div>
-    <div id="next-follow-up">
-      <label>next follow-up:<input type="date" formControlName="nextFollowUp"></label>
-    </div>
-    <div id="prescription" formArrayName="prescription">
-      <label>presctiption:
-        <div *ngFor="let item of prescription.controls;let i=index">
-          <label>{{i+1}}:<input type="text" [formControlName]="i"></label>
-        </div>
-      </label>
-      <button type="button" class="add-btn" (click)="addPrescriptionItem()">add</button>
-    </div>
-    <button type="submit" [disabled]="validateForm()" id="submit-btn">save</button>
-  </form>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <!--form head-->
+      <div class="row">
+        <div class="col-sm-6 col-md-6"><strong>HealthLog:</strong></div>
+        <div class="col-sm-6 col-md-6 text-right"><strong>{{ todayDate | date:'longDate' }}</strong></div>
+      </div>
+    </div> <!-- /.list-group-item-->
+    <div class="panel-body">
+      <form [formGroup]="healthLogForm" (ngSubmit)="submitForm()" class="form-group">
+
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <label for="chiefComplaints"><strong>Chief Complaints:</strong></label>
+          </div>
+          <div class="col-sm-9 col-md-9">
+            <div id="chief-complaints" formArrayName="chiefComplaints" class="row">
+              <div *ngFor="let complaint of chiefComplaints.controls;let i=index" class="col-sm-6 col-md-6">
+                <input type="text" [formControlName]="i" class="form-control">
+              </div>
+            </div><br>
+            <button type="button" class="btn btn-default btn-sm" (click)="addChiefComplaint()" id="add-complaint">+</button>
+            <button type="button" class="btn btn-default btn-sm" (click)="removeChiefComplaint()" id="remove-complaint">-</button>
+          </div>
+        </div><br>
+
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <label><strong>Examination:</strong></label>
+          </div>
+          <div id="examination" class="form-group col-sm-9 col-md-9">
+            <input type="radio" formControlName="examination" value="concious">
+            <label for="examination">concious</label>
+            <input type="radio" formControlName="examination" value="oriented">
+            <label for="examination">oriented</label>
+          </div>
+        </div><hr>
+
+        <label for="vitals"><strong>Vitals:</strong></label><br>
+        <div id="vitals" formGroupName="vitals" class="row">
+          <div class="col-sm-3 col-md-3">
+            <input type="text" formControlName="pr" class="form-control" placeholder="PR">
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="input-group">
+              <input type="text" formControlName="bp" class="form-control" placeholder="BP">
+              <div class="input-group-addon">mmHg</div>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <input type="text" formControlName="rr" class="form-control" placeholder="RR">
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="input-group">
+              <input type="text" formControlName="temp" class="form-control" placeholder="Temp">
+              <div class="input-group-addon">° F</div>
+            </div>
+          </div>
+        </div><br>
+
+        <label for="systemicExamination"><strong>Systemic Examination:</strong></label><br>
+        <div id="systemic-examination" formGroupName="systemicExamination" class="row">
+          <div class="col-sm-3 col-md-3">
+            <input type="text" formControlName="cvs" class="form-control" placeholder="CVS">
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <input type="text" formControlName="rs" class="form-control" placeholder="RS">
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <input type="text" formControlName="cns" class="form-control" placeholder="CNS">
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <input type="text" formControlName="pa" class="form-control" placeholder="P/A">
+          </div>
+        </div><br>
+
+        <div id="le">
+          <label for="le"><strong>L/E:</strong></label>
+          <textarea formControlName="le" class="form-control" rows="3"></textarea>
+        </div><hr><br>
+
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <label for="finalDiagnosis"><strong>Final Diagnosis:</strong></label>
+          </div>
+          <div id="final-diagnosis" class="col-sm-9 col-md-9">
+            <input type="text" formControlName="finalDiagnosis" class="form-control">
+          </div>
+        </div><br>
+
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <label for="nextFollowUp"><strong>Next Sitting Date:</strong></label>
+          </div>
+          <div id="next-follow-up" class="col-sm-9 col-md-9">
+            <input type="date" formControlName="nextFollowUp" class="form-control" placeholder="follow up date">
+          </div>
+        </div><br>
+
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <label for="prescription"><strong>Presctiption:</strong></label>
+          </div>
+          <div class="col-sm-9 col-md-9">
+            <div id="prescription" formArrayName="prescription" class="row">
+              <div *ngFor="let item of prescription.controls;let i=index" class="col-sm-6 col-md-6">
+                <input type="text" [formControlName]="i" class="form-control">
+              </div>
+            </div><br>
+            <button type="button" class="btn btn-default btn-sm" (click)="addPrescriptionItem()" id="add-prescription">+</button>
+            <button type="button" class="btn btn-default btn-sm" (click)="removePrescriptionItem()" id="remove-prescription">-</button>
+          </div>
+        </div><hr>
+
+        <button type="button" (click)="healthLogForm.reset()" class="btn btn-md">clear</button>
+        <button type="submit" [disabled]="validateForm()" id="submit-btn" class="btn btn-md">save</button>
+
+      </form>
+    </div> <!--/.list-group-item-->
+  </div>
 </div>

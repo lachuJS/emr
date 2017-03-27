@@ -95,16 +95,16 @@ describe('ConsultationComponent', () => {
     let de = fixture.debugElement.query(By.css('#patient-container'));
     expect(de).toBeTruthy();
   });
-  it('should call getPatientHistory on init',() => {
-    expect(consultationServiceGetPatientHistory).toHaveBeenCalledWith(expectedAppointment.patient.hid);
-  });
-  it('should create history component',async(() => {
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      let de = fixture.debugElement.query(By.css('#history-container'));
-      expect(de).toBeTruthy();
-    });
+  it('should load history when clicked on navigate: history',async(() => {
+    let de = fixture.debugElement.query(By.css('a[href*="#patient-history"]'));
+    let el = de.nativeElement;
+    el.click();
+    expect(consultationServiceGetPatientHistory).toHaveBeenCalled();
   }));
+  it('should not show history on init',() => {
+    let de = fixture.debugElement.query(By.css('#history-container'));
+    expect(de).toBeFalsy();
+  });
   it('should call getAppointmentHealthLogs on init',() => {
     expect(consultationServiceGetAppointmentHealthLogsSpy).toHaveBeenCalledWith(expectedAppointment.aid);
   });

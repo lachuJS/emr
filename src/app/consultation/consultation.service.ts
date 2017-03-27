@@ -33,13 +33,14 @@ export class ConsultationService {
         systemicExamination: {
           cvs:1,
           rs:1,
-          cns:1,
+          cns:null,
           pa:1
         },
         le:'lazy brown fox jumped',
         finalDiagnosis:'lrem ipsum',
         nextFollowUp: '1995-08-17',
-        prescription: ['lorem 25mg']
+        prescription: ['lorem 25mg'],
+        dateCreated: '1990-08-01'
       },
       {
         chiefComplaints: ['lorem'],
@@ -60,7 +61,8 @@ export class ConsultationService {
         le:'lazy brown fox jumped',
         finalDiagnosis:'lrem ipsum',
         nextFollowUp: '1995-08-17',
-        prescription: ['lorem 25mg']
+        prescription: ['lorem 25mg'],
+        dateCreated: '2004-03-03'
       }
     ]);
   }

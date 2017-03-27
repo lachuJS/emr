@@ -1,8 +1,5 @@
-<div class="appointment-container">
+<div id="appointment-container">
   <span>{{appointment.count}}</span>
   <h5>{{appointment.patient.name}}</h5>
   <p>{{appointment.patient.gender | genderify}} {{appointment.patient.dob | agify}}</p>
-  <button id="consult-btn" (click)="openConsultation()">consult</button>
-  <!--consultation modal-->
-  <app-consultation *ngIf="consultation" [appointment]="appointment"></app-consultation>
 </div>

@@ -1,9 +1,36 @@
-<div id="consultation-container">
-  <app-patient [patient]="appointment.patient"></app-patient>
-  <!--patient history-->
-  <app-history *ngIf="patientHistory" [history]="patientHistory"></app-history>
-  <!-- get health logs if it is a follow up consultation-->
-  <app-health-log *ngIf="appointmentHealthLogs" [healthLogs]="appointmentHealthLogs"></app-health-log>
-  <!-- health log form for current sitting-->
-  <app-health-log-form></app-health-log-form>
+<div class="container" id="consultation-container">
+  <div class="row">
+    <div class="col-sm-3 col-md-3">
+      <!--patient-->
+      <div class="panel panel-default" data-spy="affix">
+        <div class="panel-body">
+          <app-patient [patient]="appointment.patient"></app-patient>
+        </div>
+        <!--nav menu-->
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="javascript:void();" (click)="loadPatientHistory()"><strong>history</strong></a>
+          </li>
+          <li class="list-group-item">
+            <a href="javascript:void();" (click)="loadAppointmentHealthLogs()"><strong>previous healthlog</strong></a>
+          </li>
+        </ul>
+      </div>
+    </div> <!--/.col-->
+    <!--consultation component-->
+    <div class="col-sm-6 col-md-6">
+      <!--patient history-->
+      <div id="patient-history">
+        <app-history *ngIf="patientHistory" [history]="patientHistory"></app-history>
+      </div>
+      <!-- get health logs if it is a follow up consultation-->
+      <div id="patient-healthlogs">
+        <app-health-log *ngIf="appointmentHealthLogs" [healthLogs]="appointmentHealthLogs"></app-health-log>
+      </div>
+      <!-- health log form for current sitting-->
+      <div id="prescription">
+        <app-health-log-form></app-health-log-form>
+      </div>
+    </div>
+  </div>
 </div>

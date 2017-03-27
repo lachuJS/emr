@@ -51,18 +51,4 @@ describe('AppointmentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('consulation becomes true on click',() => {
-    let de = fixture.debugElement.query(By.css('#consult-btn'));
-    let el = de.nativeElement;
-    el.click();
-    expect(component.consultation).toBeTruthy();
-  });
-  it('consultation-container opens on click consult-btn',() => {
-    let de = fixture.debugElement.query(By.css('#consult-btn'));
-    let el = de.nativeElement;
-    el.click();
-    fixture.detectChanges();
-    let consultationDe = fixture.debugElement.query(By.css('#consultation-container'));
-    expect(consultationDe).toBeTruthy();
-  });
 });

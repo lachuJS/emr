@@ -1,6 +1,6 @@
 <div  *ngIf="doctor" id="doctor-container">
-  <h4 id="name">{{doctor.name}}</h4>
-  <span id="bio">{{doctor.bio}}</span>
-  <span *ngIf="doctor.email" id="email">{{doctor.email}}</span>
-  <span *ngIf="doctor.phone" id="phone">{{doctor.phone}}</span>
+  <div id="name"><strong>{{doctor.name}}</strong></div>
+  <div id="info">{{doctor.info}}</div>
+  <div *ngIf="doctor.email" id="email">{{doctor.email}}</div>
+  <div *ngIf="doctor.phone" id="phone">{{doctor.phone}}</div>
 </div>

@@ -1,12 +1,29 @@
-<div id="dashboard-container">
+<div id="dashboard-container" class="row">
   <!--doctor-info-->
-  <app-doctor *ngIf="doctor" [doctor]="doctor"></app-doctor>
+  <div class="col-md-3 col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <app-doctor *ngIf="doctor" [doctor]="doctor"></app-doctor>
+      </div>
+    </div>
+  </div>
   <!--appointments feed-->
-  <div *ngIf="appointments" id="appointments-container">
-    <div *ngFor="let appointment of appointments">
-      <app-appointment [appointment]="appointment"></app-appointment>
+  <div class="col-md-6 col-sm-3">
+    <div *ngIf="appointments" id="appointments-container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>appointments</strong>
+        </div>
+        <!--list of appointments-->
+        <ul class="list-group">
+          <button type="button" class="list-group-item" *ngFor="let appointment of appointments" (click)="openConsultation(appointment)">
+              <app-appointment [appointment]="appointment"></app-appointment>
+          </button>
+        </ul>
+      </div>
     </div>
   </div>
   <!--notifications-->
   <!--code...-->
+  <div class="col-md-3 col-sm-3"></div>
 </div>

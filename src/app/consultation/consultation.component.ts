@@ -24,7 +24,7 @@ export class ConsultationComponent implements OnInit {
     private consultationService: ConsultationService
   ) {}
 
-  ngOnInit() {
+  loadPatientHistory() {
     //get patient history
     this.consultationService.getPatientHistory(this.appointment.patient.hid)
     .then((history: History) => {
@@ -33,6 +33,8 @@ export class ConsultationComponent implements OnInit {
     .catch((err) => {
       console.log(err);
     });
+  }
+  loadAppointmentHealthLogs() {
     //get prev healthlogs if followUp appointment
     if(this.appointment.followUp) {
       this.consultationService.getAppointmentHealthLogs(this.appointment.aid)
@@ -42,4 +44,5 @@ export class ConsultationComponent implements OnInit {
       .catch((err) => { console.log(err) });
     }
   }
+  ngOnInit() {}
 }

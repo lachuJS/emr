@@ -1,48 +1,91 @@
 <div *ngIf="healthLogs" id='health-logs-container'>
-  <div *ngFor="let healthLog of healthLogs">
-
-    <div class="health-log">
+  <div *ngFor="let healthLog of healthLogs" class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-sm-6 col-md-6"><strong>HealthLog</strong></div>
+        <div class="col-sm-6 col-md-6 text-right"><strong>{{ healthLog.dateCreated | date:'longDate' }}</strong></div>
+      </div>
+    </div>
+    <div class="panel-body">
       <!--loop chief complaints array-->
-      <div id="chief-complaints">
-        <h4>chief-complaints</h4>
-        <ul *ngFor="let complaint of healthLog.chiefComplaints">
-          <li class="complaint">{{ complaint }}</li>
-        </ul>
-      </div>
+      <div class="row">
+        <div class="col-sm-3 col-md-3">
+          <strong>Chief Complaints</strong>
+        </div>
+        <div id="chief-complaints" class="col-sm-9 col-md-9">
+          <div *ngFor="let complaint of healthLog.chiefComplaints">
+            <p class="complaint">{{ complaint }} </p>
+          </div>
+        </div>
+      </div><br>
       <!--examination-->
-      <div *ngIf="healthLog.examination">
-        <div id="examination"><b>examination:</b>{{ healthLog.examination }}</div>
-      </div>
+      <div *ngIf="healthLog.examination" class="row">
+        <div class="col-sm-3 col-md-3" id="examination"><strong>Examination</strong></div>
+        <div class="col-sm-9 col-md-9">{{ healthLog.examination }}</div>
+      </div><hr>
       <!--vitals-->
       <div *ngIf="healthLog.vitals" id="vitals">
-        <h4>vitals:</h4>
-        <ul>
-          <li>PR: {{ healthLog.vitals.pr }}</li>
-          <li>BP: {{ healthLog.vitals.bp }}</li>
-          <li>RR: {{ healthLog.vitals.rr }}</li>
-          <li>temperature: {{ healthLog.vitals.temp }}</li>
-        </ul>
-      </div>
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <strong>Vitals</strong>
+          </div>
+        </div><br>
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <strong>PR : </strong>{{ healthLog.vitals.pr }}
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <strong>BP : </strong>{{ healthLog.vitals.bp }}
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <strong>RR : </strong>{{ healthLog.vitals.rr }}
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <strong>Temp : </strong>{{ healthLog.vitals.temp }}
+          </div>
+        </div>
+      </div><br>
       <!--systemic examination-->
-      <div *ngIf="healthLog.systemicExamination" id="systemic-examination">
-        <h4>systemic-examintion:</h4>
-        <ul>
-          <li>CVS: {{ healthLog.systemicExamination.cvs }}</li>
-          <li>RS: {{ healthLog.systemicExamination.rs }}</li>
-          <li>CNS: {{ healthLog.systemicExamination.cns }}</li>
-          <li>P/A: {{ healthLog.systemicExamination.pa }}</li>
-        </ul>
-      </div>
+      <div class="text-left">
+          <strong>Systemic Examintion</strong>
+      </div><br>
+      <div *ngIf="healthLog.systemicExamination" id="systemic-examination" class="row">
+        <div class="col-sm-3 col-md-3">
+          <strong>CVS : </strong>{{ healthLog.systemicExamination.cvs }}
+        </div>
+        <div class="col-sm-3 col-md-3">
+          <strong>RS : </strong>{{ healthLog.systemicExamination.rs }}
+        </div>
+        <div class="col-sm-3 col-md-3">
+          <strong>CNS : </strong>{{ healthLog.systemicExamination.cns }}
+        </div>
+        <div class="col-sm-3 col-md-3">
+          <strong>P/A : </strong>{{ healthLog.systemicExamination.pa }}
+        </div>
+      </div><hr>
       <!--L/E-->
-      <div *ngIf="healthLog.le" id="le">
-        <p>{{ healthLog.le }}</p>
+      <div *ngIf="healthLog.le" id="le" class="row">
+        <div class="col-sm-3 col-md-3">
+          <strong>L/E </strong>
+        </div>
+        <div class="col-sm-9 com-md-9">
+          <p>{{ healthLog.le }}</p>
+        </div>
       </div>
       <!--final diagnosis-->
-      <div id="final-diagnosis">
-        <p><b>diagnosis: {{ healthLog.finalDiagnosis }}</b></p>
-      </div>
+      <div id="final-diagnosis" class="row">
+        <div class="col-sm-3 col-md-3">
+          <strong>Final Diagnosis </strong>
+        </div>
+        <div class="col-sm-9 col-sm-9">
+          {{ healthLog.finalDiagnosis }}
+        </div>
+      </div><br>
       <!--follow up date-->
-      <div *ngIf="healthLog.nextFollowUp" id="next-follow-up"><p>{{ healthLog.nextFollowUp | date:'longDate' }}</p></div>
+      <div *ngIf="healthLog.nextFollowUp" id="next-follow-up" class="row">
+        <div class="col-sm-3 col-md-3"><strong>Date given for next sitting</strong></div>
+        <div class="col-md-9 col-md-9">{{ healthLog.nextFollowUp | date:'longDate' }}</div>
+      </div>
       <!--prescription-->
       <div *ngIf="healthLog.prescription" id="prescription">
         <ul *ngFor="let item of prescription;let i=index;">

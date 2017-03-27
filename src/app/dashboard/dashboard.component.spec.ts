@@ -109,7 +109,21 @@ describe('DashboardComponent', () => {
     fixture.whenStable().then(() => {
       fixture.detectChanges();
       let compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelectorAll('.appointment-container').length).toEqual(expectedAppointments.length);
+      expect(compiled.querySelectorAll('#appointment-container').length).toEqual(expectedAppointments.length);
     });
   });
+  //output test
+  it('should raise an event when clicked on an appointment',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      let openedAppointment: Appointment;
+      component.consultation.subscribe((appointment: Appointment) => {
+        openedAppointment = appointment;
+      });
+      let de = fixture.debugElement.query(By.css('#appointment-container'));
+      let el = de.nativeElement;
+      el.click();
+      expect(openedAppointment).toEqual(expectedAppointments[0]);
+    });
+  }));
 }));

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ConsultationComponent } from './consultation/consultation.component';
+
+import { Appointment } from './dashboard/appointment/appointment';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +11,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  selectedAppointment: Appointment;
+  get dashboardShow(): boolean {
+    return !this.selectedAppointment;
+  }
 
+  constructor(){}
+  openConsultation(appointment: Appointment) {
+    this.selectedAppointment = appointment;
+  }
 }

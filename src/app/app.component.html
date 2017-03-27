@@ -1,3 +1,6 @@
-<!-- navigation bar -->
 <!--doctor-dashboard-->
-<app-dashboard></app-dashboard>
+<!--set event consultation if appointment is clicked in dashboard component-->
+<app-dashboard *ngIf="dashboardShow" (consultation)="openConsultation($event)"></app-dashboard>
+<!--consultation component-->
+<!--opens on click of an appointment -->
+<app-consultation *ngIf="selectedAppointment" [appointment]="selectedAppointment"></app-consultation>

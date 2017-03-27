@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { DoctorComponent } from './doctor/doctor.component';
 import { AppointmentComponent } from './appointment/appointment.component';
@@ -16,10 +16,14 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
   doctor: Doctor;
   appointments: Array<Appointment>;
+  @Output() consultation = new EventEmitter();
+
   constructor(
     private dashboardService: DashboardService
   ) { }
-
+  openConsultation(appointment: Appointment){
+    this.consultation.emit(appointment);
+  }
   ngOnInit() {
     //get doctor info
     this.dashboardService.getDoctor()

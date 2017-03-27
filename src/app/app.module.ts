@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { PipeModule } from './pipes/pipe.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { AlertModule } from 'ng2-bootstrap';
 
 import { AppComponent } from './app.component';
 import { DoctorComponent } from './dashboard/doctor/doctor.component';
@@ -41,7 +42,9 @@ import { ErrorComponent } from './error/error.component';
     HttpModule,
     PipeModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    //bootstrap module
+    AlertModule.forRoot()
   ],
   providers: [
     LoginFormService,

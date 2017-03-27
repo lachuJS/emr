@@ -135,19 +135,53 @@ describe('HealthLogFormComponent', () => {
   }));
   it('should add new control to FormArray chiefComplaints on add-btn click',() => {
     const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
-    let de = fixture.debugElement.query(By.css('#chief-complaints > .add-btn'));
+    let de = fixture.debugElement.query(By.css('#add-complaint'));
     let el = de.nativeElement;
     el.click();
     fixture.detectChanges();
     expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore+1);
   });
+  it('should not remove control to FormArray on remove-btn click if length=1',() => {
+    const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
+    let de = fixture.debugElement.query(By.css('#remove-complaint'));
+    let el = de.nativeElement;
+    el.click();
+    fixture.detectChanges();
+    expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore);
+  });
+  it('should only remove chiefComplaints Item if length > 1',() => {
+    component.addChiefComplaint();
+    const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
+    let de = fixture.debugElement.query(By.css('#remove-complaint'));
+    let el = de.nativeElement;
+    el.click();
+    fixture.detectChanges();
+    expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore-1);
+  });
   it('should add new control to FormArray prescription on add-btn click',() => {
     const lengthBefore = component.healthLogForm.value.prescription.length;
-    let de = fixture.debugElement.query(By.css('#prescription > .add-btn'));
+    let de = fixture.debugElement.query(By.css('#add-prescription'));
     let el = de.nativeElement;
     el.click();
     fixture.detectChanges();
     expect(component.healthLogForm.value.prescription.length).toEqual(lengthBefore+1);
+  });
+  it('should not remove control to FormArray prescription  remove-btn click if length=1',() => {
+    const lengthBefore = component.healthLogForm.value.prescription.length;
+    let de = fixture.debugElement.query(By.css('#remove-prescription'));
+    let el = de.nativeElement;
+    el.click();
+    fixture.detectChanges();
+    expect(component.healthLogForm.value.prescription.length).toEqual(lengthBefore);
+  });
+  it('should only remove chiefComplaints Item if length > 1',() => {
+    component.addPrescriptionItem();
+    const lengthBefore = component.healthLogForm.value.prescription.length;
+    let de = fixture.debugElement.query(By.css('#remove-prescription'));
+    let el = de.nativeElement;
+    el.click();
+    fixture.detectChanges();
+    expect(component.healthLogForm.value.prescription.length).toEqual(lengthBefore-1);
   });
   //validators
   it('check form validity',() => {
