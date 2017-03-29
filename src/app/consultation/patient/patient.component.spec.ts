@@ -24,7 +24,7 @@ describe('PatientComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PatientComponent);
     component = fixture.componentInstance;
-    expectedPatient = new Patient('lorem',12,true,'1995-08-17',121323);
+    expectedPatient = new Patient('lorem',12,true,'1995-08-17','erode',121323);
     component.patient = expectedPatient;
     fixture.detectChanges();
   });
@@ -35,22 +35,27 @@ describe('PatientComponent', () => {
   it('should display patient name',() => {
     let de = fixture.debugElement.query(By.css('#patient-name'));
     let el = de.nativeElement;
-    expect(el.textContent).toEqual(expectedPatient.name);
+    expect(el.textContent).toMatch(expectedPatient.name);
   });
-  it('should display patient bio',() => {
-    let de = fixture.debugElement.query(By.css('#patient-bio'));
+  it('should display patient age',() => {
+    let de = fixture.debugElement.query(By.css('#patient-age'));
     let el = de.nativeElement;
-    expect(el.textContent).toEqual('male 21');
+    expect(el.textContent).toMatch('21');
   });
-  it('should display patient hid',() => {
-    let de = fixture.debugElement.query(By.css('#patient-hid'));
+  it('should display patient sex',() => {
+    let de = fixture.debugElement.query(By.css('#patient-sex'));
+    let el =  de.nativeElement;
+    expect(el.textContent).toMatch('male')
+  });
+  it('should display patient location',() => {
+    let de = fixture.debugElement.query(By.css('#patient-location'));
     let el = de.nativeElement;
-    expect(+el.textContent).toEqual(expectedPatient.hid);
+    expect(el.textContent).toMatch(expectedPatient.location);
   });
   it('should display patient phone',() => {
     let de = fixture.debugElement.query(By.css('#patient-phone'));
     let el = de.nativeElement;
-    expect(+el.textContent).toEqual(expectedPatient.phone);
+    expect(el.textContent).toMatch(expectedPatient.phone.toString());
   });
   it('should not display patient email',() => {
     let de = fixture.debugElement.query(By.css('#patient-email'));

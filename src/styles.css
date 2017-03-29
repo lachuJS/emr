@@ -5,3 +5,9 @@ body {
   background-color: #F5F5F5 !important; /*override bootstrap default white bgcolor*/
   color: #5E5E5E !important; /*override default black text-color*/
 }
+/*offsetting an html anchor to adjust for fixed header*/
+/*fix: offsets span[class="anchor"] to 70px(height of navbar)*/
+span[class="anchor"] {
+  position:absolute;
+  top:-70px;
+}

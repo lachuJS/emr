@@ -111,7 +111,7 @@ describe('HealthLogComponent', () => {
       it('should have follow-up',() => {
         let de = fixture.debugElement.query(By.css('#next-follow-up'));
         let el = de.nativeElement;
-        expect(el.textContent).toEqual('August 17, 1995');
+        expect(el.textContent).toMatch('August 17, 1995');
       });
       it('should have prescription ',() => {
         let de = fixture.debugElement.query(By.css('#prescription'));

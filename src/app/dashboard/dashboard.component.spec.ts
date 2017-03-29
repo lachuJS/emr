@@ -55,30 +55,32 @@ describe('DashboardComponent', () => {
     }
     expectedAppointments = [
       {
-          count: 1,
+          aid: 1,
           patient: {
             name: 'lorem'
             gender: true,
             dob: '1995-08-17'
-            hid: 9159151413
+            hid: 9159151413,
+            location: 'erode'
           },
-          followUp: true
+          dateTimeCreated: '2001-01-01'
       },
       {
-          count: 2,
+          aid: 2,
           patient: {
             name: 'ipsum'
             gender: false,
             dob: '1996-08-18'
-            hid: 9715641212
+            hid: 9715641212,
+            location: 'erode'
           },
-          followUp: false
+          dateTimeCreated: '2003-09-19'
       }
     ];
 
     dashboardService = fixture.debugElement.injector.get(DashboardService);
-    dashboardServiceGetAppointmentsSpy = spyOn(dashboardService,'getAppointments')
-    .and.returnValue(Promise.resolve(expectedAppointments));
+    dashboardServiceGetAppointmentsSpy = spyOn(dashboardService,'getAppointments');
+    dashboardServiceGetAppointmentsSpy.and.returnValue(Promise.resolve(expectedAppointments));
     dashboardServiceGetDoctorSpy = spyOn(dashboardService,'getDoctor')
     .and.returnValue(Promise.resolve(expectedDoctor));
 
@@ -88,13 +90,16 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('should have dashboard container',() => {
     let de = fixture.debugElement.query(By.css('#dashboard-container'));
     expect(de).toBeTruthy();
   });
+
   it('should call getDoctor() on init',() => {
     expect(dashboardServiceGetDoctorSpy).toHaveBeenCalled();
   });
+
   it('should have doctor container',() => {
     fixture.whenStable().then(() => {
       fixture.detectChanges();
@@ -102,16 +107,28 @@ describe('DashboardComponent', () => {
       expect(de).toBeTruthy();
     })
   });
+
   it('should call getAppointments',async(() => {
     expect(dashboardServiceGetAppointmentsSpy).toHaveBeenCalled();
   }));
+
   it('should display two appointment containers',async(() => {
     fixture.whenStable().then(() => {
       fixture.detectChanges();
       let compiled = fixture.debugElement.nativeElement;
       expect(compiled.querySelectorAll('#appointment-container').length).toEqual(expectedAppointments.length);
     });
-  });
+  }));
+
+  it('should display appointmentsCount badge',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      let de = fixture.debugElement.query(By.css('.panel-heading > .badge'));
+      let el = de.nativeElement;
+      expect(el.textContent).toEqual(component.appointments.length.toString());
+    });
+  }));
+
   //output test
   it('should raise an event when clicked on an appointment',async(() => {
     fixture.whenStable().then(() => {
@@ -126,4 +143,40 @@ describe('DashboardComponent', () => {
       expect(openedAppointment).toEqual(expectedAppointments[0]);
     });
   }));
-}));
+
+  describe('0 appointments',() => {
+    let expectedAppointmentsEmpty: Array<Appointment>;
+    beforeEach(() => {
+      fixture = TestBed.createComponent(DashboardComponent);
+      component = fixture.componentInstance;
+
+      expectedAppointmentsEmpty = [];
+      dashboardServiceGetAppointmentsSpy.and.returnValue(Promise.resolve(expectedAppointmentsEmpty));
+
+      fixture.detectChanges();
+    });
+
+    it('should have expectedAppointmentsEmpty on service return',async(() => {
+      fixture.whenStable().then(() => {
+        expect(component.appointments).toEqual(expectedAppointmentsEmpty);
+      });
+    }));
+    it('should not have appointments list',async(() => {
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        let de = fixture.debugElement.query(By.css('.list-group'));
+        expect(de).toBeFalsy();
+      });
+    }));
+    it('should have a badge with 0',async(() => {
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        let de = fixture.debugElement.query(By.css('.badge'));
+        let el = de.nativeElement;
+        expect(el.textContent).toEqual(expectedAppointmentsEmpty.length.toString());
+      });
+    }));
+
+  });
+
+});

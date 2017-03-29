@@ -9,10 +9,13 @@
         <!--nav menu-->
         <ul class="list-group">
           <li class="list-group-item">
-            <a href="javascript:void();" (click)="loadPatientHistory()"><strong>history</strong></a>
+            <a href="#patient-history" (click)="loadPatientHistory()" id="load-patient-history"><strong>history</strong></a>
           </li>
           <li class="list-group-item">
-            <a href="javascript:void();" (click)="loadAppointmentHealthLogs()"><strong>previous healthlog</strong></a>
+            <a href="#patient-healthlogs" (click)="loadLastHealthLog()" id="load-last-healthlog"><strong>last healthlog</strong></a>
+          </li>
+          <li class="list-group-item">
+            <a href="javascript:void();"><strong>all healthlogs</strong></a>
           </li>
         </ul>
       </div>
@@ -20,15 +23,18 @@
     <!--consultation component-->
     <div class="col-sm-6 col-md-6">
       <!--patient history-->
-      <div id="patient-history">
+      <div>
+        <span class="anchor" id="patient-history"></span> <!--fix for fixed nav bar issue-->
         <app-history *ngIf="patientHistory" [history]="patientHistory"></app-history>
       </div>
       <!-- get health logs if it is a follow up consultation-->
-      <div id="patient-healthlogs">
-        <app-health-log *ngIf="appointmentHealthLogs" [healthLogs]="appointmentHealthLogs"></app-health-log>
+      <div>
+        <!--app-health-log gets array of healthLogForm -->
+        <span class="anchor" id="patient-healthlogs"></span>
+        <app-health-log *ngIf="lastHealthLog" [healthLogs]="[lastHealthLog]"></app-health-log>
       </div>
       <!-- health log form for current sitting-->
-      <div id="prescription">
+      <div id="new-healthlog">
         <app-health-log-form></app-health-log-form>
       </div>
     </div>

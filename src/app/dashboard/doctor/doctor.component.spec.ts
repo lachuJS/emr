@@ -26,7 +26,7 @@ describe('DoctorComponent', () => {
     //doctor
     expectedDoctor = {
       name: 'doctor name',
-      bio: 'MBBS'
+      info: 'MBBS'
     }
     component.doctor = expectedDoctor;
 
@@ -45,9 +45,9 @@ describe('DoctorComponent', () => {
     let el = de.nativeElement;
     expect(el.textContent).toEqual(expectedDoctor.name);
   });
-  it('should have doctor bio',() => {
-    let de = fixture.debugElement.query(By.css('#doctor-container > #bio'));
+  it('should have doctor info',() => {
+    let de = fixture.debugElement.query(By.css('#doctor-container > #info'));
     let el = de.nativeElement;
-    expect(el.textContent).toEqual(expectedDoctor.bio);
+    expect(el.textContent).toEqual(expectedDoctor.info);
   });
 });

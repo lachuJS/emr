@@ -13,9 +13,14 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <strong>appointments</strong>
+          <span class="badge">{{ appointmentsCount }}</span>
+        </div>
+        <!-- empty message -->
+        <div class="panel-body text-center" id="empty-message" *ngIf="appointmentsCount == 0">
+          <strong>no appointments left</strong>
         </div>
         <!--list of appointments-->
-        <ul class="list-group">
+        <ul class="list-group" *ngIf="appointmentsShow">
           <button type="button" class="list-group-item" *ngFor="let appointment of appointments" (click)="openConsultation(appointment)">
               <app-appointment [appointment]="appointment"></app-appointment>
           </button>

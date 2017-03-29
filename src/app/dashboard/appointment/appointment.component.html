@@ -2,4 +2,5 @@
   <span>{{appointment.count}}</span>
   <h5>{{appointment.patient.name}}</h5>
   <p>{{appointment.patient.gender | genderify}} {{appointment.patient.dob | agify}}</p>
+  <div><strong>{{ appointment.dateTimeCreated | date:'shortTime' }}</strong></div>
 </div>

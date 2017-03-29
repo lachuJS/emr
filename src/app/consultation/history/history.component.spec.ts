@@ -32,9 +32,9 @@ describe('HistoryComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should display title History',() => {
-    let de = fixture.debugElement.query(By.css('h4'));
+    let de = fixture.debugElement.query(By.css('.panel-heading'));
     let el = de.nativeElement;
-    expect(el.textContent).toEqual('History');
+    expect(el.textContent).toMatch('History');
   });
   it('should display DM',() => {
     let de = fixture.debugElement.query(By.css('#dm'));

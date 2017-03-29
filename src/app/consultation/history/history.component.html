@@ -1,7 +1,9 @@
 <div id="history-container" class="panel panel-default">
+  <!-- title -->
   <div class="panel-heading">
     <strong>History</strong>
   </div>
+  <!--body-->
   <div *ngIf="history" id="history" class="panel-body">
     <ul id="history-list">
       <li *ngIf="history.dm" id="dm">DM</li>
@@ -13,4 +15,4 @@
     <strong>Presenting Illness</strong>
     <p id="presenting-illness">{{ history.presentingIllness }}</p>
   </div>
-</div>
+</div> <!--/.history-container-->

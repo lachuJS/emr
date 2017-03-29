@@ -17,6 +17,12 @@ export class DashboardComponent implements OnInit {
   doctor: Doctor;
   appointments: Array<Appointment>;
   @Output() consultation = new EventEmitter();
+  get appointmentsCount():number {
+    return this.appointments.length;
+  }
+  get appointmentsShow():boolean {
+    return this.appointments.length != 0;
+  }
 
   constructor(
     private dashboardService: DashboardService

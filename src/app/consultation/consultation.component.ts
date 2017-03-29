@@ -19,7 +19,7 @@ import { HealthLogForm } from './health-log-form/health-log-form.data-model';
 export class ConsultationComponent implements OnInit {
   @Input() appointment: Appointment;
   patientHistory: History;
-  appointmentHealthLogs: Array<HealthLogForm>;
+  lastHealthLog: HealthLogForm;
   constructor(
     private consultationService: ConsultationService
   ) {}
@@ -34,15 +34,13 @@ export class ConsultationComponent implements OnInit {
       console.log(err);
     });
   }
-  loadAppointmentHealthLogs() {
-    //get prev healthlogs if followUp appointment
-    if(this.appointment.followUp) {
-      this.consultationService.getAppointmentHealthLogs(this.appointment.aid)
-      .then((healthLogs: Array<HealthLogForm>) => {
-        this.appointmentHealthLogs = healthLogs;
-      })
-      .catch((err) => { console.log(err) });
-    }
+  loadLastHealthLog() {
+    //get prev healthlog
+    this.consultationService.getLastHealthLog()
+    .then((healthLog: HealthLogForm) => {
+      this.lastHealthLog = healthLog;
+    })
+    .catch((err) => { console.log(err) });
   }
   ngOnInit() {}
 }

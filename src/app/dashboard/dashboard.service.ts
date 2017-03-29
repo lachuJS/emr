@@ -24,7 +24,7 @@ export class DashboardService {
           dob: '1995-08-17',
           location: 'a-block, kumaran towers, thindal, erode'
         },
-        followUp: true
+        dateTimeCreated: '2000-01-01'
       },
       {
         aid:2,
@@ -35,7 +35,7 @@ export class DashboardService {
           dob:'1995-08-18',
           location: 'pallipalayam,erode'
         },
-        followUp: false
+        dateTimeCreated: '2000-01-01'
       }
     ]);
   }

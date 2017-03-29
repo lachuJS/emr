@@ -19,7 +19,7 @@ describe('ConsultationComponent', () => {
   let fixture: ComponentFixture<ConsultationComponent>;
   let consultationService: ConsultationService;
   let consultationServiceGetPatientHistory;
-  let consultationServiceGetAppointmentHealthLogsSpy;
+  let consultationServiceGetLastHealthLogSpy;
 
   let expectedAppointment = {
     aid: 23,
@@ -81,8 +81,8 @@ describe('ConsultationComponent', () => {
     consultationService = fixture.debugElement.injector.get(ConsultationService);
     consultationServiceGetPatientHistory = spyOn(consultationService,'getPatientHistory')
     .and.returnValue(Promise.resolve(expectedHistory));
-    consultationServiceGetAppointmentHealthLogsSpy = spyOn(consultationService,'getAppointmentHealthLogs')
-    .and.returnValue(Promise.resolve([expectedHealthLogForm]));
+    consultationServiceGetLastHealthLogSpy = spyOn(consultationService,'getLastHealthLog')
+    .and.returnValue(Promise.resolve(expectedHealthLogForm));
 
     component.appointment = expectedAppointment;
     fixture.detectChanges();
@@ -95,59 +95,43 @@ describe('ConsultationComponent', () => {
     let de = fixture.debugElement.query(By.css('#patient-container'));
     expect(de).toBeTruthy();
   });
-  it('should load history when clicked on navigate: history',async(() => {
-    let de = fixture.debugElement.query(By.css('a[href*="#patient-history"]'));
+  //patient-history
+  it('should call getLastHealthLog on click last healthlog',() => {
+    let de = fixture.debugElement.query(By.css('a[href$="patient-history"]'));
     let el = de.nativeElement;
     el.click();
     expect(consultationServiceGetPatientHistory).toHaveBeenCalled();
-  }));
-  it('should not show history on init',() => {
-    let de = fixture.debugElement.query(By.css('#history-container'));
-    expect(de).toBeFalsy();
   });
-  it('should call getAppointmentHealthLogs on init',() => {
-    expect(consultationServiceGetAppointmentHealthLogsSpy).toHaveBeenCalledWith(expectedAppointment.aid);
+  it('should create history component',async(() => {
+    let de = fixture.debugElement.query(By.css('a[href$="patient-history"]'));
+    let el =  de.nativeElement;
+    el.click();
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      let de = fixture.debugElement.query(By.css('#history-container'));
+      expect(de).toBeTruthy();
+    });
+  }));
+  //last healthlog
+  it('should call getLastHealthLog on click load last healthlog',() => {
+    let de = fixture.debugElement.query(By.css('a[href$="patient-healthlogs"]'));
+    let el = de.nativeElement;
+    el.click();
+    expect(consultationServiceGetLastHealthLogSpy).toHaveBeenCalled();
   });
   it('should create health-logs component',async(() => {
+    let de = fixture.debugElement.query(By.css('a[href$="patient-healthlogs"]'));
+    let el = de.nativeElement;
+    el.click();
     fixture.whenStable().then(() => {
       fixture.detectChanges();
       let de = fixture.debugElement.query(By.css('#health-logs-container'));
       expect(de).toBeTruthy();
     });
   }));
+  //healthlogform
   it('should create health-log-form component',() => {
     let de = fixture.debugElement.query(By.css('#health-log-form-container'));
     expect(de).toBeTruthy();
   });
-  //followUp false
-  describe('followUp is not true',() => {
-    let expectedAppointmentFalseFollowUp: Appointment;
-
-    beforeEach(() => {
-       expectedAppointmentFalseFollowUp = {
-         aid:2,
-         patient:{
-           name:'patient name',
-           hid:2,
-           gender:false,
-           dob:'1996-08-18'
-         },
-         followUp: false
-       }
-       component.appointment = expectedAppointmentFalseFollowUp;
-       fixture.detectChanges();
-    });
-
-    it('should not call getAppointmentHealthLogs',() => {
-      expect(consultationServiceGetAppointmentHealthLogsSpy).toHaveBeenCalled();
-    });
-    it('should not have healthlogs container',async(() => {
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        let de = fixture.debugElement.query(By.css('#health-logs-container'));
-        expect(de).toBeTruthy();
-    }));
-
-  });
-
 });
