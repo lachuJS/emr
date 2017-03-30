@@ -8,7 +8,7 @@
     </div>
     <div class="panel-body">
       <!--loop chief complaints array-->
-      <div class="row">
+      <div class="row" *ngIf="healthLog.chiefComplaints">
         <div class="col-sm-3 col-md-3">
           <strong>Chief Complaints</strong>
         </div>
@@ -24,45 +24,49 @@
         <div class="col-sm-9 col-md-9">{{ healthLog.examination }}</div>
       </div><hr>
       <!--vitals-->
-      <div *ngIf="healthLog.vitals" id="vitals">
+      <div *ngIf="vitals(healthLog)" id="vitals">
         <div class="row">
           <div class="col-sm-3 col-md-3">
             <strong>Vitals</strong>
           </div>
         </div><br>
         <div class="row">
-          <div class="col-sm-3 col-md-3">
+          <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.pr">
             <strong>PR : </strong>{{ healthLog.vitals.pr }}
           </div>
-          <div class="col-sm-3 col-md-3">
+          <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.bp">
             <strong>BP : </strong>{{ healthLog.vitals.bp }}
           </div>
-          <div class="col-sm-3 col-md-3">
+          <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.rr">
             <strong>RR : </strong>{{ healthLog.vitals.rr }}
           </div>
-          <div class="col-sm-3 col-md-3">
+          <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.temp">
             <strong>Temp : </strong>{{ healthLog.vitals.temp }}
           </div>
         </div>
-      </div><br>
+        <hr>
+      </div>
       <!--systemic examination-->
-      <div class="text-left">
-          <strong>Systemic Examintion</strong>
-      </div><br>
-      <div *ngIf="healthLog.systemicExamination" id="systemic-examination" class="row">
-        <div class="col-sm-3 col-md-3">
-          <strong>CVS : </strong>{{ healthLog.systemicExamination.cvs }}
+      <div *ngIf="systemicExamination(healthLog)" id="systemic-examination">
+        <div class="text-left">
+            <strong>Systemic Examintion</strong>
+        </div><br>
+        <div *ngIf="systemicExamination(healthLog)" id="systemic-examination" class="row">
+          <div class="col-sm-3 col-md-3" *ngIf="healthLog.systemicExamination.cvs">
+            <strong>CVS : </strong>{{ healthLog.systemicExamination.cvs }}
+          </div>
+          <div class="col-sm-3 col-md-3" *ngIf="healthLog.systemicExamination.rs">
+            <strong>RS : </strong>{{ healthLog.systemicExamination.rs }}
+          </div>
+          <div class="col-sm-3 col-md-3" *ngIf="healthLog.systemicExamination.cns">
+            <strong>CNS : </strong>{{ healthLog.systemicExamination.cns }}
+          </div>
+          <div class="col-sm-3 col-md-3" *ngIf="healthLog.systemicExamination.pa">
+            <strong>P/A : </strong>{{ healthLog.systemicExamination.pa }}
+          </div>
         </div>
-        <div class="col-sm-3 col-md-3">
-          <strong>RS : </strong>{{ healthLog.systemicExamination.rs }}
-        </div>
-        <div class="col-sm-3 col-md-3">
-          <strong>CNS : </strong>{{ healthLog.systemicExamination.cns }}
-        </div>
-        <div class="col-sm-3 col-md-3">
-          <strong>P/A : </strong>{{ healthLog.systemicExamination.pa }}
-        </div>
-      </div><hr>
+        <hr>
+      </div>
       <!--L/E-->
       <div *ngIf="healthLog.le" id="le" class="row">
         <div class="col-sm-3 col-md-3">
@@ -73,7 +77,7 @@
         </div>
       </div>
       <!--final diagnosis-->
-      <div id="final-diagnosis" class="row">
+      <div *ngIf="healthLog.finalDiagnosis" id="final-diagnosis" class="row">
         <div class="col-sm-3 col-md-3">
           <strong>Final Diagnosis </strong>
         </div>

@@ -8,41 +8,16 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <!-- navigation bar -->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#"><b>{{managment.name}}</b></a>
-      </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/"><strong>home</strong></a></li>
-          <li><a href="#"><strong>patients</strong></a></li>
-          <li><a href="#"><strong>analytics</strong></a></li>
-          <li><a href="/doctor/auth/logout"><strong>logout</strong></a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-  <!-- app body -->
-  <div class="container">
+    <!-- app body -->
+    <!--inline loading... will be replace by AppRootComponent -->
     <app-root>
-      <!-- app root compoenent will be rendered here after load -->
       <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6">loading...</div>
-        <div class="col-sm-3"></div>
-      </div> <!--/.row-->
+        <div class="col-sm-3 col-md-3"></div>
+        <div class="col-sm-6 col-md-6">loading...</div>
+        <div class="col-sm-3 col-md-3"></div>
+      </div>
     </app-root>
-  </div>
+
 </body>
 </html>

@@ -12,8 +12,24 @@ import { ConsultationService } from '../consultation.service';
   styleUrls: ['./health-log-form.component.css']
 })
 export class HealthLogFormComponent implements OnInit {
+  @Input() aid: number;
   healthLogForm: FormGroup;
   todayDate:Date;
+
+  //flags to show/hide formgroups
+  vitalsFlag:boolean;
+  systemicExaminationFlag: boolean;
+  leFlag: boolean;
+
+  toggleVitals(){
+    this.vitalsFlag = !this.vitalsFlag;
+  }
+  toggleSystemicExamination(){
+    this.systemicExaminationFlag = !this.systemicExaminationFlag;
+  }
+  toggleLe(){
+    this.leFlag = !this.leFlag;
+  }
 
   get chiefComplaints():  FormArray {
     return this.healthLogForm.get('chiefComplaints') as FormArray;
@@ -26,8 +42,10 @@ export class HealthLogFormComponent implements OnInit {
     private fb: FormBuilder,
     private consultationService: ConsultationService
   ) {
+    //healthLog date
     this.todayDate = new Date();
-    this.createForm();
+    this.vitalsFlag = false;
+    this.systemicExaminationFlag = false;
   }
 
   createForm(){
@@ -55,6 +73,20 @@ export class HealthLogFormComponent implements OnInit {
     this.addPrescriptionItem();
     this.addChiefComplaint();
   }
+  //edit form to main healthlog of appointment
+  createEditForm(healthLog: HealthLogForm) {
+    this.healthLogForm = this.fb.group({
+      chiefComplaints : this.fb.array(healthLog.chiefComplaints),
+      examination : healthLog.examination,
+      vitals : this.fb.group(healthLog.vitals),
+      systemicExamination : this.fb.group(healthLog.systemicExamination),
+      le : healthLog.le,
+      finalDiagnosis : healthLog.finalDiagnosis,
+      nextFollowUp : healthLog.nextFollowUp,
+      prescription : this.fb.array(healthLog.prescription)
+    });
+  }
+  //add remove buttons
   addPrescriptionItem(){
     this.prescription.push(this.fb.control('',Validators.required));
   }
@@ -103,5 +135,17 @@ export class HealthLogFormComponent implements OnInit {
     })
     .catch(err => console.log(err));
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.consultationService.getHealthLog(this.aid)
+    .then((healthLog: HealthLogForm) => {
+      //if healthLog exists for the appointment already
+      if (healthLog) {
+        this.createEditForm(healthLog);
+      }
+      else{ //empty form otherwise
+        this.createForm();
+      }
+    })
+    .catch((err) => { console.log(err) });
+  }
 }

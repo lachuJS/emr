@@ -1,42 +1,46 @@
-<div class="container" id="consultation-container">
+<div class="container">
   <div class="row">
+    <!-- patient info and history -->
     <div class="col-sm-3 col-md-3">
-      <!--patient-->
-      <div class="panel panel-default" data-spy="affix">
-        <div class="panel-body">
+      <ul class="list-group">
+        <!-- patient name, asl -->
+        <li class="list-group-item">
           <app-patient [patient]="appointment.patient"></app-patient>
-        </div>
-        <!--nav menu-->
-        <ul class="list-group">
-          <li class="list-group-item">
-            <a href="#patient-history" (click)="loadPatientHistory()" id="load-patient-history"><strong>history</strong></a>
-          </li>
-          <li class="list-group-item">
-            <a href="#patient-healthlogs" (click)="loadLastHealthLog()" id="load-last-healthlog"><strong>last healthlog</strong></a>
-          </li>
-          <li class="list-group-item">
-            <a href="javascript:void();"><strong>all healthlogs</strong></a>
-          </li>
-        </ul>
-      </div>
+        </li>
+        <!-- history toggle -->
+        <li class="list-group-item">
+
+          <div id="history">
+            <div class="row" (click)="toggleHistory()">
+              <div class="col-sm-6 col-md-6">
+                <strong>history</strong>
+              </div>
+              <div class="col-sm-6 col-md-6">
+                <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !historyFlag, 'glyphicon-chevron-down': historyFlag}"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <app-history *ngIf="historyFlag" [history]="patientHistory"></app-history>
+              </div>
+            </div>
+          </div>
+
+        </li>
+      </ul>
     </div> <!--/.col-->
-    <!--consultation component-->
+    <!-- healthlog feed -->
     <div class="col-sm-6 col-md-6">
-      <!--patient history-->
-      <div>
-        <span class="anchor" id="patient-history"></span> <!--fix for fixed nav bar issue-->
-        <app-history *ngIf="patientHistory" [history]="patientHistory"></app-history>
-      </div>
-      <!-- get health logs if it is a follow up consultation-->
-      <div>
-        <!--app-health-log gets array of healthLogForm -->
-        <span class="anchor" id="patient-healthlogs"></span>
-        <app-health-log *ngIf="lastHealthLog" [healthLogs]="[lastHealthLog]"></app-health-log>
-      </div>
-      <!-- health log form for current sitting-->
-      <div id="new-healthlog">
-        <app-health-log-form></app-health-log-form>
+      <!-- empty/ new health-log-form -->
+      <app-health-log-form [aid]="appointment.aid"></app-health-log-form>
+      <!-- healthlogs -->
+      <app-health-log *ngIf="pastHealthLogs" [healthLogs]="pastHealthLogs"></app-health-log>
+      <!-- load more button -->
+      <div class="panel panel-default">
+        <div class="panel-body text-center">
+          <a href="javascript:void();" (click)="loadPastHealthLogs()">load past healthlogs</a>
+        </div>
       </div>
     </div>
-  </div>
+  </div><!--/.row-->
 </div>

@@ -18,6 +18,7 @@ describe('HealthLogFormComponent', () => {
   let expectedValidForm: HealthLogForm;
   let consultationService: ConsultationService;
   let consultationServicePostHealthLogSpy;
+  let consultationServiceGetHealthLogSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -91,105 +92,164 @@ describe('HealthLogFormComponent', () => {
     consultationService = fixture.debugElement.injector.get(ConsultationService);
     consultationServicePostHealthLogSpy = spyOn(consultationService,'postHealthLog')
     .and.returnValue(Promise.resolve(expectedHealthLogForm));
+    consultationServiceGetHealthLogSpy = spyOn(consultationService,'getHealthLog');
+    consultationServiceGetHealthLogSpy.and.returnValue(Promise.resolve(null));
+
+    component.aid = 1;
 
     fixture.detectChanges();
   });
 
+  //empty form
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('prepareForm should capture form model( deep copy )', () => {
-    component.healthLogForm.setValue(expectedHealthLogForm);
-    fixture.detectChanges();
-    const capturedFormModel = component.prepareForm();
-    component.healthLogForm.patchValue({examination:'oriented'});
-    expect(component.healthLogForm.value.examination).not.toEqual(capturedFormModel.examination);
-  });
-  it('submit should be disabled if healthLogForm is pristine',() => {
-    let de = fixture.debugElement.query(By.css('#submit-btn'));
-    let el = de.nativeElement;
-    el.click();
-    expect(consultationServicePostHealthLogSpy).not.toHaveBeenCalled();
-  });
-  it('postHealthLog should have been called with param',() => {
-    component.healthLogForm.setValue(expectedHealthLogForm);
-    component.healthLogForm.markAsDirty(); //enable submit button
-    fixture.detectChanges();
-    let de = fixture.debugElement.query(By.css('#submit-btn'));
-    let el = de.nativeElement;
-    el.click();
-    expect(consultationServicePostHealthLogSpy).toHaveBeenCalledWith(expectedHealthLogForm);
-  });
-  it('should go back to pristine after save',async(() => {
-    component.healthLogForm.setValue(expectedHealthLogForm);
-    component.healthLogForm.markAsDirty(); //enable submit button
-    fixture.detectChanges();
-    let de = fixture.debugElement.query(By.css('#submit-btn'));
-    let el = de.nativeElement;
-    el.click();
-    fixture.whenStable()
-    .then(() => {
+  it('prepareForm should capture form model( deep copy )', async(() => {
+    fixture.whenStable().then(() => {
       fixture.detectChanges();
-      expect(component.healthLogForm.pristine).toBeTruthy();
+      component.healthLogForm.setValue(expectedHealthLogForm);
+      fixture.detectChanges();
+      const capturedFormModel = component.prepareForm();
+      component.healthLogForm.patchValue({examination:'oriented'});
+      expect(component.healthLogForm.value.examination).not.toEqual(capturedFormModel.examination);
+    });
+  }));
+  it('submit should be disabled if healthLogForm is pristine',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      let de = fixture.debugElement.query(By.css('#submit-btn'));
+      let el = de.nativeElement;
+      el.click();
+      expect(consultationServicePostHealthLogSpy).not.toHaveBeenCalled();
+    });
+  }));
+  it('postHealthLog should have been called with param',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      component.healthLogForm.setValue(expectedHealthLogForm);
+      component.healthLogForm.markAsDirty(); //enable submit button
+      fixture.detectChanges();
+      let de = fixture.debugElement.query(By.css('#submit-btn'));
+      let el = de.nativeElement;
+      el.click();
+      expect(consultationServicePostHealthLogSpy).toHaveBeenCalledWith(expectedHealthLogForm);
+    });
+  }));
+  it('should go back to pristine after save',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      component.healthLogForm.setValue(expectedHealthLogForm);
+      component.healthLogForm.markAsDirty(); //enable submit button
+      fixture.detectChanges();
+      let de = fixture.debugElement.query(By.css('#submit-btn'));
+      let el = de.nativeElement;
+      el.click();
+      fixture.whenStable()
+      .then(() => {
+        fixture.detectChanges();
+        expect(component.healthLogForm.pristine).toBeTruthy();
+      })
+    });
+  }));
+  it('should add new control to FormArray chiefComplaints on add-btn click',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
+      let de = fixture.debugElement.query(By.css('#add-complaint'));
+      let el = de.nativeElement;
+      el.click();
+      fixture.detectChanges();
+      expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore+1);
+    });
+  }));
+  it('should not remove control to FormArray on remove-btn click if length=1',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
+      let de = fixture.debugElement.query(By.css('#remove-complaint'));
+      let el = de.nativeElement;
+      el.click();
+      fixture.detectChanges();
+      expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore);
     })
   }));
-  it('should add new control to FormArray chiefComplaints on add-btn click',() => {
-    const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
-    let de = fixture.debugElement.query(By.css('#add-complaint'));
-    let el = de.nativeElement;
-    el.click();
-    fixture.detectChanges();
-    expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore+1);
+  it('should only remove chiefComplaints Item if length > 1',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      component.addChiefComplaint();
+      const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
+      let de = fixture.debugElement.query(By.css('#remove-complaint'));
+      let el = de.nativeElement;
+      el.click();
+      fixture.detectChanges();
+      expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore-1);
+    });
+  }));
+  it('should add new control to FormArray prescription on add-btn click',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      const lengthBefore = component.healthLogForm.value.prescription.length;
+      let de = fixture.debugElement.query(By.css('#add-prescription'));
+      let el = de.nativeElement;
+      el.click();
+      fixture.detectChanges();
+      expect(component.healthLogForm.value.prescription.length).toEqual(lengthBefore+1);
+    });
+  }));
+  it('should not remove control to FormArray prescription  remove-btn click if length=1',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      const lengthBefore = component.healthLogForm.value.prescription.length;
+      let de = fixture.debugElement.query(By.css('#remove-prescription'));
+      let el = de.nativeElement;
+      el.click();
+      fixture.detectChanges();
+      expect(component.healthLogForm.value.prescription.length).toEqual(lengthBefore);
+    });
+  }));
+  it('should only remove chiefComplaints Item if length > 1',async(() => {
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+      component.addPrescriptionItem();
+      const lengthBefore = component.healthLogForm.value.prescription.length;
+      let de = fixture.debugElement.query(By.css('#remove-prescription'));
+      let el = de.nativeElement;
+      el.click();
+      fixture.detectChanges();
+      expect(component.healthLogForm.value.prescription.length).toEqual(lengthBefore-1);
+    });
+  }));
+
+  describe('edit form',() => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(HealthLogFormComponent);
+      component = fixture.componentInstance;
+
+      consultationServiceGetHealthLogSpy.and.returnValue(Promise.resolve(expectedHealthLogForm));
+
+      component.aid = 1;
+      fixture.detectChanges();
+    });
+    it('should call getHealthLog',async(() => {
+      expect(consultationServiceGetHealthLogSpy).toHaveBeenCalledWith(component.aid);
+    }));
+    it('should create edit form with expectedHealthLogForm',async(() => {
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        expect(component.healthLogForm.value).toEqual(expectedHealthLogForm);
+      });
+    }));
+    it('should call postHealthLog with expectedHealthLogForm on submit',async(() => {
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        let de = fixture.debugElement.query(By.css('#submit-btn'));
+        let el = de.nativeElement;
+        component.healthLogForm.markAsDirty();
+        fixture.detectChanges();
+        el.click();
+        expect(consultationServicePostHealthLogSpy).toHaveBeenCalledWith(expectedHealthLogForm);
+      });
+    }));
   });
-  it('should not remove control to FormArray on remove-btn click if length=1',() => {
-    const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
-    let de = fixture.debugElement.query(By.css('#remove-complaint'));
-    let el = de.nativeElement;
-    el.click();
-    fixture.detectChanges();
-    expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore);
-  });
-  it('should only remove chiefComplaints Item if length > 1',() => {
-    component.addChiefComplaint();
-    const lengthBefore = component.healthLogForm.value.chiefComplaints.length;
-    let de = fixture.debugElement.query(By.css('#remove-complaint'));
-    let el = de.nativeElement;
-    el.click();
-    fixture.detectChanges();
-    expect(component.healthLogForm.value.chiefComplaints.length).toEqual(lengthBefore-1);
-  });
-  it('should add new control to FormArray prescription on add-btn click',() => {
-    const lengthBefore = component.healthLogForm.value.prescription.length;
-    let de = fixture.debugElement.query(By.css('#add-prescription'));
-    let el = de.nativeElement;
-    el.click();
-    fixture.detectChanges();
-    expect(component.healthLogForm.value.prescription.length).toEqual(lengthBefore+1);
-  });
-  it('should not remove control to FormArray prescription  remove-btn click if length=1',() => {
-    const lengthBefore = component.healthLogForm.value.prescription.length;
-    let de = fixture.debugElement.query(By.css('#remove-prescription'));
-    let el = de.nativeElement;
-    el.click();
-    fixture.detectChanges();
-    expect(component.healthLogForm.value.prescription.length).toEqual(lengthBefore);
-  });
-  it('should only remove chiefComplaints Item if length > 1',() => {
-    component.addPrescriptionItem();
-    const lengthBefore = component.healthLogForm.value.prescription.length;
-    let de = fixture.debugElement.query(By.css('#remove-prescription'));
-    let el = de.nativeElement;
-    el.click();
-    fixture.detectChanges();
-    expect(component.healthLogForm.value.prescription.length).toEqual(lengthBefore-1);
-  });
-  //validators
-  it('check form validity',() => {
-    component.healthLogForm.patchValue(expectedValidForm);
-    expect(component.healthLogForm.status).toEqual('VALID');
-  });
-  it('check form INVALID',() => {
-    component.healthLogForm.patchValue({chiefComplaints:['lorem']});
-    expect(component.healthLogForm.status).toEqual('INVALID');
-  });
+
 });

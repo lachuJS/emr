@@ -31,11 +31,6 @@ describe('HistoryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should display title History',() => {
-    let de = fixture.debugElement.query(By.css('.panel-heading'));
-    let el = de.nativeElement;
-    expect(el.textContent).toMatch('History');
-  });
   it('should display DM',() => {
     let de = fixture.debugElement.query(By.css('#dm'));
     expect(de).toBeTruthy();
@@ -51,6 +46,6 @@ describe('HistoryComponent', () => {
   it('should display presenting illness',() => {
     let de = fixture.debugElement.query(By.css('#presenting-illness'));
     let el = de.nativeElement;
-    expect(el.textContent).toEqual(expectedHistory.presentingIllness);
+    expect(el.textContent).toMatch(expectedHistory.presentingIllness);
   });
 }));

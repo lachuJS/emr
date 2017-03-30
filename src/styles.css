@@ -11,3 +11,7 @@ span[class="anchor"] {
   position:absolute;
   top:-70px;
 }
+.glyphicon {
+   font-family:'Glyphicons Halflings' !important;
+   /* more css comes along here*/
+}

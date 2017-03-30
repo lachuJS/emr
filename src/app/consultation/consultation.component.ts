@@ -18,27 +18,43 @@ import { HealthLogForm } from './health-log-form/health-log-form.data-model';
 })
 export class ConsultationComponent implements OnInit {
   @Input() appointment: Appointment;
+
+  historyFlag: boolean;
   patientHistory: History;
-  lastHealthLog: HealthLogForm;
+
+  pastHealthLogs: Array<HealthLogForm>
+
   constructor(
     private consultationService: ConsultationService
-  ) {}
-
-  loadPatientHistory() {
-    //get patient history
-    this.consultationService.getPatientHistory(this.appointment.patient.hid)
-    .then((history: History) => {
-      this.patientHistory = history;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  ) {
+    this.historyFlag = false;
   }
-  loadLastHealthLog() {
-    //get prev healthlog
-    this.consultationService.getLastHealthLog()
-    .then((healthLog: HealthLogForm) => {
-      this.lastHealthLog = healthLog;
+
+  toggleHistory() {
+    //getPatientHistory if not already
+    if(!this.patientHistory){
+      this.consultationService.getPatientHistory(this.appointment.patient.hid)
+      .then((history: History) => {
+        this.patientHistory = history;
+        this.historyFlag = !this.historyFlag;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+    else{ //already fetched patient history
+      this.historyFlag = !this.historyFlag;
+    }
+  }
+  loadPastHealthLogs() {
+    this.consultationService.getHealthLogs(this.appointment.patient.hid)
+    .then((healthLogs: Array<HealthLogForm>) => {
+      if(this.pastHealthLogs){ //already got pastHealthLogs
+        this.pastHealthLogs = this.pastHealthLogs.concat(healthLogs);
+      }
+      else{ //clicked for first time
+        this.pastHealthLogs = healthLogs;
+      }
     })
     .catch((err) => { console.log(err) });
   }

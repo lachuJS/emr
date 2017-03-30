@@ -7,7 +7,7 @@
         <div class="col-sm-6 col-md-6 text-right"><strong>{{ todayDate | date:'longDate' }}</strong></div>
       </div>
     </div> <!-- /.list-group-item-->
-    <div class="panel-body">
+    <div class="panel-body" *ngIf="healthLogForm">
       <form [formGroup]="healthLogForm" (ngSubmit)="submitForm()" class="form-group">
 
         <div class="row">
@@ -37,8 +37,17 @@
           </div>
         </div><hr>
 
-        <label for="vitals"><strong>Vitals:</strong></label><br>
-        <div id="vitals" formGroupName="vitals" class="row">
+
+        <div class="row" (click)="toggleVitals()">
+          <div class="col-sm-6 col-md-6">
+            <strong>Vitals</strong>:
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !vitalsFlag, 'glyphicon-chevron-down': vitalsFlag}"></i>
+          </div>
+        </div>
+        <div id="vitals" formGroupName="vitals" class="row" *ngIf="vitalsFlag">
+          <br>
           <div class="col-sm-3 col-md-3">
             <input type="text" formControlName="pr" class="form-control" placeholder="PR">
           </div>
@@ -57,10 +66,19 @@
               <div class="input-group-addon">° F</div>
             </div>
           </div>
-        </div><br>
+        </div><hr>
 
-        <label for="systemicExamination"><strong>Systemic Examination:</strong></label><br>
-        <div id="systemic-examination" formGroupName="systemicExamination" class="row">
+        <div class="row" (click)="toggleSystemicExamination()">
+          <div class="col-sm-6 col-md-6">
+            <strong>Systemic Examination</strong>:
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !systemicExaminationFlag,
+             'glyphicon-chevron-down': systemicExaminationFlag}"></i>
+          </div>
+        </div>
+        <div id="systemic-examination" formGroupName="systemicExamination" class="row" *ngIf="systemicExaminationFlag">
+          <br>
           <div class="col-sm-3 col-md-3">
             <input type="text" formControlName="cvs" class="form-control" placeholder="CVS">
           </div>
@@ -73,10 +91,19 @@
           <div class="col-sm-3 col-md-3">
             <input type="text" formControlName="pa" class="form-control" placeholder="P/A">
           </div>
-        </div><br>
+        </div><hr>
 
-        <div id="le">
-          <label for="le"><strong>L/E:</strong></label>
+        <div class="row" (click)="toggleLe()">
+          <div class="col-sm-6 col-md-6">
+            <strong>L/E</strong>:
+          </div>
+          <div class="col-sm-6 col-md-6 text-right">
+            <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !leFlag,
+             'glyphicon-chevron-down': leFlag}"></i>
+          </div>
+        </div>
+        <div id="le" *ngIf="leFlag">
+          <br>
           <textarea formControlName="le" class="form-control" rows="3"></textarea>
         </div><hr><br>
 

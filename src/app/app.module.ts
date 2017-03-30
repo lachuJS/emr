@@ -5,6 +5,7 @@ import { PipeModule } from './pipes/pipe.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { AlertModule } from 'ng2-bootstrap';
 
+
 import { AppComponent } from './app.component';
 import { DoctorComponent } from './dashboard/doctor/doctor.component';
 import { PatientComponent } from './consultation/patient/patient.component';
@@ -20,6 +21,7 @@ import { DashboardService } from './dashboard/dashboard.service';
 import { ConsultationService } from './consultation/consultation.service';
 import { LoginFormService } from './login-form/login-form.service';
 import { ErrorComponent } from './error/error.component';
+import { PromptComponent } from './prompt/prompt.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { ErrorComponent } from './error/error.component';
     LoginFormComponent,
     HealthLogComponent,
     ErrorComponent,
+    PromptComponent
   ],
   imports: [
     BrowserModule,

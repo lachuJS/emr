@@ -170,10 +170,6 @@ describe('HealthLogComponent', () => {
       let de = fixture.debugElement.query(By.css('#final-diagnosis'));
       expect(de).toBeTruthy();
     });
-    it('should have prescription',() => {
-      let de = fixture.debugElement.query(By.css('#prescription'));
-      expect(de).toBeTruthy();
-    });
   });
 
 });

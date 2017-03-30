@@ -11,5 +11,20 @@ export class HealthLogComponent implements OnInit {
   @Input() healthLogs: Array<HealthLogForm>;
 
   constructor() {}
+  vitals(healthLog: HealthLogForm) {
+    let vitals = healthLog.vitals;
+    if (vitals && (vitals.pr || vitals.bp || vitals.rr || vitals.temp)) {
+      return true;
+    }
+    return false;
+  }
+  systemicExamination(healthLog: HealthLogForm){
+    let se = healthLog.systemicExamination;
+    if(se && (se.cvs || se.rs || se.cns || se.pa)){
+      return true;
+    }
+    return false;
+  }
+
   ngOnInit() {}
 }

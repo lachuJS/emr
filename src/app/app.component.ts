@@ -12,12 +12,21 @@ import { Appointment } from './dashboard/appointment/appointment';
 })
 export class AppComponent {
   selectedAppointment: Appointment;
-  get dashboardShow(): boolean {
-    return !this.selectedAppointment;
-  }
 
   constructor(){}
-  openConsultation(appointment: Appointment) {
+  //sets selectedAppointment
+  selectAppointment(appointment: Appointment) {
     this.selectedAppointment = appointment;
   }
+  goHome() {
+    //if in consultation
+    if(this.selectedAppointment){
+      //unset selectedAppointment
+      //prompt are you sure
+      this.selectedAppointment = undefined;
+    }
+    //other route configs
+    //code...
+  }
+
 }

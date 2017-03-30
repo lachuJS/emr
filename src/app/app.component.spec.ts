@@ -5,10 +5,12 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { PipeModule } from './pipes/pipe.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertModule } from 'ng2-bootstrap';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ConsultationComponent } from './consultation/consultation.component';
+import { PromptComponent } from './prompt/prompt.component';
 
 import { DashboardService } from './dashboard/dashboard.service';
 
@@ -21,9 +23,13 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         DashboardComponent,
-        ConsultationComponent
+        ConsultationComponent,
+        PromptComponent
       ],
-      imports: [ PipeModule ],
+      imports: [
+        PipeModule,
+        AlertModule.forRoot()
+      ],
       providers: [ DashboardService ]
     })
     .overrideComponent(DashboardComponent,{

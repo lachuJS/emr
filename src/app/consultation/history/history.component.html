@@ -1,18 +1,17 @@
-<div id="history-container" class="panel panel-default">
-  <!-- title -->
-  <div class="panel-heading">
-    <strong>History</strong>
-  </div>
+<div id="history-container" *ngIf="history">
   <!--body-->
-  <div *ngIf="history" id="history" class="panel-body">
-    <ul id="history-list">
-      <li *ngIf="history.dm" id="dm">DM</li>
-      <li *ngIf="history.htn" id="htn">HTN</li>
-      <li *ngIf="history.ba" id="ba">BA</li>
-      <li *ngIf="history.thyroid" id="thyroid">Thyroid</li>
-      <li *ngIf="history.seizures" id="seizures">Seizures</li>
-    </ul>
-    <strong>Presenting Illness</strong>
-    <p id="presenting-illness">{{ history.presentingIllness }}</p>
+  <br>
+  <div id="history">
+    <div id="history-list">
+      <p *ngIf="history.dm" id="dm">DM</p>
+      <p *ngIf="history.htn" id="htn">HTN</p>
+      <p *ngIf="history.ba" id="ba">BA</p>
+      <p *ngIf="history.thyroid" id="thyroid">Thyroid</p>
+      <p *ngIf="history.seizures" id="seizures">Seizures</p>
+    </div>
+    <div id="presenting-illness">
+      <strong>Presenting Illness</strong>
+      <p id="presenting-illness">{{ history.presentingIllness }}</p>
+    </div>
   </div>
 </div> <!--/.history-container-->

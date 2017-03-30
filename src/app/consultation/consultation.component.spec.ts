@@ -81,8 +81,6 @@ describe('ConsultationComponent', () => {
     consultationService = fixture.debugElement.injector.get(ConsultationService);
     consultationServiceGetPatientHistory = spyOn(consultationService,'getPatientHistory')
     .and.returnValue(Promise.resolve(expectedHistory));
-    consultationServiceGetLastHealthLogSpy = spyOn(consultationService,'getLastHealthLog')
-    .and.returnValue(Promise.resolve(expectedHealthLogForm));
 
     component.appointment = expectedAppointment;
     fixture.detectChanges();
@@ -95,39 +93,15 @@ describe('ConsultationComponent', () => {
     let de = fixture.debugElement.query(By.css('#patient-container'));
     expect(de).toBeTruthy();
   });
-  //patient-history
-  it('should call getLastHealthLog on click last healthlog',() => {
-    let de = fixture.debugElement.query(By.css('a[href$="patient-history"]'));
-    let el = de.nativeElement;
-    el.click();
-    expect(consultationServiceGetPatientHistory).toHaveBeenCalled();
-  });
   it('should create history component',async(() => {
-    let de = fixture.debugElement.query(By.css('a[href$="patient-history"]'));
-    let el =  de.nativeElement;
-    el.click();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      let de = fixture.debugElement.query(By.css('#history-container'));
-      expect(de).toBeTruthy();
-    });
-  }));
-  //last healthlog
-  it('should call getLastHealthLog on click load last healthlog',() => {
-    let de = fixture.debugElement.query(By.css('a[href$="patient-healthlogs"]'));
-    let el = de.nativeElement;
-    el.click();
-    expect(consultationServiceGetLastHealthLogSpy).toHaveBeenCalled();
-  });
-  it('should create health-logs component',async(() => {
-    let de = fixture.debugElement.query(By.css('a[href$="patient-healthlogs"]'));
+    let de = fixture.debugElement.query(By.css('#history > .row')); //gets first .row
     let el = de.nativeElement;
     el.click();
     fixture.whenStable().then(() => {
       fixture.detectChanges();
-      let de = fixture.debugElement.query(By.css('#health-logs-container'));
-      expect(de).toBeTruthy();
-    });
+      let historyDe = fixture.debugElement.query(By.css('#history-container'));
+      expect(historyDe).toBeTruthy();
+    })
   }));
   //healthlogform
   it('should create health-log-form component',() => {
