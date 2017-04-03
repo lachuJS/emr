@@ -1,22 +1,19 @@
 <div id="dashboard-container" class="row">
   <!--doctor-info-->
   <div class="col-md-3 col-sm-3">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <app-doctor *ngIf="doctor" [doctor]="doctor"></app-doctor>
-      </div>
-    </div>
+      <app-doctor *ngIf="doctor" [doctor]="doctor"></app-doctor>
   </div>
   <!--appointments feed-->
   <div class="col-md-6 col-sm-3">
     <div *ngIf="appointments" id="appointments-container">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <strong>appointments</strong>
+          <strong>appointments</strong>&nbsp;
           <span class="badge">{{ appointmentsCount }}</span>
         </div>
         <!-- empty message -->
         <div class="panel-body text-center" id="empty-message" *ngIf="appointmentsCount == 0">
+          <i class="glyphicon glyphicon-apple"></i>&nbsp;
           <strong>no appointments left</strong>
         </div>
         <!--list of appointments-->

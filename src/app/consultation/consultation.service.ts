@@ -21,7 +21,16 @@ export class ConsultationService {
   //sticky appointment form
   getHealthLog(aid: number): Promise<HealthLogForm>{
     return Promise.resolve({
-        chiefComplaints: ['lorem'],
+        chiefComplaints: [
+          {
+            complaint: 'fever',
+            duration: 2 //days
+          },
+          {
+            complaint: 'nausea',
+            duration: 3 //days
+          }
+      ],
         examination: 'concious',
         //form builder replaces undefined with null values
         vitals: {
@@ -39,7 +48,23 @@ export class ConsultationService {
         le:'lazy brown fox jumped',
         finalDiagnosis:'lrem ipsum',
         nextFollowUp: '1995-08-17',
-        prescription: ['lorem 25mg'],
+        investigations: 'lab data',
+        prescription: [
+          {
+            item: 'crocin',
+            breakfast: true,
+            lunch: false,
+            dinner: true,
+            beforeMeal: false
+          },
+          {
+            item: 'cetrizin',
+            breakfast: false,
+            lunch: false,
+            dinner: true,
+            beforeMeal: false
+          }
+        ],
         dateCreated: '1990-08-01'
       });
   }
@@ -52,7 +77,12 @@ export class ConsultationService {
   getHealthLogs(patientId: number): Promise<HealthLogForm[]> {
     return Promise.resolve([
       {
-          chiefComplaints: ['lorem'],
+          chiefComplaints: [
+            {
+              complaint: 'fever',
+              duration :2 //days
+            }
+          ],
           examination: 'concious',
           //form builder replaces undefined with null values
           vitals: {
@@ -70,11 +100,24 @@ export class ConsultationService {
           le:'lazy brown fox jumped',
           finalDiagnosis:'lrem ipsum',
           nextFollowUp: '1995-08-17',
-          prescription: ['lorem 25mg'],
+          investigations: 'lab data',
+          prescription:[
+            {
+              item: 'crocin',
+              breakfast: true,
+              lunch: false,
+              dinner: true,
+              beforeMeal: true
+            },
+            {
+              item: 'cetrizin',
+              dinner: true
+            }
+          ],
           dateCreated: '1990-08-01'
         },
         {
-            chiefComplaints: ['lorem'],
+            chiefComplaints: [],
             examination: 'concious',
             //form builder replaces undefined with null values
             vitals: {
@@ -92,8 +135,9 @@ export class ConsultationService {
             le:undefined,
             finalDiagnosis:'lrem ipsum',
             nextFollowUp: '1995-08-17',
-            prescription: ['lorem 25mg'],
-            dateCreated: '1990-08-01'
+            investigations: 'lab data',
+            prescription: [],
+          dateCreated: '1990-08-01'
         }
     ]);
   }

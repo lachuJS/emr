@@ -27,9 +27,14 @@ export class DashboardComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService
   ) { }
+
   openConsultation(appointment: Appointment){
     this.consultation.emit(appointment);
   }
+  doneAppointment(index: number) {
+    this.appointments.slice(index,1);
+  }
+
   ngOnInit() {
     //get doctor info
     this.dashboardService.getDoctor()

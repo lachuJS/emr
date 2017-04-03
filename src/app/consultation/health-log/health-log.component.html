@@ -8,23 +8,33 @@
     </div>
     <div class="panel-body">
       <!--loop chief complaints array-->
-      <div class="row" *ngIf="healthLog.chiefComplaints">
-        <div class="col-sm-3 col-md-3">
+      <div *ngIf="chiefComplaintsExists(healthLog)">
+        <div>
           <strong>Chief Complaints</strong>
+        </div><br>
+        <div id="chief-complaints">
+          <table class="table table-hover">
+            <tr>
+              <th>#</th>
+              <th>complaint</th>
+              <th>duration(days)</th>
+            </tr>
+            <tr *ngFor="let chiefComplaint of healthLog.chiefComplaints;let i=index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ chiefComplaint.complaint }}</td>
+              <td>{{ chiefComplaint.duration }}</td>
+            </tr>
+          </table>
         </div>
-        <div id="chief-complaints" class="col-sm-9 col-md-9">
-          <div *ngFor="let complaint of healthLog.chiefComplaints">
-            <p class="complaint">{{ complaint }} </p>
-          </div>
-        </div>
-      </div><br>
+        <hr>
+      </div>
       <!--examination-->
       <div *ngIf="healthLog.examination" class="row">
         <div class="col-sm-3 col-md-3" id="examination"><strong>Examination</strong></div>
         <div class="col-sm-9 col-md-9">{{ healthLog.examination }}</div>
       </div><hr>
       <!--vitals-->
-      <div *ngIf="vitals(healthLog)" id="vitals">
+      <div *ngIf="vitalsExists(healthLog)" id="vitals">
         <div class="row">
           <div class="col-sm-3 col-md-3">
             <strong>Vitals</strong>
@@ -47,11 +57,11 @@
         <hr>
       </div>
       <!--systemic examination-->
-      <div *ngIf="systemicExamination(healthLog)" id="systemic-examination">
+      <div *ngIf="systemicExaminationExists(healthLog)" id="systemic-examination">
         <div class="text-left">
             <strong>Systemic Examintion</strong>
         </div><br>
-        <div *ngIf="systemicExamination(healthLog)" id="systemic-examination" class="row">
+        <div *ngIf="systemicExaminationExists(healthLog)" id="systemic-examination" class="row">
           <div class="col-sm-3 col-md-3" *ngIf="healthLog.systemicExamination.cvs">
             <strong>CVS : </strong>{{ healthLog.systemicExamination.cvs }}
           </div>
@@ -69,32 +79,57 @@
       </div>
       <!--L/E-->
       <div *ngIf="healthLog.le" id="le" class="row">
-        <div class="col-sm-3 col-md-3">
+        <div class="col-sm-6 col-md-6">
           <strong>L/E </strong>
         </div>
-        <div class="col-sm-9 com-md-9">
+        <div class="col-sm-6 com-md-6">
           <p>{{ healthLog.le }}</p>
         </div>
+        <br>
       </div>
       <!--final diagnosis-->
       <div *ngIf="healthLog.finalDiagnosis" id="final-diagnosis" class="row">
-        <div class="col-sm-3 col-md-3">
+        <div class="col-sm-6 col-md-6">
           <strong>Final Diagnosis </strong>
         </div>
-        <div class="col-sm-9 col-sm-9">
+        <div class="col-sm-6 col-sm-6">
           {{ healthLog.finalDiagnosis }}
         </div>
-      </div><br>
+        <br><br>
+      </div>
       <!--follow up date-->
       <div *ngIf="healthLog.nextFollowUp" id="next-follow-up" class="row">
-        <div class="col-sm-3 col-md-3"><strong>Date given for next sitting</strong></div>
-        <div class="col-md-9 col-md-9">{{ healthLog.nextFollowUp | date:'longDate' }}</div>
+        <div class="col-sm-6 col-md-6"><strong>Date given for next sitting</strong></div>
+        <div class="col-md-6 col-md-6">{{ healthLog.nextFollowUp | date:'longDate' }}</div>
+        <br><br>
+      </div>
+      <!--investigations-->
+      <div *ngIf="healthLog.investigations" id="investigations" class="row">
+        <div class="col-sm-6 col-md-6"><strong>Investigations</strong></div>
+        <div class="col-sm-6 col-md-6">{{ healthLog.investigations }}</div>
       </div>
       <!--prescription-->
-      <div *ngIf="healthLog.prescription" id="prescription">
-        <ul *ngFor="let item of prescription;let i=index;">
-          <li>{{ i+1 }}: {{ item }}</li>
-        </ul>
+      <br>
+      <div *ngIf="prescriptionExists(healthLog)" id="prescription">
+        <strong>Prescription</strong><br><br>
+        <table class="table table-hover">
+          <tr>
+            <th>#</th>
+            <th>item</th>
+            <th>breakfast</th>
+            <th>lunch</th>
+            <th>dinner</th>
+            <th>before meal</th>
+          </tr>
+          <tr *ngFor="let prescriptionItem of healthLog.prescription;let i=index">
+            <td>{{ i+1 }}</td>
+            <td>{{ prescriptionItem.item }}</td>
+            <td><span class="glyphicon glyphicon-ok" *ngIf="prescriptionItem.breakfast"></span></td>
+            <td><span class="glyphicon glyphicon-ok" *ngIf="prescriptionItem.lunch"></span></td>
+            <td><span class="glyphicon glyphicon-ok" *ngIf="prescriptionItem.dinner"></span></td>
+            <td><span class="glyphicon glyphicon-ok" *ngIf="prescriptionItem.beforeMeal"></span></td>
+          </tr>
+        </table>
       </div>
     </div>
 

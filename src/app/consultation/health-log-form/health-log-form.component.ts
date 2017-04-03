@@ -17,18 +17,15 @@ export class HealthLogFormComponent implements OnInit {
   todayDate:Date;
 
   //flags to show/hide formgroups
+  chiefComplaintsFlag: boolean;
   vitalsFlag:boolean;
   systemicExaminationFlag: boolean;
   leFlag: boolean;
+  prescriptionFlag: boolean;
+  investigationsFlag: boolean;
 
-  toggleVitals(){
-    this.vitalsFlag = !this.vitalsFlag;
-  }
-  toggleSystemicExamination(){
-    this.systemicExaminationFlag = !this.systemicExaminationFlag;
-  }
-  toggleLe(){
-    this.leFlag = !this.leFlag;
+  toggle(flagName: string) {
+    this[flagName] = !this[flagName];
   }
 
   get chiefComplaints():  FormArray {
@@ -44,15 +41,13 @@ export class HealthLogFormComponent implements OnInit {
   ) {
     //healthLog date
     this.todayDate = new Date();
-    this.vitalsFlag = false;
-    this.systemicExaminationFlag = false;
   }
 
   createForm(){
     //create form model with empty default/empty values
     this.healthLogForm = this.fb.group({
-      chiefComplaints: this.fb.array([]),
-      examination: ['concious',Validators.required],
+      chiefComplaints : this.fb.array([]),
+      examination: 'concious',
       vitals: this.fb.group({
         pr: undefined,
         bp: undefined,
@@ -66,8 +61,9 @@ export class HealthLogFormComponent implements OnInit {
         pa: undefined
       }),
       le: '',
-      finalDiagnosis: ['',Validators.required],
+      finalDiagnosis: '',
       nextFollowUp: '',
+      investigations: '',
       prescription: this.fb.array([])
     });
     this.addPrescriptionItem();
@@ -76,31 +72,49 @@ export class HealthLogFormComponent implements OnInit {
   //edit form to main healthlog of appointment
   createEditForm(healthLog: HealthLogForm) {
     this.healthLogForm = this.fb.group({
-      chiefComplaints : this.fb.array(healthLog.chiefComplaints),
+      chiefComplaints : this.fb.array(healthLog.chiefComplaints.map((chiefComplaint) => {
+        return this.fb.group(chiefComplaint);
+      })),
       examination : healthLog.examination,
       vitals : this.fb.group(healthLog.vitals),
       systemicExamination : this.fb.group(healthLog.systemicExamination),
       le : healthLog.le,
       finalDiagnosis : healthLog.finalDiagnosis,
       nextFollowUp : healthLog.nextFollowUp,
-      prescription : this.fb.array(healthLog.prescription)
+      investigations : healthLog.investigations,
+      prescription : this.fb.array(healthLog.prescription.map((prescriptionItem) => {
+        return this.fb.group(prescriptionItem)
+      }))
     });
   }
   //add remove buttons
   addPrescriptionItem(){
-    this.prescription.push(this.fb.control('',Validators.required));
+    this.prescription.push(
+      this.fb.group({
+        item: undefined,
+        breakfast: undefined,
+        lunch: undefined,
+        dinner: undefined,
+        beforeMeal: undefined
+      })
+    );
   }
   addChiefComplaint(){
-    this.chiefComplaints.push(this.fb.control('',Validators.required));
+    this.chiefComplaints.push(
+      this.fb.group({
+        complaint: undefined,
+        duration: undefined
+      })
+    );
   }
-  removePrescriptionItem(){
+  removePrescriptionItem(index: number){
     if(this.prescription.length > 1) {
-      this.prescription.removeAt(this.prescription.length-1);
+      this.prescription.removeAt(index);
     }
   }
-  removeChiefComplaint(){
+  removeChiefComplaint(index: number){
     if(this.chiefComplaints.length > 1) {
-      this.chiefComplaints.removeAt(this.chiefComplaints.length-1);
+      this.chiefComplaints.removeAt(index);
     }
   }
   validateForm(){
@@ -114,14 +128,23 @@ export class HealthLogFormComponent implements OnInit {
     //captures form model
     const formModel = this.healthLogForm.value;
     return {
-      chiefComplaints: formModel.chiefComplaints.slice(0),
+      chiefComplaints: formModel.chiefComplaints.map((chiefComplaint) => {
+        if(chiefComplaint.complaint || chiefComplaint.duration){
+          return Object.assign({},chiefComplaint); //to avoid empty fields
+        }
+      }),
       examination: formModel.examination as Examination,
       vitals: Object.assign({},formModel.vitals),
       systemicExamination: Object.assign({},formModel.systemicExamination),
       le: formModel.le as string,
       finalDiagnosis: formModel.finalDiagnosis as string,
       nextFollowUp: formModel.nextFollowUp as string,
-      prescription: formModel.prescription.slice(0)
+      investigations : formModel.investigations as string,
+      prescription: formModel.prescription.map((prescriptionItem) => {
+        if(prescriptionItem.item) {
+          return Object.assign({},prescriptionItem); //to avoid empty fields
+        }
+      })
     }
   }
   submitForm() {
@@ -129,6 +152,7 @@ export class HealthLogFormComponent implements OnInit {
     this.consultationService.postHealthLog(healthLog)
     .then((status: boolean) => {
       if(status){
+        console.log(healthLog); //__remove__
         this.healthLogForm.markAsPristine(); //disables save until form is dirty
       }
       //code...

@@ -22,13 +22,14 @@ export class ConsultationComponent implements OnInit {
   historyFlag: boolean;
   patientHistory: History;
 
+  healthLogsListFlag: boolean;
+  
+
   pastHealthLogs: Array<HealthLogForm>
 
   constructor(
     private consultationService: ConsultationService
-  ) {
-    this.historyFlag = false;
-  }
+  ) {}
 
   toggleHistory() {
     //getPatientHistory if not already

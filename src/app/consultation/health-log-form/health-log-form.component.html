@@ -1,50 +1,67 @@
 <div id="health-log-form-container">
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <!--form head-->
-      <div class="row">
-        <div class="col-sm-6 col-md-6"><strong>HealthLog:</strong></div>
-        <div class="col-sm-6 col-md-6 text-right"><strong>{{ todayDate | date:'longDate' }}</strong></div>
-      </div>
-    </div> <!-- /.list-group-item-->
+
     <div class="panel-body" *ngIf="healthLogForm">
+      <!-- log-date-->
+      <div class="text-right">
+        <strong>{{ todayDate | date:'longDate' }}</strong>
+      </div><br>
+
+      <!-- form -->
       <form [formGroup]="healthLogForm" (ngSubmit)="submitForm()" class="form-group">
 
-        <div class="row">
-          <div class="col-sm-3 col-md-3">
-            <label for="chiefComplaints"><strong>Chief Complaints:</strong></label>
+        <div>
+          <div>
+            <a href="javascript:void();" (click)="toggle('chiefComplaintsFlag')">
+              <strong>Chief Complaints:</strong>
+              <i class="pull-right float-xs-right glyphicon " [ngClass]="{'glyphicon-chevron-right': !chiefComplaintsFlag,
+              'glyphicon-chevron-down': chiefComplaintsFlag}"></i>
+            </a>
           </div>
-          <div class="col-sm-9 col-md-9">
-            <div id="chief-complaints" formArrayName="chiefComplaints" class="row">
-              <div *ngFor="let complaint of chiefComplaints.controls;let i=index" class="col-sm-6 col-md-6">
-                <input type="text" [formControlName]="i" class="form-control">
-              </div>
-            </div><br>
-            <button type="button" class="btn btn-default btn-sm" (click)="addChiefComplaint()" id="add-complaint">+</button>
-            <button type="button" class="btn btn-default btn-sm" (click)="removeChiefComplaint()" id="remove-complaint">-</button>
+          <div *ngIf="chiefComplaintsFlag">
+            <br>
+            <table class="table" formArrayName="chiefComplaints">
+              <tr>
+                <th>#</th>
+                <th>complaint</th>
+                <th>duration (days)</th>
+                <th></th>
+              </tr>
+              <tr *ngFor="let chiefComplaint of chiefComplaints.controls; let i=index" [formGroupName]="i" >
+                <td>{{ i + 1 }}</td>
+                <td><input type="text" class="form-control input-sm" formControlName="complaint" placeholder="complaint"></td>
+                <td><input type="text" class="form-control input-sm" formControlName="duration" placeholder="duration"></td>
+                <td><span class="glyphicon glyphicon-remove" (click)="removeChiefComplaint(i)" *ngIf="chiefComplaints.length>1"></span></td>
+              </tr>
+            </table>
+            <a href="javascript:void();" (click)="addChiefComplaint()" id="add-complaint">+ add-complaint</a>
           </div>
-        </div><br>
+          <hr>
+        </div>
 
         <div class="row">
-          <div class="col-sm-3 col-md-3">
+          <div class="col-sm-6 col-md-6">
             <label><strong>Examination:</strong></label>
           </div>
-          <div id="examination" class="form-group col-sm-9 col-md-9">
-            <input type="radio" formControlName="examination" value="concious">
-            <label for="examination">concious</label>
-            <input type="radio" formControlName="examination" value="oriented">
-            <label for="examination">oriented</label>
+          <div id="examination" class="col-sm-6 col-md-6">
+            <div class="col-sm-6 col-md-6">
+              <input type="radio" formControlName="examination" value="concious">
+              <label for="examination">concious</label>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <input type="radio" formControlName="examination" value="oriented">
+              <label for="examination">oriented</label>
+            </div>
           </div>
         </div><hr>
 
 
-        <div class="row" (click)="toggleVitals()">
-          <div class="col-sm-6 col-md-6">
+        <div>
+          <a href="javascript:void();" (click)="toggle('vitalsFlag')">
             <strong>Vitals</strong>:
-          </div>
-          <div class="col-sm-6 col-md-6">
-            <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !vitalsFlag, 'glyphicon-chevron-down': vitalsFlag}"></i>
-          </div>
+            <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !vitalsFlag,
+             'glyphicon-chevron-down': vitalsFlag}"></i>
+          </a>
         </div>
         <div id="vitals" formGroupName="vitals" class="row" *ngIf="vitalsFlag">
           <br>
@@ -68,14 +85,12 @@
           </div>
         </div><hr>
 
-        <div class="row" (click)="toggleSystemicExamination()">
-          <div class="col-sm-6 col-md-6">
+        <div>
+          <a href="javascript:void();" (click)="toggle('systemicExaminationFlag')">
             <strong>Systemic Examination</strong>:
-          </div>
-          <div class="col-sm-6 col-md-6">
             <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !systemicExaminationFlag,
              'glyphicon-chevron-down': systemicExaminationFlag}"></i>
-          </div>
+          </a>
         </div>
         <div id="systemic-examination" formGroupName="systemicExamination" class="row" *ngIf="systemicExaminationFlag">
           <br>
@@ -93,55 +108,86 @@
           </div>
         </div><hr>
 
-        <div class="row" (click)="toggleLe()">
-          <div class="col-sm-6 col-md-6">
+        <div>
+          <a href="javascript:void();" (click)="toggle('leFlag')">
             <strong>L/E</strong>:
-          </div>
-          <div class="col-sm-6 col-md-6 text-right">
             <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !leFlag,
              'glyphicon-chevron-down': leFlag}"></i>
-          </div>
+          </a>
         </div>
         <div id="le" *ngIf="leFlag">
           <br>
           <textarea formControlName="le" class="form-control" rows="3"></textarea>
-        </div><hr><br>
+        </div><hr>
 
         <div class="row">
-          <div class="col-sm-3 col-md-3">
+          <div class="col-sm-6 col-md-6">
             <label for="finalDiagnosis"><strong>Final Diagnosis:</strong></label>
           </div>
-          <div id="final-diagnosis" class="col-sm-9 col-md-9">
+          <div id="final-diagnosis" class="col-sm-6 col-md-6">
             <input type="text" formControlName="finalDiagnosis" class="form-control">
           </div>
         </div><br>
 
         <div class="row">
-          <div class="col-sm-3 col-md-3">
+          <div class="col-sm-6 col-md-6">
             <label for="nextFollowUp"><strong>Next Sitting Date:</strong></label>
           </div>
-          <div id="next-follow-up" class="col-sm-9 col-md-9">
+          <div id="next-follow-up" class="col-sm-6 col-md-6">
             <input type="date" formControlName="nextFollowUp" class="form-control" placeholder="follow up date">
-          </div>
-        </div><br>
-
-        <div class="row">
-          <div class="col-sm-3 col-md-3">
-            <label for="prescription"><strong>Presctiption:</strong></label>
-          </div>
-          <div class="col-sm-9 col-md-9">
-            <div id="prescription" formArrayName="prescription" class="row">
-              <div *ngFor="let item of prescription.controls;let i=index" class="col-sm-6 col-md-6">
-                <input type="text" [formControlName]="i" class="form-control">
-              </div>
-            </div><br>
-            <button type="button" class="btn btn-default btn-sm" (click)="addPrescriptionItem()" id="add-prescription">+</button>
-            <button type="button" class="btn btn-default btn-sm" (click)="removePrescriptionItem()" id="remove-prescription">-</button>
           </div>
         </div><hr>
 
-        <button type="button" (click)="healthLogForm.reset()" class="btn btn-md">clear</button>
-        <button type="submit" [disabled]="validateForm()" id="submit-btn" class="btn btn-md">save</button>
+        <div>
+          <a href="javascript:void();" (click)="toggle('prescriptionFlag')">
+            <strong>Prescription</strong>:
+            <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !prescriptionFlag,
+             'glyphicon-chevron-down': prescriptionFlag}"></i>
+          </a>
+        </div>
+        <div id="prescription" *ngIf="prescriptionFlag">
+          <br>
+          <table class="table" formArrayName="prescription">
+            <tr>
+              <th>#</th>
+              <th>medicine</th>
+              <th>breakfast</th>
+              <th>lunch</th>
+              <th>dinner</th>
+              <th>before meal</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let prescriptionItem of prescription.controls;let i=index" [formGroupName]="i">
+              <td>{{ i + 1 }}</td>
+              <td><input type="text" formControlName="item" class="form-control input-sm"></td>
+              <td><input type="checkbox" formControlName="breakfast"></td>
+              <td><input type="checkbox" formControlName="lunch"></td>
+              <td><input type="checkbox" formControlName="dinner"></td>
+              <td><input type="checkbox" formControlName="beforeMeal"></td>
+              <td>
+                <i class="glyphicon glyphicon-remove" (click)="removePrescriptionItem(i)" *ngIf="prescription.length>1"></i>
+              </td>
+            </tr>
+          </table>
+          <a href="javascript:void();" (click)="addPrescriptionItem()" id="add-prescription">+ add medicine</a>
+        </div><hr>
+
+        <div>
+          <a href="javascript:void();" (click)="toggle('investigationsFlag')">
+            <strong>Investigations</strong>:
+            <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !investigationsFlag,
+             'glyphicon-chevron-down': investigationsFlag}"></i>
+          </a>
+        </div>
+        <div *ngIf="investigationsFlag">
+          <br>
+          <textarea formControlName="investigations" class="form-control" rows=3></textarea>
+        </div><hr>
+
+        <div class="pull-right">
+          <button type="button" (click)="healthLogForm.reset()" class="btn btn-md">clear</button>
+          <button type="submit" [disabled]="validateForm()" id="submit-btn" class="btn btn-md">save</button>
+        </div>
 
       </form>
     </div> <!--/.list-group-item-->

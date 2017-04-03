@@ -1,6 +1,10 @@
-<div  *ngIf="doctor" id="doctor-container">
-  <div id="name"><strong>{{doctor.name}}</strong></div>
-  <div id="info">{{doctor.info}}</div>
-  <div *ngIf="doctor.email" id="email">{{doctor.email}}</div>
-  <div *ngIf="doctor.phone" id="phone">{{doctor.phone}}</div>
+<div class="panel panel-default">
+  <div class="panel-body text-left">
+    <div>
+      <strong>{{ doctor.name }}</strong>
+    </div>
+    <div>
+      <p>{{ doctor.info }}</p>
+    </div>
+  </div>
 </div>

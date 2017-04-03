@@ -8,16 +8,12 @@
           <app-patient [patient]="appointment.patient"></app-patient>
         </li>
         <!-- history toggle -->
-        <li class="list-group-item">
+        <button class="list-group-item" (click)="toggleHistory()">
 
           <div id="history">
-            <div class="row" (click)="toggleHistory()">
-              <div class="col-sm-6 col-md-6">
-                <strong>history</strong>
-              </div>
-              <div class="col-sm-6 col-md-6">
-                <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !historyFlag, 'glyphicon-chevron-down': historyFlag}"></i>
-              </div>
+            <div href="javascript:void();">
+              <strong>history</strong>
+              <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !historyFlag, 'glyphicon-chevron-down': historyFlag}"></i>
             </div>
             <div class="row">
               <div class="col-sm-12 col-md-12">
@@ -26,21 +22,24 @@
             </div>
           </div>
 
+        </button>
+        <!-- past healthlogs -->
+        <li class="list-group-item">
+          <a href="javascript:void();" (click)="toggleHealthLogs()">
+            <strong>healthlogs</strong>
+            <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !healthLogsFlag,
+             'glyphicon-chevron-down': healthLogsFlag}"></i>
+          </a>
+
         </li>
-      </ul>
+        <div></div>
+      </ul><!--/.list-group -->
     </div> <!--/.col-->
-    <!-- healthlog feed -->
+
     <div class="col-sm-6 col-md-6">
-      <!-- empty/ new health-log-form -->
       <app-health-log-form [aid]="appointment.aid"></app-health-log-form>
-      <!-- healthlogs -->
-      <app-health-log *ngIf="pastHealthLogs" [healthLogs]="pastHealthLogs"></app-health-log>
-      <!-- load more button -->
-      <div class="panel panel-default">
-        <div class="panel-body text-center">
-          <a href="javascript:void();" (click)="loadPastHealthLogs()">load past healthlogs</a>
-        </div>
-      </div>
+
     </div>
+
   </div><!--/.row-->
 </div>

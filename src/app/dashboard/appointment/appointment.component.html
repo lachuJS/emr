@@ -1,6 +1,4 @@
-<div id="appointment-container">
-  <span>{{appointment.count}}</span>
-  <h5>{{appointment.patient.name}}</h5>
-  <p>{{appointment.patient.gender | genderify}} {{appointment.patient.dob | agify}}</p>
-  <div><strong>{{ appointment.dateTimeCreated | date:'shortTime' }}</strong></div>
+<div id="appointment-container" class="row">
+  <div class="col-sm-6 col-md-6">{{ appointment.patient.name }}</div>
+  <small class="col-sm-6 col-md-6 text-right">{{ appointment.dateTimeCreated | date:'shortTime' }}</small>
 </div>
