@@ -1,11 +1,9 @@
-export class Patient {
-  constructor(
-    public name: string,
-    public hid: number,
-    public gender: boolean,
-    public dob: string,
-    public location: string,
-    public phone?: number,
-    public email?: string
-  ){}
+export interface Patient {
+    name: string,
+    hid: number,
+    dob: string,
+    gender: boolean,
+    location: string,
+    email?: string,
+    phone?: number
 }

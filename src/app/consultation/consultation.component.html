@@ -1,45 +1,61 @@
 <div class="container">
-  <div class="row">
-    <!-- patient info and history -->
-    <div class="col-sm-3 col-md-3">
-      <ul class="list-group">
-        <!-- patient name, asl -->
-        <li class="list-group-item">
-          <app-patient [patient]="appointment.patient"></app-patient>
-        </li>
-        <!-- history toggle -->
-        <button class="list-group-item" (click)="toggleHistory()">
+  <ngb-tabset type="pills">
 
-          <div id="history">
-            <div href="javascript:void();">
-              <strong>history</strong>
-              <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !historyFlag, 'glyphicon-chevron-down': historyFlag}"></i>
-            </div>
-            <div class="row">
-              <div class="col-sm-12 col-md-12">
-                <app-history *ngIf="historyFlag" [history]="patientHistory"></app-history>
-              </div>
-            </div>
+    <!-- info-->
+    <ngb-tab>
+      <template ngbTabTitle>
+        <i class="fa fa-info-circle"></i>
+        <strong>info</strong>
+      </template>
+      <template ngbTabContent>
+        <br>
+        <div class="row">
+          <div class="col-sm-3 col-md-3"></div>
+          <div class="col-sm-6 col-md-6">
+            <br>
+            <app-patient [patient]="patientInfo"></app-patient>
           </div>
+        </div>
+      </template>
+    </ngb-tab>
 
-        </button>
-        <!-- past healthlogs -->
-        <li class="list-group-item">
-          <a href="javascript:void();" (click)="toggleHealthLogs()">
-            <strong>healthlogs</strong>
-            <i class="pull-right float-xs-right glyphicon" [ngClass]="{'glyphicon-chevron-right': !healthLogsFlag,
-             'glyphicon-chevron-down': healthLogsFlag}"></i>
-          </a>
+    <!-- patient history -->
+    <ngb-tab>
+      <template ngbTabTitle>
+        <i class="fa fa-history"></i>
+        <strong>history</strong>
+      </template>
+      <template ngbTabContent>
+        <br>
+        all
+      </template>
+    </ngb-tab>
 
-        </li>
-        <div></div>
-      </ul><!--/.list-group -->
-    </div> <!--/.col-->
+    <!--charts-->
+    <ngb-tab>
+      <template ngbTabTitle>
+        <i class="fa fa-area-chart"></i>
+        <strong>charts</strong>
+      </template>
+      <template ngbTabContent></template>
+    </ngb-tab>
 
-    <div class="col-sm-6 col-md-6">
-      <app-health-log-form [aid]="appointment.aid"></app-health-log-form>
+    <!-- new healthlog -->
+    <ngb-tab>
+      <template ngbTabTitle>
+        <i class="fa fa-file"></i>
+        <strong>new log</strong>
+      </template>
+      <template ngbTabContent>
+        <br>
+        <div class="row">
+          <div class="col-sm-2 col-md-2"></div>
+          <div class="col-sm-8 col-md-8">
+            <app-health-log-form [aid]=""></app-health-log-form>
+          </div>
+        </div>
+      </template>
+    </ngb-tab>
 
-    </div>
-
-  </div><!--/.row-->
-</div>
+  </ngb-tabset>
+</div><!--/.container-->

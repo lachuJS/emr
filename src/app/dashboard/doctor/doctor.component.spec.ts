@@ -36,18 +36,15 @@ describe('DoctorComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should have doctor container',() => {
-    let de = fixture.debugElement.query(By.css('#doctor-container'));
-    expect(de).toBeTruthy();
-  });
   it('should have doctor name',() => {
-    let de = fixture.debugElement.query(By.css('#doctor-container > #name'));
+    let de = fixture.debugElement.query(By.css('h5'));
     let el = de.nativeElement;
     expect(el.textContent).toEqual(expectedDoctor.name);
   });
   it('should have doctor info',() => {
-    let de = fixture.debugElement.query(By.css('#doctor-container > #info'));
+    let de = fixture.debugElement.query(By.css('p'));
     let el = de.nativeElement;
     expect(el.textContent).toEqual(expectedDoctor.info);
   });
+  
 });

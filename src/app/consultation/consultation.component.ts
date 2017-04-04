@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { PatientComponent } from './patient/patient.component';
 import { HealthLogComponent } from './health-log/health-log.component';
 import { HealthLogFormComponent } from './health-log-form/health-log-form.component';
-import { HistoryComponent } from './history/history.component';
 
 import { ConsultationService } from './consultation.service';
 
-import { Appointment } from '../dashboard/appointment/appointment';
+import { Patient } from './patient/patient';
 import { HealthLogForm } from './health-log-form/health-log-form.data-model';
 
 
@@ -17,47 +17,26 @@ import { HealthLogForm } from './health-log-form/health-log-form.data-model';
   styleUrls: ['./consultation.component.css']
 })
 export class ConsultationComponent implements OnInit {
-  @Input() appointment: Appointment;
-
-  historyFlag: boolean;
-  patientHistory: History;
-
-  healthLogsListFlag: boolean;
-  
-
-  pastHealthLogs: Array<HealthLogForm>
+  patientInfo: Patient;
+  today = new Date();
 
   constructor(
-    private consultationService: ConsultationService
+    private consultationService: ConsultationService,
+    private route: ActivatedRoute
   ) {}
 
-  toggleHistory() {
-    //getPatientHistory if not already
-    if(!this.patientHistory){
-      this.consultationService.getPatientHistory(this.appointment.patient.hid)
-      .then((history: History) => {
-        this.patientHistory = history;
-        this.historyFlag = !this.historyFlag;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
-    else{ //already fetched patient history
-      this.historyFlag = !this.historyFlag;
-    }
-  }
-  loadPastHealthLogs() {
-    this.consultationService.getHealthLogs(this.appointment.patient.hid)
-    .then((healthLogs: Array<HealthLogForm>) => {
-      if(this.pastHealthLogs){ //already got pastHealthLogs
-        this.pastHealthLogs = this.pastHealthLogs.concat(healthLogs);
-      }
-      else{ //clicked for first time
-        this.pastHealthLogs = healthLogs;
-      }
+  loadPatientInfo(aid: number) {
+    this.consultationService.getPatientInfo(aid)
+    .then((patient: Patient) => {
+      this.patientInfo = patient;
     })
     .catch((err) => { console.log(err) });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    //get routeParam patientId
+    this.route.params.forEach((params: Params) => {
+      let aid = +params['aid'];
+      this.loadPatientInfo(aid);
+    })
+  }
 }

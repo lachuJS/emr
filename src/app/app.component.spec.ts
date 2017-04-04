@@ -53,12 +53,5 @@ describe('AppComponent', () => {
   it('should create the app', () => {
     expect(component).toBeTruthy();
   });
-  it('should have dashboard component on init',() => {
-    let de = fixture.debugElement.query(By.css('#dashboard-container'));
-    expect(de).toBeTruthy();
-  });
-  it('should not have consultation component on init',() => {
-    let de = fixture.debugElement.query(By.css('#consultation-container'));
-    expect(de).toBeFalsy();
-  });
+
 });

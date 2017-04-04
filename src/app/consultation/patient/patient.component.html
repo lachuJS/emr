@@ -1,27 +1,23 @@
-<div *ngIf="patient" id="patient-container">
-  <!-- name -->
-  <div id="patient-name">
-    <strong>{{ patient.name }}</strong>
-  </div>
-  <!-- age -->
-  <div id="patient-age">
-    <strong>age</strong>: {{ patient.dob | agify }}
-  </div>
-  <!--sex-->
-  <div id="patient-sex">
-    <strong>sex</strong>: {{ patient.gender | genderify }}
-  </div>
-  <!--location-->
-  <div id="patient-location">
-    <strong>location</strong>: {{ patient.location }}
-  </div>
-  <!--optional-->
-  <!-- phone -->
-  <div *ngIf="patient.phone" id="patient-phone">
-    <strong>phone</strong>: {{ patient.phone }}
-  </div>
-  <!-- email -->
-  <div *ngIf="patient.email" id="patient-email">
-    <strong>email</strong>: {{ patient.email }}
-  </div>
-</div> <!--/.patient-container -->
+    <div>
+      <h5><strong>Personal</strong></h5>
+      <table class="table borderless" *ngIf="patient">
+        <tbody>
+          <tr>
+            <th scope="row">name</th>
+            <td>{{ patient.name }}</td>
+          </tr>
+          <tr>
+            <th scope="row">age</th>
+            <td>{{ patient.dob | agify }}</td>
+          </tr>
+          <tr>
+            <th scope="row">sex</th>
+            <td>{{ patient.gender | genderify }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="presenting-illness">
+      <h5><strong>Presenting Illness</strong></h5>
+      <!--code...-->
+    </div>

@@ -1,11 +1,21 @@
 import { Injectable } from '@angular/core';
 
+import { Patient } from './patient/patient';
 import { HealthLogForm } from './health-log-form/health-log-form.data-model';
 
 @Injectable()
 export class ConsultationService {
 
   constructor() { }
+  getPatientInfo(hid: number): Promise<Patient> {
+    return Promise.resolve({
+      hid: hid,
+      name: 'Lakshmi Narayanan S V',
+      dob: '1995-08-17',
+      gender: true,
+      location: 'erode'
+    });
+  }
   getPatientHistory(hid: number): Promise<History> {
     //return promise.resolve(history: History)
     //mock data

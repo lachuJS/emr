@@ -1,10 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { DoctorComponent } from './doctor/doctor.component';
-import { AppointmentComponent } from './appointment/appointment.component';
 
 import { Doctor } from './doctor/doctor';
-import { Appointment } from './appointment/appointment';
+import { Appointment } from "./appointment";
 
 import { DashboardService } from './dashboard.service';
 
@@ -16,25 +15,19 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
   doctor: Doctor;
   appointments: Array<Appointment>;
-  @Output() consultation = new EventEmitter();
+
+  //badge
   get appointmentsCount():number {
     return this.appointments.length;
-  }
-  get appointmentsShow():boolean {
-    return this.appointments.length != 0;
   }
 
   constructor(
     private dashboardService: DashboardService
-  ) { }
+  ) {}
 
-  openConsultation(appointment: Appointment){
-    this.consultation.emit(appointment);
+  removeAppointment(index: number) {
+    this.appointments.splice(index,1);
   }
-  doneAppointment(index: number) {
-    this.appointments.slice(index,1);
-  }
-
   ngOnInit() {
     //get doctor info
     this.dashboardService.getDoctor()

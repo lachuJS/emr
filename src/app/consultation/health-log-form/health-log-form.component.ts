@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import {NgbAccordionConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import { HealthLogForm } from './health-log-form.data-model';
 import { Examination } from './health-log-form.data-model';
@@ -14,19 +15,6 @@ import { ConsultationService } from '../consultation.service';
 export class HealthLogFormComponent implements OnInit {
   @Input() aid: number;
   healthLogForm: FormGroup;
-  todayDate:Date;
-
-  //flags to show/hide formgroups
-  chiefComplaintsFlag: boolean;
-  vitalsFlag:boolean;
-  systemicExaminationFlag: boolean;
-  leFlag: boolean;
-  prescriptionFlag: boolean;
-  investigationsFlag: boolean;
-
-  toggle(flagName: string) {
-    this[flagName] = !this[flagName];
-  }
 
   get chiefComplaints():  FormArray {
     return this.healthLogForm.get('chiefComplaints') as FormArray;
@@ -36,11 +24,11 @@ export class HealthLogFormComponent implements OnInit {
   }
 
   constructor(
+    accordionConfig: NgbAccordionConfig,
     private fb: FormBuilder,
-    private consultationService: ConsultationService
+    private consultationService: ConsultationService,
   ) {
-    //healthLog date
-    this.todayDate = new Date();
+    console.log(accordionConfig);
   }
 
   createForm(){
