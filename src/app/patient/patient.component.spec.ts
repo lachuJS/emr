@@ -6,13 +6,6 @@ import { PipeModule } from '../pipes/pipe.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { ConsultationComponent } from './consultation.component';
-import { PatientComponent } from './patient/patient.component';
-import { HistoryComponent } from './history/history.component';
-import { HealthLogComponent } from './health-log/health-log.component';
-import { HealthLogFormComponent } from './health-log-form/health-log-form.component';
-
-import { ConsultationService } from './consultation.service';
 
 xdescribe('ConsultationComponent', () => {
   let component: ConsultationComponent;

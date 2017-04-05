@@ -1,6 +1,6 @@
-export interface Patient {
+export interface Info {
     name: string,
-    hid: number,
+    patientId: number,
     dob: string,
     gender: boolean,
     location: string,

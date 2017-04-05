@@ -1,9 +1,0 @@
-<div id="login-form-container">
-  <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
-    <div id="form-controls-container">
-      <input type="text" formControlName="username" placeholder="username">
-      <input type="password" formControlName="password" placeholder="password">
-    </div>
-    <button type="submit" id="login-btn" (click)="submitForm()" [disabled]="loginForm.pristine && !loginForm.valid">login</button>
-  </form>
-</div>

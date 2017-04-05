@@ -5,33 +5,37 @@ import { PipeModule } from './pipes/pipe.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; //ng-bootstrap
 
+//routing
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routing';
 
+//components
 import { AppComponent } from './app.component';
-import { DoctorComponent } from './dashboard/doctor/doctor.component';
-import { PatientComponent } from './consultation/patient/patient.component';
-import { HealthLogFormComponent } from './consultation/health-log-form/health-log-form.component';
-import { ConsultationComponent } from './consultation/consultation.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { HealthLogComponent } from './consultation/health-log/health-log.component';
+//appointments
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { DoctorComponent } from './appointments/doctor/doctor.component';
+//patient
+import { PatientComponent } from './patient/patient.component';
+import { InfoComponent } from './patient/info/info.component';
+import { HistoryComponent } from './patient/history/history.component';
+import { HealthLogFormComponent } from './patient/health-log-form/health-log-form.component';
 
-import { DashboardService } from './dashboard/dashboard.service';
-import { ConsultationService } from './consultation/consultation.service';
-import { LoginFormService } from './login-form/login-form.service';
+//services
+//appointments
+import { AppointmentsService } from './appointments/appointments.service';
+//patient
+import { PatientService } from './patient/patient.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    AppointmentsComponent,
     DoctorComponent,
     PatientComponent,
-    PatientComponent,
-    HealthLogFormComponent,
-    ConsultationComponent,
-    DashboardComponent,
-    LoginFormComponent,
-    HealthLogComponent
+    InfoComponent,
+    HistoryComponent,
+    HealthLogFormComponent
   ],
   imports: [
     BrowserModule,
@@ -40,14 +44,13 @@ import { LoginFormService } from './login-form/login-form.service';
     PipeModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
-    NgbModule.forRoot()
+    RouterModule.forRoot(appRoutes), //routes
+    NgbModule.forRoot() //ng-bootstrap module
   ],
   providers: [
-    LoginFormService,
-    DashboardService,
-    ConsultationService
+    AppointmentsService,
+    PatientService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

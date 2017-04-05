@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import {NgbAccordionConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { HealthLogForm } from './health-log-form.data-model';
 import { Examination } from './health-log-form.data-model';
 
-import { ConsultationService } from '../consultation.service';
+import { PatientService } from '../patient.service';
 
 @Component({
   selector: 'app-health-log-form',
@@ -13,7 +13,6 @@ import { ConsultationService } from '../consultation.service';
   styleUrls: ['./health-log-form.component.css']
 })
 export class HealthLogFormComponent implements OnInit {
-  @Input() aid: number;
   healthLogForm: FormGroup;
 
   get chiefComplaints():  FormArray {
@@ -26,7 +25,7 @@ export class HealthLogFormComponent implements OnInit {
   constructor(
     accordionConfig: NgbAccordionConfig,
     private fb: FormBuilder,
-    private consultationService: ConsultationService,
+    private patientService: PatientService,
   ) {
     console.log(accordionConfig);
   }
@@ -137,9 +136,9 @@ export class HealthLogFormComponent implements OnInit {
   }
   submitForm() {
     const healthLog = this.prepareForm();
-    this.consultationService.postHealthLog(healthLog)
-    .then((status: boolean) => {
-      if(status){
+    this.patientService.postHealthLog(healthLog)
+    .then((insertId: number) => {
+      if(insertId){
         console.log(healthLog); //__remove__
         this.healthLogForm.markAsPristine(); //disables save until form is dirty
       }
@@ -148,7 +147,7 @@ export class HealthLogFormComponent implements OnInit {
     .catch(err => console.log(err));
   }
   ngOnInit() {
-    this.consultationService.getHealthLog(this.aid)
+    this.patientService.getHealthLog()
     .then((healthLog: HealthLogForm) => {
       //if healthLog exists for the appointment already
       if (healthLog) {

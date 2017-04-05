@@ -1,0 +1,92 @@
+<div class="row">
+  <!-- track form -->
+  <div class="col-sm-3 col-md-3">
+    <h5><strong>Track</strong></h5>
+    <form>
+      <table class="table">
+        <tbody>
+          <!--BP-->
+          <tr>
+            <th scope="row"><label for="bp">BP</label></th>
+            <td><input type="checkbox" [(ngModel)]="track.bp" name="bp" class="form-control"></td>
+          </tr>
+          <!--PR-->
+          <tr>
+            <th scope="row"><label for="pr">PR</label></th>
+            <td><input type="checkbox" [(ngModel)]="track.pr" name="pr" class="form-control"></td>
+          </tr>
+          <!--RR-->
+          <tr>
+            <th scope="row"><label for="rr">RR</label></th>
+            <td><input type="checkbox" [(ngModel)]="track.rr" name="rr" class="form-control"></td>
+          </tr>
+          <!-- temp -->
+          <tr>
+            <th scope="row"><label for="temp">temperature</label></th>
+            <td><input type="checkbox" [(ngModel)]="track.temp" name="temp" class="form-control"></td>
+          </tr>
+          <!--CVS-->
+          <tr>
+            <th scope="row"><label for="cvs">CVS</label></th>
+            <td><input type="checkbox" [(ngModel)]="track.cvs" name="cvs" class="form-control"></td>
+          </tr>
+          <!--RS-->
+          <tr>
+            <th scope="row"><label for="cvs">RS</label></th>
+            <td><input type="checkbox" [(ngModel)]="track.rs" name="rs" class="form-control"></td>
+          </tr>
+          <!--CNS-->
+          <tr>
+            <th scope="row"><label for="cvs">CNS</label></th>
+            <td><input type="checkbox" [(ngModel)]="track.cns" name="cns" class="form-control"></td>
+          </tr>
+          <!--P/A-->
+          <tr>
+            <th scope="row"><label for="cvs">P/A</label></th>
+            <td><input type="checkbox" [(ngModel)]="track.pa" name="pa" class="form-control"></td>
+          </tr>
+          <tr>
+            <th scope="row"><label for="cvs">diagnosis</label></th>
+            <td><input type="checkbox" [(ngModel)]="track.finalDiagnosis" name="finalDiagnosis" class="form-control"></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div><!--/.col-->
+  <!-- history table view -->
+  <div class="col-sm-9 col-md-9">
+    <h5><strong>HealthLog</strong></h5>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><i class="fa fa-calendar-o"></i>&nbsp;date</th>
+          <th *ngIf="track.bp">BP</th>
+          <th *ngIf="track.pr">PR</th>
+          <th *ngIf="track.rr">RR</th>
+          <th *ngIf="track.temp">temp</th>
+          <th *ngIf="track.cvs">CVS</th>
+          <th *ngIf="track.rs">RS</th>
+          <th *ngIf="track.cns">CNS</th>
+          <th *ngIf="track.pa">P/A</th>
+          <th *ngIf="track.finalDiagnosis">Diagnosis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let healthLog of history">
+          <ng-container *ngIf="shouldBeTracked(healthLog)">
+            <th scope="row">{{ healthLog.dateCreated | date:'mediumDate' }}</th>
+            <td *ngIf="track.bp">{{ healthLog.vitals.bp }}</td>
+            <td *ngIf="track.pr">{{ healthLog.vitals.pr }}</td>
+            <td *ngIf="track.rr">{{ healthLog.vitals.rr }}</td>
+            <td *ngIf="track.temp">{{ healthLog.vitals.temp }}</td>
+            <td *ngIf="track.cvs">{{ healthLog.systemicExamination.cvs }}</td>
+            <td *ngIf="track.rs">{{ healthLog.systemicExamination.rs }}</td>
+            <td *ngIf="track.cns">{{ healthLog.systemicExamination.cns }}</td>
+            <td *ngIf="track.pa">{{ healthLog.systemicExamination.pa }}</td>
+            <td *ngIf="track.finalDiagnosis">{{ healthLog.finalDiagnosis }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div><!--/.row-->

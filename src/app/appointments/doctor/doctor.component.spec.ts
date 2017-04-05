@@ -7,7 +7,7 @@ import { DoctorComponent } from './doctor.component';
 
 import { Doctor } from './doctor';
 
-describe('DoctorComponent', () => {
+xdescribe('DoctorComponent', () => {
   let component: DoctorComponent;
   let fixture: ComponentFixture<DoctorComponent>;
   let expectedDoctor: Doctor;
@@ -46,5 +46,5 @@ describe('DoctorComponent', () => {
     let el = de.nativeElement;
     expect(el.textContent).toEqual(expectedDoctor.info);
   });
-  
+
 });

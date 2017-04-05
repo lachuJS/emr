@@ -1,10 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 /*prevent overlay of navbar(50px)*/
-/*body {
-  padding-top: 70px; /*prevent overlay of navbar*/
-  /*background-color: #F5F5F5 !important; /*override bootstrap default white bgcolor*/
-  /*color: #5E5E5E !important; /*override default black text-color*/
-/*}*/
+body {
+  /*padding-top: 70px; /*prevent overlay of navbar*/
+  /*background-color: #F6F6F6 !important; /*override bootstrap default white bgcolor*/
+  color: #333333 !important; /*override default black text-color*/
+}
 /*offsetting an html anchor to adjust for fixed header*/
 /*fix: offsets span[class="anchor"] to 70px(height of navbar)*/
 /*span[class="anchor"] {
@@ -17,7 +17,11 @@
 .borderless td, .borderless th {
     border: none;
 }
-/*app-body*/
-.app-body {
-  padding-top: 10px;
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:2px !important;
+    padding-bottom:5px !important;
+    height: 30px;
+}
+.navbar {
+  min-height:30px !important;
 }

@@ -5,14 +5,14 @@ import { DoctorComponent } from './doctor/doctor.component';
 import { Doctor } from './doctor/doctor';
 import { Appointment } from "./appointment";
 
-import { DashboardService } from './dashboard.service';
+import { AppointmentsService } from './appointments.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-appointments',
+  templateUrl: './appointments.component.html',
+  styleUrls: ['./appointments.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class AppointmentsComponent implements OnInit {
   doctor: Doctor;
   appointments: Array<Appointment>;
 
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   }
 
   constructor(
-    private dashboardService: DashboardService
+    private appointmentsService: AppointmentsService
   ) {}
 
   removeAppointment(index: number) {
@@ -30,13 +30,13 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit() {
     //get doctor info
-    this.dashboardService.getDoctor()
+    this.appointmentsService.getDoctor()
     .then((doctor: Doctor) => {
       this.doctor = doctor; //set property doctor
     })
     .catch((err) => {console.log(err)})
     //get appointments of doctor
-    this.dashboardService.getAppointments()
+    this.appointmentsService.getAppointments()
     .then((appointments: Array<Appointment>) => {
       this.appointments = appointments; //set property appointments
     })

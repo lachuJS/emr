@@ -4,7 +4,7 @@ import { Doctor } from './doctor/doctor';
 import { Appointment } from './appointment';
 
 @Injectable()
-export class DashboardService {
+export class AppointmentsService {
 
   constructor() { }
   getDoctor(): Promise<Doctor> {

@@ -6,8 +6,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { HealthLogFormComponent } from './health-log-form.component';
 
-import { ConsultationService } from '../consultation.service';
-
 import { HealthLogForm } from './health-log-form.data-model';
 
 xdescribe('HealthLogFormComponent', () => {

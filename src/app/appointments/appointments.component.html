@@ -28,7 +28,7 @@
           <tr *ngFor="let appointment of appointments;let i=index;">
             <td>{{ i + 1 }}</td>
             <td>
-              <a href="/appointment/{{appointment.aid}}">{{ appointment.patient.name }}</a>
+              <a href="/patient/{{appointment.patient.hid}}">{{ appointment.patient.name }}</a>
             </td>
             <td>{{ appointment.dateTimeCreated | date:'shortTime' }}</td>
             <td>

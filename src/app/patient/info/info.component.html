@@ -1,0 +1,21 @@
+<div id="patient-info" *ngIf="info">
+  <h5><strong>Personal</strong></h5>
+  <table class="table borderless">
+    <tbody>
+      <tr>
+        <th scope="row">name</th>
+        <td>{{ info.name }}</td>
+      </tr>
+      <tr>
+        <th scope="row">age</th>
+        <td>{{ info.dob | agify }}</td>
+      </tr>
+      <tr>
+        <th scope="row">sex</th>
+        <td>{{ info.gender | genderify }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!--presenting illness-->
+<!--code...-->
