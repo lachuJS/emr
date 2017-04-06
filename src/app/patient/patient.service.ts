@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Info } from './info/info';
-import { HealthLogForm } from './health-log-form/health-log-form';
+import { HealthLogForm } from './health-log-form/health-log-form.data-model';
 
 @Injectable()
 export class PatientService {
@@ -88,7 +88,7 @@ export class PatientService {
         }
     ]);
   }
-  getHealthLog(): HealthLogForm {
+  getHealthLog(): Promise<HealthLogForm> {
     return Promise.resolve({
         chiefComplaints: [
           {

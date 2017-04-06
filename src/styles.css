@@ -4,6 +4,7 @@ body {
   /*padding-top: 70px; /*prevent overlay of navbar*/
   /*background-color: #F6F6F6 !important; /*override bootstrap default white bgcolor*/
   color: #333333 !important; /*override default black text-color*/
+  /*font-size: 15px !important;*/
 }
 /*offsetting an html anchor to adjust for fixed header*/
 /*fix: offsets span[class="anchor"] to 70px(height of navbar)*/
@@ -18,10 +19,14 @@ body {
     border: none;
 }
 .navbar-nav > li > a, .navbar-brand {
-    padding-top:2px !important;
-    padding-bottom:5px !important;
-    height: 30px;
+  color: #333333 !important;
 }
-.navbar {
-  min-height:30px !important;
+.app-body {
+  padding-top :25px;
+}
+a {
+  color : #333333;
+}
+li.borderless {
+  border: 0 none;
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { HealthLogForm } from './health-log-form.data-model';
 import { Examination } from './health-log-form.data-model';
@@ -23,12 +22,9 @@ export class HealthLogFormComponent implements OnInit {
   }
 
   constructor(
-    accordionConfig: NgbAccordionConfig,
     private fb: FormBuilder,
     private patientService: PatientService,
-  ) {
-    console.log(accordionConfig);
-  }
+  ) {}
 
   createForm(){
     //create form model with empty default/empty values

@@ -1,189 +1,147 @@
 <div id="health-log-form-container">
-    <div *ngIf="healthLogForm" class="custom">
+    <div *ngIf="healthLogForm">
 
       <!-- form -->
       <form [formGroup]="healthLogForm" (ngSubmit)="submitForm()" class="form-group">
 
-        <ngb-accordion #acc="ngbAccordion" activeIds="chief-complaints,vitals,final-diagnosis">
           <!--chief complaints table-->
-          <ngb-panel id="chief-complaints">
-            <template ngbPanelTitle><strong>Chief Complaints</strong></template>
-            <template ngbPanelContent>
-              <table class="table borderless" formArrayName="chiefComplaints">
-                <tr>
-                  <th>#</th>
-                  <th>complaint</th>
-                  <th>duration (days)</th>
-                  <th>remove</th>
-                </tr>
-                <tr *ngFor="let chiefComplaint of chiefComplaints.controls; let i=index" [formGroupName]="i" >
-                  <td>{{ i + 1 }}</td>
-                  <td><input type="text" class="form-control" formControlName="complaint" placeholder="complaint"></td>
-                  <td><input type="text" class="form-control" formControlName="duration" placeholder="duration"></td>
-                  <td><span class="fa fa-remove" (click)="removeChiefComplaint(i)" *ngIf="chiefComplaints.length>1"></span></td>
-                </tr>
-              </table>
-              <a href="javascript:void();" (click)="addChiefComplaint()" id="add-complaint">+ add-complaint</a>
-            </template>
-          </ngb-panel>
-          <!--Examination-->
-          <ngb-panel id="examination">
-            <template ngbPanelTitle><strong>examination</strong></template>
-            <template ngbPanelContent>
-              <div class="row">
-                <div class="col-sm-6 col-md-6"></div>
-                <div class="col-sm-6 col-md-6">
-                  <div class="float-left">
-                    <input type="radio" formControlName="examination" value="concious">
-                    <label for="examination">concious</label>
-                  </div>
-                  <div class="float-right">
-                    <input type="radio" formControlName="examination" value="oriented">
-                    <label for="examination">oriented</label>
-                  </div>
-                </div><!--/.col-->
-              </div><!--/.row-->
-            </template>
-          </ngb-panel>
-          <!--Vitals-->
-          <ngb-panel id="vitals">
-            <template ngbPanelTitle><strong>Vitals</strong></template>
-            <template ngbPanelContent>
-              <div formGroupName="vitals" class="row">
-                <div class="col-sm-3 col-md-3">
-                  <input type="text" formControlName="pr" class="form-control" placeholder="PR">
-                </div>
-                <div class="col-sm-3 col-md-3">
-                  <div class="input-group">
-                    <input type="text" formControlName="bp" class="form-control" placeholder="BP">
-                    <div class="input-group-addon">mmHg</div>
-                  </div>
-                </div>
-                <div class="col-sm-3 col-md-3">
-                  <input type="text" formControlName="rr" class="form-control" placeholder="RR">
-                </div>
-                <div class="col-sm-3 col-md-3">
-                  <div class="input-group">
-                    <input type="text" formControlName="temp" class="form-control" placeholder="Temp">
-                    <div class="input-group-addon">° F</div>
-                  </div>
-                </div>
-              </div>
-            </template>
-          </ngb-panel>
-          <!--SystemicExamination-->
-          <ngb-panel id="systemic-examination">
-            <template ngbPanelTitle>
-              <strong>Systemic Examination</strong>
-            </template>
-            <template ngbPanelContent>
-              <div id="systemic-examination" formGroupName="systemicExamination" class="row">
-                <div class="col-sm-3 col-md-3">
-                  <input type="text" formControlName="cvs" class="form-control" placeholder="CVS">
-                </div>
-                <div class="col-sm-3 col-md-3">
-                  <input type="text" formControlName="rs" class="form-control" placeholder="RS">
-                </div>
-                <div class="col-sm-3 col-md-3">
-                  <input type="text" formControlName="cns" class="form-control" placeholder="CNS">
-                </div>
-                <div class="col-sm-3 col-md-3">
-                  <input type="text" formControlName="pa" class="form-control" placeholder="P/A">
-                </div>
-              </div>
-            </template>
-          </ngb-panel>
-          <!--L/E-->
-          <ngb-panel id="le">
-            <template ngbPanelTitle>
-              <strong>L/E</strong>
-            </template>
-            <template ngbPanelContent>
-              <textarea formControlName="le" class="form-control" rows="3"></textarea>
-            </template>
-          </ngb-panel>
-          <!--diagnosis-->
-          <ngb-panel id="final-diagnosis">
-            <template ngbPanelTitle>
-              <strong>Final Diagnosis</strong>
-            </template>
-            <template ngbPanelContent>
-              <div class="row">
-                <div class="col-sm-6 col-md-6">
-                  <label for="finalDiagnosis"><strong>Final Diagnosis:</strong></label>
-                </div>
-                <div id="final-diagnosis" class="col-sm-6 col-md-6">
-                  <input type="text" formControlName="finalDiagnosis" class="form-control">
-                </div>
-              </div>
-            </template>
-          </ngb-panel>
-          <!--follow up-->
-          <ngb-panel id="follow-up">
-            <template ngbPanelTitle>
-              <strong>Follow up</strong>
-            </template>
-            <template ngbPanelContent>
-              <div class="row">
-                <div class="col-sm-6 col-md-6">
-                  <label for="nextFollowUp"><strong>Next Sitting Date:</strong></label>
-                </div>
-                <div id="next-follow-up" class="col-sm-6 col-md-6">
-                  <input type="date" formControlName="nextFollowUp" class="form-control" placeholder="follow up date">
-                </div>
-              </div>
-            </template>
-          </ngb-panel>
-          <!--prescription-->
-          <ngb-panel id="prescription">
-            <template ngbPanelTitle>
-              <strong>Prescription</strong>
-            </template>
-            <template ngbPanelContent>
-              <div id="prescription">
-                <table class="table borderless" formArrayName="prescription">
-                  <tr>
-                    <th>#</th>
-                    <th>medicine</th>
-                    <th>breakfast</th>
-                    <th>lunch</th>
-                    <th>dinner</th>
-                    <th>before meal</th>
-                    <th></th>
-                  </tr>
-                  <tr *ngFor="let prescriptionItem of prescription.controls;let i=index" [formGroupName]="i">
-                    <td>{{ i + 1 }}</td>
-                    <td><input type="text" formControlName="item" class="form-control input-sm"></td>
-                    <td><input type="checkbox" formControlName="breakfast"></td>
-                    <td><input type="checkbox" formControlName="lunch"></td>
-                    <td><input type="checkbox" formControlName="dinner"></td>
-                    <td><input type="checkbox" formControlName="beforeMeal"></td>
-                    <td>
-                      <i class="fa fa-remove" (click)="removePrescriptionItem(i)" *ngIf="prescription.length>1"></i>
-                    </td>
-                  </tr>
-                </table>
-                <a href="javascript:void();" (click)="addPrescriptionItem()" id="add-prescription">+ add medicine</a>
-              </div>
-            </template>
-          </ngb-panel>
-          <!--investifagations-->
-          <ngb-panel id="investigations">
-            <template ngbPanelTitle>
-              <strong>Investigations</strong>
-            </template>
-            <template ngbPanelContent>
-              <textarea formControlName="investigations" class="form-control" rows=3></textarea>
-            </template>
-          </ngb-panel>
-        </ngb-accordion><br>
-
+        <h5><strong>Chief Complaints</strong></h5><hr>
+        <div>
+          <table class="table borderless" formArrayName="chiefComplaints">
+            <tr>
+              <th>#</th>
+              <th>complaint</th>
+              <th>duration (days)</th>
+              <th>remove</th>
+            </tr>
+            <tr *ngFor="let chiefComplaint of chiefComplaints.controls; let i=index" [formGroupName]="i" >
+              <td>{{ i + 1 }}</td>
+              <td><input type="text" class="form-control" formControlName="complaint" placeholder="complaint"></td>
+              <td><input type="text" class="form-control" formControlName="duration" placeholder="duration"></td>
+              <td><span class="fa fa-remove" (click)="removeChiefComplaint(i)" *ngIf="chiefComplaints.length>1"></span></td>
+            </tr>
+          </table><br>
+          <!--add-complaint-->
+          <div class="text-right">
+            <a href="javascript:void();" (click)="addChiefComplaint()" id="add-complaint">
+              <i class="fa fa-plus"></i>&nbsp;
+              add-complaint
+            </a>
+          </div>
+        </div>
+        <!--Examination-->
+        <h5><strong>Examination</strong></h5><hr>
+          <div class="d-flex justify-content-end">
+            <div class="p-2">
+              <input type="radio" formControlName="examination" value="concious">
+              <label for="examination">concious</label>
+            </div>
+            <div class="p-2">
+              <input type="radio" formControlName="examination" value="oriented">
+              <label for="examination">oriented</label>
+            </div>
+          </div><!--/.d-flex-->
+        <!--Vitals-->
+        <h5 ngbPanelTitle><strong>Vitals</strong></h5><hr>
+        <div formGroupName="vitals" class="d-flex justify-content-between">
+          <div class="p-2">
+            <input type="text" formControlName="pr" class="form-control" placeholder="PR">
+          </div>
+          <div class="p-2">
+            <div class="input-group">
+              <input type="text" formControlName="bp" class="form-control" placeholder="BP">
+              <div class="input-group-addon">mmHg</div>
+            </div>
+          </div>
+          <div class="p-2">
+            <input type="text" formControlName="rr" class="form-control" placeholder="RR">
+          </div>
+          <div class="p-2">
+            <div class="input-group">
+              <input type="text" formControlName="temp" class="form-control" placeholder="Temp">
+              <div class="input-group-addon">° F</div>
+            </div>
+          </div>
+        </div><br>
+        <!--SystemicExamination-->
+        <h5><strong>Systemic Examination</strong></h5><hr>
+        <div id="systemic-examination" formGroupName="systemicExamination" class="d-flex justify-content-between">
+          <div class="p-2">
+            <input type="text" formControlName="cvs" class="form-control" placeholder="CVS">
+          </div>
+          <div class="p-2">
+            <input type="text" formControlName="rs" class="form-control" placeholder="RS">
+          </div>
+          <div class="p-2">
+            <input type="text" formControlName="cns" class="form-control" placeholder="CNS">
+          </div>
+          <div class="p-2">
+            <input type="text" formControlName="pa" class="form-control" placeholder="P/A">
+          </div>
+        </div><br>
+        <!--L/E-->
+        <h5><strong>L/E</strong></h5><hr>
+        <div>
+          <textarea formControlName="le" class="form-control" rows="3"></textarea>
+        </div><br>
+        <!--diagnosis-->
+        <h5><strong>Final Diagnosis</strong></h5><hr>
+        <div class="d-flex justify-content-between">
+          <div class="p-2">
+            <label for="finalDiagnosis">Diagnosed Disease / Problem</label>
+          </div>
+          <div id="final-diagnosis" class="p-2">
+            <input type="text" formControlName="finalDiagnosis" class="form-control">
+          </div>
+        </div><br>
+        <!--follow up-->
+        <h5><strong>Follow up</strong></h5><hr>
+        <div class="d-flex justify-content-between">
+          <div class="p-2">
+            <label for="nextFollowUp">Next Sitting Date if necessary</label>
+          </div>
+          <div id="next-follow-up" class="p-2">
+            <input type="date" formControlName="nextFollowUp" class="form-control" placeholder="follow up date">
+          </div>
+        </div>
+        <!--prescription-->
+        <h5><strong>Prescription</strong></h5><hr>
+        <div id="prescription">
+          <table class="table borderless" formArrayName="prescription">
+            <tr>
+              <th>#</th>
+              <th>medicine</th>
+              <th>breakfast</th>
+              <th>lunch</th>
+              <th>dinner</th>
+              <th>before meal</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let prescriptionItem of prescription.controls;let i=index" [formGroupName]="i">
+              <td>{{ i + 1 }}</td>
+              <td><input type="text" formControlName="item" class="form-control input-sm"></td>
+              <td><input type="checkbox" formControlName="breakfast"></td>
+              <td><input type="checkbox" formControlName="lunch"></td>
+              <td><input type="checkbox" formControlName="dinner"></td>
+              <td><input type="checkbox" formControlName="beforeMeal"></td>
+              <td>
+                <i class="fa fa-remove" (click)="removePrescriptionItem(i)" *ngIf="prescription.length>1"></i>
+              </td>
+            </tr>
+          </table>
+          <a href="javascript:void();" (click)="addPrescriptionItem()" id="add-prescription">+ add medicine</a>
+        </div><br>
+        <!--investifagations-->
+        <h5><strong>Investigations</strong></h5><hr>
+        <div id="investigations">
+          <textarea formControlName="investigations" class="form-control" rows=3></textarea>
+        </div><br>
+        <!--form buttons-->
         <div>
           <button type="button" (click)="healthLogForm.reset()" class="btn btn-md">clear</button>
           <button type="submit" [disabled]="validateForm()" id="submit-btn" class="btn btn-md">save</button>
         </div>
-
       </form>
-
+      
     </div>
 </div><!--/#conatiner-->

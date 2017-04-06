@@ -1,51 +1,30 @@
-<!--patient navbar-->
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse app-consultation-navbar" id="consultation-navbar">
-
-  <!--<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>-->
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-1 col-md-1"></div>
-        <div class="col-sm-10 col-md-10">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="[{ outlets: { 'patient' : ['info'] } }]">
-                <i class="fa fa-user-circle-o"></i>&nbsp;
-                <small><strong>info</strong></small>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="[{ outlets: { 'patient' : ['history'] } }]">
-                <i class="fa fa-list-ol"></i>&nbsp;
-                <small><strong>history</strong></small>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="fa fa-area-chart"></i>&nbsp;
-                <small><strong>charts</strong></small>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="[{outlets: { 'patient' : ['health-log'] }}]">
-                <i class="fa fa-file"></i>&nbsp;
-                <small><strong>healthlog</strong></small>
-              </a>
-            </li>
-          </ul>
-        </div><!--/.col-->
-      </div><!--/.row-->
-    </div> <!--/.container-->
-  </div>
-</nav><br>
 <!--patient body-->
 <div class="container">
   <div class="row">
-    <div class="col-sm-1 col-md-1"></div>
-    <div class="col-sm-10 col-md-10">
+    <div class="col-sm-2 col-md-2">
+      <h5><strong>Patient</strong></h5><hr>
+      <ul class="list-group">
+        <li class="list-group-item borderless">
+          <a [routerLink]="[{ outlets: { 'patient' : ['info'] } }]">
+            <i class="fa fa-user-circle-o"></i>&nbsp;
+            info
+          </a>
+        </li>
+        <li class="list-group-item borderless">
+          <a [routerLink]="[{ outlets: { 'patient' : ['history'] } }]">
+            <i class="fa fa-list-ol"></i>&nbsp;
+            history
+          </a>
+        </li>
+        <li class="list-group-item borderless">
+          <a [routerLink]="[{ outlets: { 'patient' : ['health-log'] } }]">
+            <i class="fa fa-file"></i>&nbsp;
+            healthlog
+          </a>
+        </li>
+      </ul><!--/.list-group-->
+    </div><!--/.col-->
+    <div class="col-sm-8 col-md-8">
       <router-outlet name="patient"></router-outlet>
     </div><!--/.col-->
   </div><!--/.row-->

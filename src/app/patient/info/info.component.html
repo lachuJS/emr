@@ -1,5 +1,6 @@
-<div id="patient-info" *ngIf="info">
-  <h5><strong>Personal</strong></h5>
+<h5><strong>Personal</strong></h5><hr>
+<div *ngIf="!info">loading...</div>
+<div *ngIf="info">
   <table class="table borderless">
     <tbody>
       <tr>
@@ -14,8 +15,15 @@
         <th scope="row">sex</th>
         <td>{{ info.gender | genderify }}</td>
       </tr>
+      <tr>
+        <th scope="row">location</th>
+        <td>{{ info.location }}</td>
+      </tr>
     </tbody>
   </table>
 </div>
 <!--presenting illness-->
-<!--code...-->
+<h5><strong>Presenting Illness</strong></h5><hr>
+<div>
+  <!--code-->
+</div>
