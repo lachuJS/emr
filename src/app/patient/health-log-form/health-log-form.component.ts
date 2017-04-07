@@ -45,6 +45,7 @@ export class HealthLogFormComponent implements OnInit {
       }),
       le: '',
       finalDiagnosis: '',
+      presentingIllness: '',
       nextFollowUp: '',
       investigations: '',
       prescription: this.fb.array([])
@@ -63,6 +64,7 @@ export class HealthLogFormComponent implements OnInit {
       systemicExamination : this.fb.group(healthLog.systemicExamination),
       le : healthLog.le,
       finalDiagnosis : healthLog.finalDiagnosis,
+      presentingIllness : healthLog.presentingIllness;
       nextFollowUp : healthLog.nextFollowUp,
       investigations : healthLog.investigations,
       prescription : this.fb.array(healthLog.prescription.map((prescriptionItem) => {
@@ -121,6 +123,7 @@ export class HealthLogFormComponent implements OnInit {
       systemicExamination: Object.assign({},formModel.systemicExamination),
       le: formModel.le as string,
       finalDiagnosis: formModel.finalDiagnosis as string,
+      presentingIllness : formModel.presentingIllness as boolean;
       nextFollowUp: formModel.nextFollowUp as string,
       investigations : formModel.investigations as string,
       prescription: formModel.prescription.map((prescriptionItem) => {

@@ -93,6 +93,12 @@
           <div id="final-diagnosis" class="p-2">
             <input type="text" formControlName="finalDiagnosis" class="form-control">
           </div>
+          <!--is it a presenting illness-->
+          <div class="d-flex">
+            <p class="form-inline">mark as presenting illness&nbsp;
+              <input type="checkbox" formControlName="presentingIllness" class="form-control">
+            </p>
+          </div>
         </div><br>
         <!--follow up-->
         <h5><strong>Follow up</strong></h5><hr>
@@ -142,6 +148,6 @@
           <button type="submit" [disabled]="validateForm()" id="submit-btn" class="btn btn-md">save</button>
         </div>
       </form>
-      
+
     </div>
 </div><!--/#conatiner-->

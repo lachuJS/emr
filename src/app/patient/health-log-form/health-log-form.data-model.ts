@@ -33,6 +33,7 @@ export interface HealthLogForm {
   systemicExamination?: SystemicExamination,
   le?: string,
   finalDiagnosis?: string,
+  presentingIllness?: boolean,
   nextFollowUp?: string,
   investigations?: string,
   prescription?: Array<PrescriptionItem>

@@ -55,6 +55,7 @@ export class PatientService {
           },
           le:'lazy brown fox jumped',
           finalDiagnosis:'lrem ipsum',
+          presentingIllness : false,
           nextFollowUp: '1995-08-17',
           investigations: 'lab data',
           prescription:[
@@ -90,6 +91,7 @@ export class PatientService {
             },
             le:undefined,
             finalDiagnosis:'lrem ipsum',
+            presentingIllness : false,
             nextFollowUp: '1995-08-17',
             investigations: 'lab data',
             prescription: [],
@@ -175,6 +177,7 @@ export class PatientService {
           },
           le:'lazy brown fox jumped',
           finalDiagnosis:'lrem ipsum',
+          presentingIllness : false,
           nextFollowUp: '1995-08-17',
           investigations: 'lab data',
           prescription:[
@@ -211,6 +214,7 @@ export class PatientService {
             },
             le:undefined,
             finalDiagnosis:'lrem ipsum',
+            presentingIllness : false,
             nextFollowUp: '1995-08-17',
             investigations: 'lab data',
             prescription: [],
