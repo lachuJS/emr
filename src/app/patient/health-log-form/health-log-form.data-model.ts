@@ -26,6 +26,7 @@ export interface PrescriptionItem {
   beforeMeal: boolean
 }
 export interface HealthLogForm {
+  id?:number,
   chiefComplaints?: Array<ChiefComplaint>,
   examination?: Examination,
   vitals?: Vitals,
@@ -35,4 +36,9 @@ export interface HealthLogForm {
   nextFollowUp?: string,
   investigations?: string,
   prescription?: Array<PrescriptionItem>
+}
+export interface PresentingIllness {
+  healthLogId: number,
+  finalDiagnosis: string,
+  medications: Array<string>
 }

@@ -8,6 +8,7 @@ import { PatientComponent } from './patient/patient.component';
 import { InfoComponent } from './patient/info/info.component';
 import { HistoryComponent } from './patient/history/history.component';
 import { HealthLogFormComponent } from './patient/health-log-form/health-log-form.component';
+import { HealthLogsComponent } from './patient/health-logs/health-logs.component';
 
 export const appRoutes: Routes = [
   {
@@ -22,10 +23,10 @@ export const appRoutes: Routes = [
   {
     path : 'patient/:patientId',
     component : PatientComponent,
-    //consultation routes
+    //patient child routes
     children: [
       {
-        path : 'info',
+        path : '', //default patient landing page
         component : InfoComponent,
         outlet : 'patient'
       },
@@ -37,6 +38,11 @@ export const appRoutes: Routes = [
       {
         path : 'health-log',
         component : HealthLogFormComponent,
+        outlet : 'patient'
+      },
+      {
+        path : 'health-logs',
+        component : HealthLogsComponent,
         outlet : 'patient'
       }
     ]

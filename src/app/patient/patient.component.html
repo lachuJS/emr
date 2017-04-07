@@ -3,26 +3,18 @@
   <div class="row">
     <div class="col-sm-2 col-md-2">
       <h5><strong>Patient</strong></h5><hr>
-      <ul class="list-group">
-        <li class="list-group-item borderless">
-          <a [routerLink]="[{ outlets: { 'patient' : ['info'] } }]">
-            <i class="fa fa-user-circle-o"></i>&nbsp;
-            info
-          </a>
-        </li>
-        <li class="list-group-item borderless">
+          <a [routerLink]="['./']">
+            <i class="fa fa-heart"></i>&nbsp;profile
+          </a><br>
           <a [routerLink]="[{ outlets: { 'patient' : ['history'] } }]">
-            <i class="fa fa-list-ol"></i>&nbsp;
-            history
-          </a>
-        </li>
-        <li class="list-group-item borderless">
+            <i class="fa fa-table"></i>&nbsp;track health-log data
+          </a><br>
           <a [routerLink]="[{ outlets: { 'patient' : ['health-log'] } }]">
-            <i class="fa fa-file"></i>&nbsp;
-            healthlog
-          </a>
-        </li>
-      </ul><!--/.list-group-->
+            <i class="fa fa-plus"></i>&nbsp;add health-log
+          </a><br>
+          <a [routerLink]="[{ outlets: { 'patient' : ['health-logs'] } }]">
+            <i class="fa fa-list"></i>&nbsp;list health-logs
+          </a><br>
     </div><!--/.col-->
     <div class="col-sm-8 col-md-8">
       <router-outlet name="patient"></router-outlet>

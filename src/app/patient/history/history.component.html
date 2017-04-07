@@ -1,102 +1,105 @@
-<h5><strong>Track</strong></h5><hr>
-<form class="form">
-  <div class="d-flex justify-content-between">
+<div *ngIf="track">
+    <h5><strong>Track</strong></h5><hr>
+    <form class="form">
+      <div class="d-flex justify-content-between">
 
-    <div class="p-2 form-inline">
-      <label for="bp">BP&nbsp;
-        <input type="checkbox" [(ngModel)]="track.bp" name="bp" class="form-control">
-      </label>
-    </div>
+        <div class="p-2 form-inline">
+          <label for="bp">BP&nbsp;
+            <input type="checkbox" name="bp" class="form-control" [(ngModel)]="track.bp" (ngModelChange)="rebuildQueryParams()">
+          </label>
+        </div>
 
-    <!--PR-->
-    <div class="p-2 form-inline">
-      <label for="pr">PR&nbsp;
-        <input type="checkbox" [(ngModel)]="track.pr" name="pr" class="form-control">
-      </label>
-    </div>
+        <!--PR-->
+        <div class="p-2 form-inline">
+          <label for="pr">PR&nbsp;
+            <input type="checkbox" name="pr" class="form-control" [(ngModel)]="track.pr" (ngModelChange)="rebuildQueryParams()">
+            <a></a>
+          </label>
+        </div>
 
-    <!--RR-->
-    <div class="p-2 form-inline">
-      <label for="rr">RR&nbsp;
-        <input type="checkbox" [(ngModel)]="track.rr" name="rr" class="form-control">
-      </label>
-    </div>
+        <!--RR-->
+        <div class="p-2 form-inline">
+          <label for="rr">RR&nbsp;
+            <input type="checkbox" name="rr" class="form-control" [(ngModel)]="track.rr" (ngModelChange)="rebuildQueryParams()">
+          </label>
+        </div>
 
-    <!-- temp -->
-    <div class="p-2 form-inline">
-      <label for="temp">temperature&nbsp;
-        <input type="checkbox" [(ngModel)]="track.temp" name="temp" class="form-control">
-      </label>
-    </div>
+        <!-- temp -->
+        <div class="p-2 form-inline">
+          <label for="temp">temperature&nbsp;
+            <input type="checkbox" name="temp" class="form-control" [(ngModel)]="track.temp" (ngModelChange)="rebuildQueryParams()">
+          </label>
+        </div>
 
-    <!--CVS-->
-    <div class="p-2 form-inline">
-      <label for="cvs">CVS&nbsp;
-        <input type="checkbox" [(ngModel)]="track.cvs" name="cvs" class="form-control">
-      </label>
-    </div>
+        <!--CVS-->
+        <div class="p-2 form-inline">
+          <label for="cvs">CVS&nbsp;
+            <input type="checkbox" name="cvs" class="form-control" [(ngModel)]="track.cvs" (ngModelChange)="rebuildQueryParams()">
+          </label>
+        </div>
 
-    <!--RS-->
-    <div class="p-2 form-inline">
-      <label for="cvs">RS&nbsp;
-        <input type="checkbox" [(ngModel)]="track.rs" name="rs" class="form-control">
-      </label>
-    </div>
+        <!--RS-->
+        <div class="p-2 form-inline">
+          <label for="rs">RS&nbsp;
+            <input type="checkbox" name="rs" class="form-control" [(ngModel)]="track.rs" (ngModelChange)="rebuildQueryParams()">
+          </label>
+        </div>
 
-    <!--CNS-->
-    <div class="p-2 form-inline">
-      <label for="cvs">CNS&nbsp;
-        <input type="checkbox" [(ngModel)]="track.cns" name="cns" class="form-control">
-      </label>
-    </div>
+        <!--CNS-->
+        <div class="p-2 form-inline">
+          <label for="cns">CNS&nbsp;
+            <input type="checkbox" name="cns" class="form-control" [(ngModel)]="track.cns" (ngModelChange)="rebuildQueryParams()">
+          </label>
+        </div>
 
-    <!--P/A-->
-    <div class="p-2 form-inline">
-      <label for="cvs">P/A&nbsp;
-        <input type="checkbox" [(ngModel)]="track.pa" name="pa" class="form-control">
-      </label>
-    </div>
+        <!--P/A-->
+        <div class="p-2 form-inline">
+          <label for="pa">P/A&nbsp;
+            <input type="checkbox" name="pa" class="form-control" [(ngModel)]="track.pa" (ngModelChange)="rebuildQueryParams()">
+          </label>
+        </div>
 
-    <!--diagnosis-->
-    <div class="p-2 form-inline">
-      <label for="cvs">diagnosis&nbsp;
-        <input type="checkbox" [(ngModel)]="track.finalDiagnosis" name="finalDiagnosis" class="form-control">
-      </label>
-    </div>
+        <!--diagnosis-->
+        <div class="p-2 form-inline">
+          <label for="diagnosis">diagnosis&nbsp;
+            <input type="checkbox" name="finalDiagnosis" class="form-control" [(ngModel)]="track.finalDiagnosis" (ngModelChange)="rebuildQueryParams()">
+          </label>
+        </div>
 
-  </div>
-</form><br>
+      </div>
+    </form><br>
 
-<h5><strong>Health Logs</strong></h5><hr>
-<table class="table borderless">
-  <thead>
-    <tr>
-      <th><i class="fa fa-calendar-o"></i>&nbsp;date</th>
-      <th *ngIf="track.bp">BP</th>
-      <th *ngIf="track.pr">PR</th>
-      <th *ngIf="track.rr">RR</th>
-      <th *ngIf="track.temp">temp</th>
-      <th *ngIf="track.cvs">CVS</th>
-      <th *ngIf="track.rs">RS</th>
-      <th *ngIf="track.cns">CNS</th>
-      <th *ngIf="track.pa">P/A</th>
-      <th *ngIf="track.finalDiagnosis">Diagnosis</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let healthLog of history">
-      <ng-container *ngIf="shouldBeTracked(healthLog)">
-        <th scope="row">{{ healthLog.dateCreated | date:'mediumDate' }}</th>
-        <td *ngIf="track.bp">{{ healthLog.vitals.bp }}</td>
-        <td *ngIf="track.pr">{{ healthLog.vitals.pr }}</td>
-        <td *ngIf="track.rr">{{ healthLog.vitals.rr }}</td>
-        <td *ngIf="track.temp">{{ healthLog.vitals.temp }}</td>
-        <td *ngIf="track.cvs">{{ healthLog.systemicExamination.cvs }}</td>
-        <td *ngIf="track.rs">{{ healthLog.systemicExamination.rs }}</td>
-        <td *ngIf="track.cns">{{ healthLog.systemicExamination.cns }}</td>
-        <td *ngIf="track.pa">{{ healthLog.systemicExamination.pa }}</td>
-        <td *ngIf="track.finalDiagnosis">{{ healthLog.finalDiagnosis }}</td>
-      </ng-container>
-    </tr>
-  </tbody>
-</table>
+    <h5><strong>Health Logs</strong></h5><hr>
+    <table class="table borderless">
+      <thead>
+        <tr>
+          <th><i class="fa fa-calendar-o"></i>&nbsp;date</th>
+          <th *ngIf="track.bp">BP</th>
+          <th *ngIf="track.pr">PR</th>
+          <th *ngIf="track.rr">RR</th>
+          <th *ngIf="track.temp">temp</th>
+          <th *ngIf="track.cvs">CVS</th>
+          <th *ngIf="track.rs">RS</th>
+          <th *ngIf="track.cns">CNS</th>
+          <th *ngIf="track.pa">P/A</th>
+          <th *ngIf="track.finalDiagnosis">Diagnosis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let healthLog of history">
+          <ng-container *ngIf="shouldBeTracked(healthLog)">
+            <th scope="row">{{ healthLog.dateCreated | date:'mediumDate' }}</th>
+            <td *ngIf="track.bp">{{ healthLog.vitals.bp }}</td>
+            <td *ngIf="track.pr">{{ healthLog.vitals.pr }}</td>
+            <td *ngIf="track.rr">{{ healthLog.vitals.rr }}</td>
+            <td *ngIf="track.temp">{{ healthLog.vitals.temp }}</td>
+            <td *ngIf="track.cvs">{{ healthLog.systemicExamination.cvs }}</td>
+            <td *ngIf="track.rs">{{ healthLog.systemicExamination.rs }}</td>
+            <td *ngIf="track.cns">{{ healthLog.systemicExamination.cns }}</td>
+            <td *ngIf="track.pa">{{ healthLog.systemicExamination.pa }}</td>
+            <td *ngIf="track.finalDiagnosis">{{ healthLog.finalDiagnosis }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+</div>

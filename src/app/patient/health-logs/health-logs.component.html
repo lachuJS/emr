@@ -1,77 +1,68 @@
 <div *ngIf="healthLogs" id='health-logs-container'>
-  <div *ngFor="let healthLog of healthLogs" class="panel panel-default">
-    <div class="panel-heading">
-      <div class="row">
-        <div class="col-sm-6 col-md-6"><strong>HealthLog</strong></div>
-        <div class="col-sm-6 col-md-6 text-right"><strong>{{ healthLog.dateCreated | date:'longDate' }}</strong></div>
+  <div *ngFor="let healthLog of healthLogs" id="{{healthLog.id}}">
+    <!--date of log-->
+    <div class="d-flex justify-content-end">
+      <div class="p-2"><strong>{{ healthLog.dateCreated | date:'longDate' }}</strong></div>
+    </div>
+    <!--loop chief complaints array-->
+    <div *ngIf="chiefComplaintsExists(healthLog)">
+      <h5><strong>Chief Complaints</strong></h5><hr>
+      <div id="chief-complaints">
+        <table class="table table-hover">
+          <tr>
+            <th>#</th>
+            <th>complaint</th>
+            <th>duration(days)</th>
+          </tr>
+          <tr *ngFor="let chiefComplaint of healthLog.chiefComplaints;let i=index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ chiefComplaint.complaint }}</td>
+            <td>{{ chiefComplaint.duration }}</td>
+          </tr>
+        </table>
       </div>
     </div>
-    <div class="panel-body">
-      <!--loop chief complaints array-->
-      <div *ngIf="chiefComplaintsExists(healthLog)">
-        <div>
-          <strong>Chief Complaints</strong>
-        </div><br>
-        <div id="chief-complaints">
-          <table class="table table-hover">
-            <tr>
-              <th>#</th>
-              <th>complaint</th>
-              <th>duration(days)</th>
-            </tr>
-            <tr *ngFor="let chiefComplaint of healthLog.chiefComplaints;let i=index">
-              <td>{{ i + 1 }}</td>
-              <td>{{ chiefComplaint.complaint }}</td>
-              <td>{{ chiefComplaint.duration }}</td>
-            </tr>
-          </table>
-        </div>
-        <hr>
+    <!--examination-->
+    <div *ngIf="healthLog.examination" class="d-flex justify-content-between">
+      <div class="p-2" id="examination">
+        <h5><strong>Examination</strong></h5>
       </div>
-      <!--examination-->
-      <div *ngIf="healthLog.examination" class="row">
-        <div class="col-sm-3 col-md-3" id="examination"><strong>Examination</strong></div>
-        <div class="col-sm-9 col-md-9">{{ healthLog.examination }}</div>
-      </div><hr>
-      <!--vitals-->
-      <div *ngIf="vitalsExists(healthLog)" id="vitals">
-        <div class="row">
-          <div class="col-sm-3 col-md-3">
-            <strong>Vitals</strong>
-          </div>
-        </div><br>
-        <div class="row">
-          <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.pr">
-            <strong>PR : </strong>{{ healthLog.vitals.pr }}
-          </div>
-          <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.bp">
-            <strong>BP : </strong>{{ healthLog.vitals.bp }}
-          </div>
-          <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.rr">
-            <strong>RR : </strong>{{ healthLog.vitals.rr }}
-          </div>
-          <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.temp">
-            <strong>Temp : </strong>{{ healthLog.vitals.temp }}
-          </div>
+      <div class="p-2">{{ healthLog.examination }}</div>
+    </div><hr>
+    <!--vitals-->
+    <div *ngIf="vitalsExists(healthLog)" id="vitals">
+      <h5><strong>Vitals</strong></h5><hr>
+      <div class="row">
+        <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.pr">
+          <strong>PR : </strong>{{ healthLog.vitals.pr }}
         </div>
-        <hr>
+        <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.bp">
+          <strong>BP : </strong>{{ healthLog.vitals.bp }}
+        </div>
+        <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.rr">
+          <strong>RR : </strong>{{ healthLog.vitals.rr }}
+        </div>
+        <div class="col-sm-3 col-md-3" *ngIf="healthLog.vitals.temp">
+          <strong>Temp : </strong>{{ healthLog.vitals.temp }}
+        </div>
       </div>
+    </div>
       <!--systemic examination-->
       <div *ngIf="systemicExaminationExists(healthLog)" id="systemic-examination">
         <div class="text-left">
             <strong>Systemic Examintion</strong>
         </div><br>
-        <div *ngIf="systemicExaminationExists(healthLog)" id="systemic-examination" class="row">
-          <div class="col-sm-3 col-md-3" *ngIf="healthLog.systemicExamination.cvs">
+        <div *ngIf="systemicExaminationExists(healthLog)" id="systemic-examination" class="d-flex justify-content-start">
+          <div class="p-2" *ngIf="healthLog.systemicExamination.cvs">
             <strong>CVS : </strong>{{ healthLog.systemicExamination.cvs }}
           </div>
-          <div class="col-sm-3 col-md-3" *ngIf="healthLog.systemicExamination.rs">
+          <div class="p-2" *ngIf="healthLog.systemicExamination.rs">
             <strong>RS : </strong>{{ healthLog.systemicExamination.rs }}
           </div>
-          <div class="col-sm-3 col-md-3" *ngIf="healthLog.systemicExamination.cns">
+          <div class="p-2" *ngIf="healthLog.systemicExamination.cns">
             <strong>CNS : </strong>{{ healthLog.systemicExamination.cns }}
           </div>
-          <div class="col-sm-3 col-md-3" *ngIf="healthLog.systemicExamination.pa">
+          <div class="p-2" *ngIf="healthLog.systemicExamination.pa">
             <strong>P/A : </strong>{{ healthLog.systemicExamination.pa }}
           </div>
         </div>
@@ -132,6 +123,4 @@
         </table>
       </div>
     </div>
-
-  </div>
 </div>

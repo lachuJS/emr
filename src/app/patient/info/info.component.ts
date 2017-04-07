@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { PatientService } from '../patient.service';
+
 import { Info } from './info';
+import { PresentingIllness } from '../health-log-form/health-log-form.data-model';
 
 @Component({
   selector: 'app-info',
@@ -10,16 +12,24 @@ import { Info } from './info';
 })
 export class InfoComponent implements OnInit {
   info: Info;
+  presentingIllness: PresentingIllness;
 
   constructor(
     private patientService: PatientService
   ) {}
 
   ngOnInit() {
-      this.patientService.getInfo()
-      .then((info: Info) => {
-        this.info = info;
-      })
-      .catch((err) => { console.log(err); });
+    //personal
+    this.patientService.getInfo()
+    .then((info: Info) => {
+      this.info = info;
+    })
+    .catch((err) => { console.log(err); });
+    //presenting illness
+    this.patientService.getPresentingIllness()
+    .then((presentingIllness: PresentingIllness) => {
+      this.presentingIllness = presentingIllness;
+    })
+    .catch((err) => { console.log(err) });
   }
 }

@@ -24,6 +24,22 @@
 </div>
 <!--presenting illness-->
 <h5><strong>Presenting Illness</strong></h5><hr>
-<div>
-  <!--code-->
+<div *ngIf="presentingIllness">
+  <p>The final diagnosis marked as presenting illness by the doctor.click to see healthlogs.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Diagnosis</th>
+        <th>Medications</th>
+        <th><th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ presentingIllness.finalDiagnosis }}</td>
+        <td>{{ presentingIllness.medications | json }}</td>
+        <td><a href="[{ outlets: { 'patient' : ['health-logs'] } }]">> see log</a></td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -1,16 +1,20 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { HealthLogForm } from '../health-log-form/health-log-form.data-model';
 
-@Component({
-  selector: 'app-health-log',
-  templateUrl: './health-log.component.html',
-  styleUrls: ['./health-log.component.css']
-})
-export class HealthLogComponent implements OnInit {
-  @Input() healthLogs: Array<HealthLogForm>;
+import { PatientService } from '../patient.service';
 
-  constructor() {}
+@Component({
+  selector: 'app-health-logs',
+  templateUrl: './health-logs.component.html',
+  styleUrls: ['./health-logs.component.css']
+})
+export class HealthLogsComponent implements OnInit {
+  healthLogs: Array<HealthLogForm>;
+
+  constructor(
+    private patientService: PatientService
+  ) {}
   //returns boolean for ngIf
   //for formGroups and formArray
   vitalsExists(healthLog: HealthLogForm) {
@@ -44,5 +48,11 @@ export class HealthLogComponent implements OnInit {
     return false;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.patientService.getHealthLogs()
+    .then((healthLogs: Array<HealthLogForm>) => {
+      this.healthLogs = healthLogs;
+    })
+    .catch((err) => { console.log(err) });
+  }
 }

@@ -19,6 +19,7 @@ import { PatientComponent } from './patient/patient.component';
 import { InfoComponent } from './patient/info/info.component';
 import { HistoryComponent } from './patient/history/history.component';
 import { HealthLogFormComponent } from './patient/health-log-form/health-log-form.component';
+import { HealthLogsComponent } from './patient/health-logs/health-logs.component';
 
 //services
 //appointments
@@ -35,7 +36,8 @@ import { PatientService } from './patient/patient.service';
     PatientComponent,
     InfoComponent,
     HistoryComponent,
-    HealthLogFormComponent
+    HealthLogFormComponent,
+    HealthLogsComponent
   ],
   imports: [
     BrowserModule,
