@@ -15,6 +15,9 @@
           <a [routerLink]="[{ outlets: { 'patient' : ['health-logs'] } }]">
             <i class="fa fa-list"></i>&nbsp;list health-logs
           </a><br>
+          <div *ngIf="patientPinned != undefined">
+            <button type="button" (click)="updatePin()" class="btn btn-sm btn-default">{{ buttonState }}</button>
+          </div>
     </div><!--/.col-->
     <div class="col-sm-8 col-md-8">
       <router-outlet name="patient"></router-outlet>

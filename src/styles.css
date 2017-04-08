@@ -3,7 +3,7 @@
 body {
   /*padding-top: 70px; /*prevent overlay of navbar*/
   /*background-color: #F6F6F6 !important; /*override bootstrap default white bgcolor*/
-  color: #333333 !important; /*override default black text-color*/
+  color: #545454 !important; /*override default black text-color*/
   /*font-size: 15px !important;*/
 }
 /*offsetting an html anchor to adjust for fixed header*/
@@ -19,7 +19,7 @@ body {
     border: none;
 }
 .navbar-nav > li > a, .navbar-brand {
-  color: #333333 !important;
+  color: #545454 !important;
 }
 .app-body {
   padding-top :25px;

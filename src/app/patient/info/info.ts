@@ -4,6 +4,7 @@ export interface Info {
     dob: string,
     gender: boolean,
     location: string,
+    pinned: boolean,
     email?: string,
     phone?: number
 }

@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
 
 //components
-//dashboard
+//appointments
 import { AppointmentsComponent } from './appointments/appointments.component';
+//patients listing
+import { PatientsComponent } from './patients/patients.component';
 //patient
 import { PatientComponent } from './patient/patient.component';
 import { InfoComponent } from './patient/info/info.component';
@@ -19,6 +21,10 @@ export const appRoutes: Routes = [
   {
     path : 'appointments',
     component: AppointmentsComponent
+  },
+  {
+    path : 'patients',
+    component : PatientsComponent
   },
   {
     path : 'patient/:patientId',

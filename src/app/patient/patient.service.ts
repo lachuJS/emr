@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Info } from './info/info';
 import { HealthLogForm } from './health-log-form/health-log-form.data-model';
@@ -8,20 +9,25 @@ import { PresentingIllness } from './health-log-form/health-log-form.data-model'
 export class PatientService {
 
   patientId: number;
-  info: Info;
-  history: Array<HealthLogForm>;
+  //pinned BehaviorSubject
+  pinned = new BehaviorSubject<boolean>(undefined);
 
   constructor() { }
 
   //info
   getInfo(): Promise<Info> {
-    return Promise.resolve({
+    let info = {
       patientId: 12,
       name: 'Lakshmi Narayanan S V',
       dob: '1995-08-17',
       gender: true,
-      location: 'erode'
-    });
+      location: 'erode',
+      pinned: true
+    }
+    //set pin
+    this.pinned.next(info.pinned);
+    //get personal, and pin flag from patient table
+    return Promise.resolve(info);
   }
   getPresentingIllness(): Promise<PresentingIllness> {
     return Promise.resolve({
@@ -221,6 +227,12 @@ export class PatientService {
           dateCreated: '1990-08-01'
         }
     ]);
+  }
+  updatePin(): Promise<boolean>{
+    //send http request to set pin of this.patientId of patient table true
+    //return status
+    this.pinned.next(!this.pinned.value);
+    return Promise.resolve(true);
   }
 
 }

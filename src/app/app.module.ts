@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 //appointments
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { DoctorComponent } from './appointments/doctor/doctor.component';
+//patients
+import { PatientsComponent } from './patients/patients.component';
 //patient
 import { PatientComponent } from './patient/patient.component';
 import { InfoComponent } from './patient/info/info.component';
@@ -24,6 +26,8 @@ import { HealthLogsComponent } from './patient/health-logs/health-logs.component
 //services
 //appointments
 import { AppointmentsService } from './appointments/appointments.service';
+//patients
+import { PatientsService } from './patients/patients.service';
 //patient
 import { PatientService } from './patient/patient.service';
 
@@ -37,7 +41,8 @@ import { PatientService } from './patient/patient.service';
     InfoComponent,
     HistoryComponent,
     HealthLogFormComponent,
-    HealthLogsComponent
+    HealthLogsComponent,
+    PatientsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,7 @@ import { PatientService } from './patient/patient.service';
   ],
   providers: [
     AppointmentsService,
+    PatientsService,
     PatientService
   ],
   bootstrap: [ AppComponent ]
