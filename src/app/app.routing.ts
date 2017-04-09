@@ -1,56 +1,80 @@
 import { Routes } from '@angular/router';
 
 //components
+//app-layout
+import { LayoutComponent } from './layout/layout.component';
 //appointments
 import { AppointmentsComponent } from './appointments/appointments.component';
 //patients listing
 import { PatientsComponent } from './patients/patients.component';
 //patient
-import { PatientComponent } from './patient/patient.component';
-import { InfoComponent } from './patient/info/info.component';
-import { HistoryComponent } from './patient/history/history.component';
-import { HealthLogFormComponent } from './patient/health-log-form/health-log-form.component';
-import { HealthLogsComponent } from './patient/health-logs/health-logs.component';
+import { PatientInfoComponent } from './patient/patient-info/patient-info.component';
+import { PatientHistoryComponent } from './patient/patient-history/patient-history.component';
+import { PatientHealthLogFormComponent } from './patient/patient-health-log-form/patient-health-log-form.component';
+import { PatientHealthLogsComponent } from './patient/patient-health-logs/patient-health-logs.component';
+import { PatientSubNavComponent } from './patient/patient-sub-nav/patient-sub-nav.component';
 
 export const appRoutes: Routes = [
+  //set default landing page as /appointments
   {
-    path : '',
+    path: '',
     redirectTo : '/appointments',
-    pathMatch : 'full'
+    pathMatch: 'full'
   },
+  //appointments
   {
-    path : 'appointments',
-    component: AppointmentsComponent
+    path: 'appointments',
+    component : LayoutComponent,
+    children : [
+      {
+        path : '',
+        component: AppointmentsComponent,
+        outlet: 'content'
+      }
+      //subnav component here...
+    ]
   },
+  //patients
   {
     path : 'patients',
-    component : PatientsComponent
+    component : LayoutComponent,
+    children : [
+      {
+        path : '',
+        component : PatientsComponent,
+        outlet : 'content'
+      }
+      //insert subnav component here...
+    ]
   },
+  //patient
   {
-    path : 'patient/:patientId',
-    component : PatientComponent,
-    //patient child routes
+    path: 'patient/:patientId',
+    component : LayoutComponent,
     children: [
+      //subnav
       {
-        path : '', //default patient landing page
-        component : InfoComponent,
-        outlet : 'patient'
+        path : '',
+        component : PatientSubNavComponent,
+        outlet: 'subnav'
+      },
+      //content
+      {
+        path  : '', //default landing page for /patient/:patientId
+        component : PatientInfoComponent,
+        outlet : 'content'
       },
       {
-        path : 'history',
-        component : HistoryComponent,
-        outlet : 'patient'
+        path : 'track',
+        component : PatientHistoryComponent,
+        outlet : 'content'
       },
       {
-        path : 'health-log',
-        component : HealthLogFormComponent,
-        outlet : 'patient'
-      },
-      {
-        path : 'health-logs',
-        component : HealthLogsComponent,
-        outlet : 'patient'
+        path : 'new-log',
+        component : PatientHealthLogFormComponent,
+        outlet : 'content'
       }
     ]
   }
+
 ];

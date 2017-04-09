@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HealthLogForm } from '../health-log-form/health-log-form.data-model';
+import { HealthLogForm } from '../patient-health-log-form/patient-health-log-form.data-model';
 
 import { PatientService } from '../patient.service';
 
 @Component({
-  selector: 'app-health-logs',
-  templateUrl: './health-logs.component.html',
-  styleUrls: ['./health-logs.component.css']
+  selector: 'app-patient-health-logs',
+  templateUrl: './patient-health-logs.component.html',
+  styleUrls: ['./patient-health-logs.component.css']
 })
-export class HealthLogsComponent implements OnInit {
+export class PatientHealthLogsComponent implements OnInit {
   healthLogs: Array<HealthLogForm>;
 
   constructor(

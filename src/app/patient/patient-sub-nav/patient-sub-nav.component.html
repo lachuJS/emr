@@ -1,0 +1,26 @@
+<ul class="nav flex-column">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./']">
+      <i class="fa fa-heart"></i>
+      profile
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['track'] } }]">
+      <i class="fa fa-table"></i>
+      track
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['new-log'] } }]">
+      <i class="fa fa-plus"></i>
+      health-log
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="javascript:void();" (click)="updatePin()">
+      <i class="fa fa-thumb-tack"></i>
+      {{ buttonState }}
+    </a>
+  </li>
+</ul>

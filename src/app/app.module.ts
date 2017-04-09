@@ -11,18 +11,18 @@ import { appRoutes } from './app.routing';
 
 //components
 import { AppComponent } from './app.component';
+//layout
+import { LayoutComponent } from './layout/layout.component';
 //appointments
 import { AppointmentsComponent } from './appointments/appointments.component';
-import { DoctorComponent } from './appointments/doctor/doctor.component';
 //patients
 import { PatientsComponent } from './patients/patients.component';
 //patient
-import { PatientComponent } from './patient/patient.component';
-import { InfoComponent } from './patient/info/info.component';
-import { HistoryComponent } from './patient/history/history.component';
-import { HealthLogFormComponent } from './patient/health-log-form/health-log-form.component';
-import { HealthLogsComponent } from './patient/health-logs/health-logs.component';
-
+import { PatientInfoComponent } from './patient/patient-info/patient-info.component';
+import { PatientHistoryComponent } from './patient/patient-history/patient-history.component';
+import { PatientHealthLogFormComponent } from './patient/patient-health-log-form/patient-health-log-form.component';
+import { PatientHealthLogsComponent } from './patient/patient-health-logs/patient-health-logs.component';
+import { PatientSubNavComponent } from './patient/patient-sub-nav/patient-sub-nav.component';
 //services
 //appointments
 import { AppointmentsService } from './appointments/appointments.service';
@@ -35,13 +35,13 @@ import { PatientService } from './patient/patient.service';
 @NgModule({
   declarations: [
     AppComponent,
+    LayoutComponent,
     AppointmentsComponent,
-    DoctorComponent,
-    PatientComponent,
-    InfoComponent,
-    HistoryComponent,
-    HealthLogFormComponent,
-    HealthLogsComponent,
+    PatientInfoComponent,
+    PatientHistoryComponent,
+    PatientHealthLogFormComponent,
+    PatientHealthLogsComponent,
+    PatientSubNavComponent,
     PatientsComponent
   ],
   imports: [

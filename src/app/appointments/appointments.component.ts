@@ -1,8 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { DoctorComponent } from './doctor/doctor.component';
-
-import { Doctor } from './doctor/doctor';
 import { Appointment } from "./appointment";
 
 import { AppointmentsService } from './appointments.service';
@@ -13,9 +10,8 @@ import { AppointmentsService } from './appointments.service';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent implements OnInit {
-  doctor: Doctor;
+  //appointments list
   appointments: Array<Appointment>;
-
   //badge
   get appointmentsCount():number {
     return this.appointments.length;
@@ -29,12 +25,6 @@ export class AppointmentsComponent implements OnInit {
     this.appointments.splice(index,1);
   }
   ngOnInit() {
-    //get doctor info
-    this.appointmentsService.getDoctor()
-    .then((doctor: Doctor) => {
-      this.doctor = doctor; //set property doctor
-    })
-    .catch((err) => {console.log(err)})
     //get appointments of doctor
     this.appointmentsService.getAppointments()
     .then((appointments: Array<Appointment>) => {

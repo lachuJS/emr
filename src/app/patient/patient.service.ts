@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { Info } from './info/info';
-import { HealthLogForm } from './health-log-form/health-log-form.data-model';
-import { PresentingIllness } from './health-log-form/health-log-form.data-model';
+import { Info } from './patient-info/patient-info';
+import { HealthLogForm } from './patient-health-log-form/patient-health-log-form.data-model';
+import { PresentingIllness } from './patient-health-log-form/patient-health-log-form.data-model';
 
 @Injectable()
 export class PatientService {

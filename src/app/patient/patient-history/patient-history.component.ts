@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { PatientService } from '../patient.service';
 
-import { HealthLogForm } from '../health-log-form/health-log-form.data-model';
+import { HealthLogForm } from '../patient-health-log-form/patient-health-log-form.data-model';
 
 export interface Track {
     bp: boolean,
@@ -18,11 +18,11 @@ export interface Track {
 }
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.css']
+  selector: 'app-patient-history',
+  templateUrl: './patient-history.component.html',
+  styleUrls: ['./patient-history.component.css']
 })
-export class HistoryComponent implements OnInit {
+export class PatientHistoryComponent implements OnInit {
   history: Array<HealthLogForm>;
   //default tracked data
   track: Track;

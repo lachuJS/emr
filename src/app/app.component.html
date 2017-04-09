@@ -1,8 +1,9 @@
-<!-- app navigation bar -->
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded static-top">
+<!-- app main navigation bar -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <a class="navbar-brand" href="javascript:void();"><strong>Managment Name</strong></a>
 
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -30,7 +31,6 @@
     </ul>
   </div>
 </nav>
-<!--app body-->
-<div class="app-body">
-  <router-outlet></router-outlet>
-</div>
+<!--primary router-outlet-->
+<!--will be loaded: layout-->
+<router-outlet></router-outlet>

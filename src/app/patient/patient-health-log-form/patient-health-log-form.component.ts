@@ -1,17 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
-import { HealthLogForm } from './health-log-form.data-model';
-import { Examination } from './health-log-form.data-model';
+import { HealthLogForm } from './patient-health-log-form.data-model';
+import { Examination } from './patient-health-log-form.data-model';
 
 import { PatientService } from '../patient.service';
 
 @Component({
-  selector: 'app-health-log-form',
-  templateUrl: './health-log-form.component.html',
-  styleUrls: ['./health-log-form.component.css']
+  selector: 'app-patient-health-log-form',
+  templateUrl: './patient-health-log-form.component.html',
+  styleUrls: ['./patient-health-log-form.component.css']
 })
-export class HealthLogFormComponent implements OnInit {
+export class PatientHealthLogFormComponent implements OnInit {
   healthLogForm: FormGroup;
 
   get chiefComplaints():  FormArray {

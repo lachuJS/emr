@@ -5,7 +5,7 @@
       <form [formGroup]="healthLogForm" (ngSubmit)="submitForm()" class="form-group">
 
           <!--chief complaints table-->
-        <h5><strong>Chief Complaints</strong></h5><hr>
+        <h2><strong>Chief Complaints</strong></h2><br>
         <div>
           <table class="table borderless" formArrayName="chiefComplaints">
             <tr>
@@ -30,7 +30,7 @@
           </div>
         </div>
         <!--Examination-->
-        <h5><strong>Examination</strong></h5><hr>
+        <h2><strong>Examination</strong></h2><br>
           <div class="d-flex justify-content-end">
             <div class="p-2">
               <input type="radio" formControlName="examination" value="concious">
@@ -42,7 +42,7 @@
             </div>
           </div><!--/.d-flex-->
         <!--Vitals-->
-        <h5 ngbPanelTitle><strong>Vitals</strong></h5><hr>
+        <h2 ngbPanelTitle><strong>Vitals</strong></h2><br>
         <div formGroupName="vitals" class="d-flex justify-content-between">
           <div class="p-2">
             <input type="text" formControlName="pr" class="form-control" placeholder="PR">
@@ -64,7 +64,7 @@
           </div>
         </div><br>
         <!--SystemicExamination-->
-        <h5><strong>Systemic Examination</strong></h5><hr>
+        <h2><strong>Systemic Examination</strong></h2><br>
         <div id="systemic-examination" formGroupName="systemicExamination" class="d-flex justify-content-between">
           <div class="p-2">
             <input type="text" formControlName="cvs" class="form-control" placeholder="CVS">
@@ -80,12 +80,12 @@
           </div>
         </div><br>
         <!--L/E-->
-        <h5><strong>L/E</strong></h5><hr>
+        <h2><strong>L/E</strong></h2><br>
         <div>
           <textarea formControlName="le" class="form-control" rows="3"></textarea>
         </div><br>
         <!--diagnosis-->
-        <h5><strong>Final Diagnosis</strong></h5><hr>
+        <h2><strong>Final Diagnosis</strong></h2><br>
         <div class="d-flex justify-content-between">
           <div class="p-2">
             <label for="finalDiagnosis">Diagnosed Disease / Problem</label>
@@ -101,7 +101,7 @@
           </div>
         </div><br>
         <!--follow up-->
-        <h5><strong>Follow up</strong></h5><hr>
+        <h2><strong>Follow up</strong></h2><br>
         <div class="d-flex justify-content-between">
           <div class="p-2">
             <label for="nextFollowUp">Next Sitting Date if necessary</label>
@@ -111,7 +111,7 @@
           </div>
         </div>
         <!--prescription-->
-        <h5><strong>Prescription</strong></h5><hr>
+        <h2><strong>Prescription</strong></h2><br>
         <div id="prescription">
           <table class="table borderless" formArrayName="prescription">
             <tr>
@@ -138,7 +138,7 @@
           <a href="javascript:void();" (click)="addPrescriptionItem()" id="add-prescription">+ add medicine</a>
         </div><br>
         <!--investifagations-->
-        <h5><strong>Investigations</strong></h5><hr>
+        <h2><strong>Investigations</strong></h2><br>
         <div id="investigations">
           <textarea formControlName="investigations" class="form-control" rows=3></textarea>
         </div><br>

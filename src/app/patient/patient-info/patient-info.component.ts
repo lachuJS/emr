@@ -2,15 +2,15 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { PatientService } from '../patient.service';
 
-import { Info } from './info';
-import { PresentingIllness } from '../health-log-form/health-log-form.data-model';
+import { Info } from './patient-info';
+import { PresentingIllness } from '../patient-health-log-form/patient-health-log-form.data-model';
 
 @Component({
-  selector: 'app-info',
-  templateUrl: './info.component.html',
-  styleUrls: ['./info.component.css']
+  selector: 'app-patient-info',
+  templateUrl: './patient-info.component.html',
+  styleUrls: ['./patient-info.component.css']
 })
-export class InfoComponent implements OnInit {
+export class PatientInfoComponent implements OnInit {
   info: Info;
   presentingIllness: PresentingIllness;
 

@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /*prevent overlay of navbar(50px)*/
 body {
-  /*padding-top: 70px; /*prevent overlay of navbar*/
+  padding-top: 50px; /*prevent overlay of navbar*/
   /*background-color: #F6F6F6 !important; /*override bootstrap default white bgcolor*/
   color: #545454 !important; /*override default black text-color*/
   /*font-size: 15px !important;*/

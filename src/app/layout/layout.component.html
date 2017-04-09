@@ -1,0 +1,46 @@
+
+<!--wrapper-->
+<div id="wrapper" [ngClass]="{'toggled':sidebar}">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <!--sub-nav router-outlet-->
+      <br>
+      <div class="container-fluid">
+        <router-outlet name="subnav"></router-outlet>
+        <!--account-nav-->
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fa fa-cog"></i>
+              account
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fa fa-sign-out"></i>
+              logout
+            </a>
+          </li>
+        </ul>
+      </div><!--/.container-fluid-->
+    </div><!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <!--toggle sidebar button-->
+      <a href="javascript:void();" (click)="toggleSidebar()" id="menu-toggle">
+        <i class="fa fa-bars"></i>
+      </a>
+      <!--content-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                  <!--primary router-outlet-->
+                  <div class="app-body">
+                    <router-outlet name="content"></router-outlet>
+                  </div>
+                </div><!--/.col-->
+            </div><!--/.row-->
+        </div><!--/.container-fluid-->
+    </div><!-- /#page-content-wrapper -->
+</div><!-- /#wrapper -->
