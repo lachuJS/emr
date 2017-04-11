@@ -60,7 +60,7 @@ export const appRoutes: Routes = [
       },
       //content
       {
-        path  : '', //default landing page for /patient/:patientId
+        path  : 'profile', //default landing page for /patient/:patientId
         component : PatientInfoComponent,
         outlet : 'content'
       },

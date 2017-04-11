@@ -20,7 +20,7 @@
         <tr *ngFor="let appointment of appointments;let i=index;">
           <td>{{ i + 1 }}</td>
           <td>
-            <a href="/patient/{{appointment.patient.hid}}">{{ appointment.patient.name }}</a>
+            <a [routerLink]="['/patient',appointment.patient.hid,{ outlets: { content : 'profile' } }]">{{ appointment.patient.name }}</a>
           </td>
           <td>{{ appointment.dateTimeCreated | date:'shortTime' }}</td>
           <td>

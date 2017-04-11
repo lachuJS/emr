@@ -1,26 +1,26 @@
-<ul class="nav flex-column">
+<ul class="nav flex-column nav-pills">
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['./']">
+    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['profile'] } }]" routerLinkActive="active">
       <i class="fa fa-heart"></i>
-      profile
+      &nbsp;profile
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['track'] } }]">
+    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['track'] } }]" routerLinkActive="active">
       <i class="fa fa-table"></i>
-      track
+      &nbsp;track
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['new-log'] } }]">
+    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['new-log'] } }]" routerLinkActive="active">
       <i class="fa fa-plus"></i>
-      health-log
+      &nbsp;health-log
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="javascript:void();" (click)="updatePin()">
-      <i class="fa fa-thumb-tack"></i>
-      {{ buttonState }}
+    <a class="nav-link" (click)="updatePin()" href="javascript:void();">
+      <i class="fa" [ngClass]="{'fa-eye': !patientPinned,'fa-eye-slash': patientPinned}"></i>
+      {{ buttonName }}
     </a>
   </li>
 </ul>

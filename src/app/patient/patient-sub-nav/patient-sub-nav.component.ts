@@ -12,8 +12,8 @@ export class PatientSubNavComponent implements OnInit {
   constructor(
     private patientService: PatientService
   ) {}
-  get buttonState() {
-    return this.patientPinned == true ? 'unpin patient' : 'pin patient';
+  get buttonName() {
+    return this.patientPinned == true ? 'unwatch' : 'watch';
   }
 
   updatePin(){
