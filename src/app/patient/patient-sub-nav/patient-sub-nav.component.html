@@ -1,26 +1,55 @@
 <ul class="nav flex-column nav-pills">
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['profile'] } }]" routerLinkActive="active">
+    <a class="nav-link" [routerLink]="['./profile']" routerLinkActive="active">
       <i class="fa fa-heart"></i>
       &nbsp;profile
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['track'] } }]" routerLinkActive="active">
+    <a class="nav-link" [routerLink]="['./','track']" routerLinkActive="active">
       <i class="fa fa-table"></i>
       &nbsp;track
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="[{ outlets: { 'content' : ['new-log'] } }]" routerLinkActive="active">
+    <a class="nav-link">
+      <i class="fa fa-line-chart"></i>
+      &nbsp;charts
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./','new-log']" routerLinkActive="active">
       <i class="fa fa-plus"></i>
       &nbsp;health-log
     </a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" (click)="updatePin()" href="javascript:void();">
+  <!--<li class="nav-item">
+    <hr>
+    <button  type="button" class="nav-link btn btn-default btn-sm" (click)="updatePin()" href="javascript:void();">
       <i class="fa" [ngClass]="{'fa-eye': !patientPinned,'fa-eye-slash': patientPinned}"></i>
       {{ buttonName }}
+    </button>
+  </li>-->
+</ul>
+<hr>
+<!--health-log-->
+<ul class="nav flex-column nav-pills">
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./','diagnosis']" routerLinkActive="active">
+      <i class="fa fa-plus"></i>
+      &nbsp;diagnosis
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./','prescription']" routerLinkActive="active">
+      <i class="fa fa-plus"></i>
+      &nbsp;prescription
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [routerLink]="['./','investigations']" routerLinkActive="active">
+      <i class="fa fa-plus"></i>
+      &nbsp;investigations
     </a>
   </li>
 </ul>

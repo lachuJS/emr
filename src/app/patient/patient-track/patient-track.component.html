@@ -1,0 +1,35 @@
+<div id="track-container">
+  <h2><strong>Tracked Health Information</strong></h2><br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><i class="fa fa-calendar-o"></i>&nbsp;date</th>
+        <th *ngIf="track.bp">BP</th>
+        <th *ngIf="track.pr">PR</th>
+        <th *ngIf="track.rr">RR</th>
+        <th *ngIf="track.temp">temp</th>
+        <th *ngIf="track.cvs">CVS</th>
+        <th *ngIf="track.rs">RS</th>
+        <th *ngIf="track.cns">CNS</th>
+        <th *ngIf="track.pa">P/A</th>
+        <th *ngIf="track.finalDiagnosis">Diagnosis</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="track">
+      <tr *ngFor="let healthLog of history">
+        <ng-container *ngIf="shouldBeTracked(healthLog)">
+          <th scope="row">{{ healthLog.dateCreated | date:'shortDate' }}</th>
+          <td *ngIf="track.bp">{{ healthLog.vitals.bp }}</td>
+          <td *ngIf="track.pr">{{ healthLog.vitals.pr }}</td>
+          <td *ngIf="track.rr">{{ healthLog.vitals.rr }}</td>
+          <td *ngIf="track.temp">{{ healthLog.vitals.temp }}</td>
+          <td *ngIf="track.cvs">{{ healthLog.systemicExamination.cvs }}</td>
+          <td *ngIf="track.rs">{{ healthLog.systemicExamination.rs }}</td>
+          <td *ngIf="track.cns">{{ healthLog.systemicExamination.cns }}</td>
+          <td *ngIf="track.pa">{{ healthLog.systemicExamination.pa }}</td>
+          <td *ngIf="track.finalDiagnosis">{{ healthLog.finalDiagnosis }}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,63 @@
+<!--track form-->
+<div>
+    <hr>
+    <div class="container">
+      <span><strong>Select data to track</strong></span><br><br>
+      <form class="form">
+
+          <div class="form-inline">
+            <input type="checkbox" name="bp" [(ngModel)]="track.bp" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="bp">BP</label>
+          </div>
+
+          <div class="form-inline">
+            <input type="checkbox" name="pr" [(ngModel)]="track.pr" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="pr">PR</label>
+          </div>
+
+          <div class="form-inline">
+            <input type="checkbox" name="rr" class="form-control" [(ngModel)]="track.rr" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="rr">RR</label>
+          </div>
+
+          <div class="form-inline">
+            <input type="checkbox" name="temp" class="form-control" [(ngModel)]="track.temp" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="temp">temperature</label>
+          </div>
+
+          <div class="form-inline">
+            <input type="checkbox" name="cvs" class="form-control" [(ngModel)]="track.cvs" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="cvs">CVS</label>
+          </div>
+
+          <!--RS-->
+          <div class="form-inline">
+            <input type="checkbox" name="rs" class="form-control" [(ngModel)]="track.rs" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="rs">RS</label>
+          </div>
+
+          <!--CNS-->
+          <div class="form-inline">
+            <input type="checkbox" name="cns" class="form-control" [(ngModel)]="track.cns" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="cns">CNS</label>
+          </div>
+
+          <!--P/A-->
+          <div class="form-inline">
+            <input type="checkbox" name="pa" class="form-control" [(ngModel)]="track.pa" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="pa">P/A</label>
+          </div>
+
+          <!--diagnosis-->
+          <div class="form-inline">
+            <input type="checkbox" name="finalDiagnosis" class="form-control" [(ngModel)]="track.finalDiagnosis" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="diagnosis">diagnosis</label><br>
+          </div><br>
+
+          <div>
+            <a class="float-left" href="javascript:void();" (click)="selectAll()">select-all</a>
+            <a class="float-right" href="javascript:void();" (click)="unselectAll()">unselect-all</a>
+          </div>
+    </form>
+  </div>
+</div>

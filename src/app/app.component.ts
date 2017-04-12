@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor() {};
+  sidebar: boolean;
+  constructor() {
+    this.sidebar = true; //show sidebar initially
+  }
+  toggleSidebar() {
+    this.sidebar = !this.sidebar;
+  }
+
+  ngOnInit() {}
 }

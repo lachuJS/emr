@@ -11,7 +11,7 @@ export class PatientSubNavComponent implements OnInit {
   patientPinned: boolean;
   constructor(
     private patientService: PatientService
-  ) {}
+  ) { }
   get buttonName() {
     return this.patientPinned == true ? 'unwatch' : 'watch';
   }

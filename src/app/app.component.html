@@ -4,8 +4,15 @@
     <i class="fa fa-bars"></i>
   </button>
 
-  <a class="navbar-brand" href="javascript:void();"><strong>Managment Name</strong></a>
-
+  <!--brand title-->
+  <a class="navbar-brand" href="javascript:void();">
+    <!--toggle sidebar button-->
+    <a href="javascript:void();" (click)="toggleSidebar()" id="menu-toggle">
+      <i class="fa fa-bars"></i>
+    </a>&nbsp;
+    <strong>Managment Name</strong>
+  </a>
+  <!--nav-->
   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -14,7 +21,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/patients">
+        <a class="nav-link" routerLink="/patients" routerLinkActive="active">
           <i class="fa fa-users"></i>&nbsp;patients
         </a>
       </li>
@@ -36,6 +43,30 @@
     </ul>
   </div>
 </nav>
-<!--primary router-outlet-->
-<!--will be loaded: layout-->
-<router-outlet></router-outlet>
+<!--wrapper-->
+<div id="wrapper" [ngClass]="{'toggled':sidebar}">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <div class="container">
+        <div class="app-body">
+          <router-outlet name="subnav"></router-outlet>
+          <router-outlet name="action"></router-outlet>
+        </div>
+      </div>
+    </div>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <!--primary outlet-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                  <!--primary router-outlet-->
+                  <div class="app-body">
+                    <router-outlet></router-outlet>
+                  </div>
+                </div><!--/.col-->
+            </div><!--/.row-->
+        </div><!--/.container-fluid-->
+    </div><!-- /#page-content-wrapper -->
+</div><!-- /#wrapper -->

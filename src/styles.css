@@ -8,25 +8,16 @@ body {
 }
 /*offsetting an html anchor to adjust for fixed header*/
 /*fix: offsets span[class="anchor"] to 70px(height of navbar)*/
-/*span[class="anchor"] {
+span[class="anchor"] {
   position:absolute;
-  top:-70px;
-}*/
+  top:-200px;
+}
 /*font-awesome icons import*/
 @import '../node_modules/font-awesome/css/font-awesome.css';
 /* borderless table*/
 .borderless td, .borderless th {
     border: none;
 }
-.navbar-nav > li > a, .navbar-brand {
-  color: #545454 !important;
-}
 .app-body {
   padding-top :25px;
-}
-a {
-  color : #545454;
-}
-li.borderless {
-  border: 0 none;
 }

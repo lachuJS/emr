@@ -1,21 +1,23 @@
 import { Routes } from '@angular/router';
 
 //components
-//app-layout
-import { LayoutComponent } from './layout/layout.component';
 //appointments
 import { AppointmentsComponent } from './appointments/appointments.component';
 //patients listing
 import { PatientsComponent } from './patients/patients.component';
 //patient
 import { PatientInfoComponent } from './patient/patient-info/patient-info.component';
-import { PatientHistoryComponent } from './patient/patient-history/patient-history.component';
+import { PatientTrackComponent } from './patient/patient-track/patient-track.component';
 import { PatientHealthLogFormComponent } from './patient/patient-health-log-form/patient-health-log-form.component';
 import { PatientHealthLogsComponent } from './patient/patient-health-logs/patient-health-logs.component';
 import { PatientSubNavComponent } from './patient/patient-sub-nav/patient-sub-nav.component';
+import { PatientTrackActionComponent } from './patient/patient-track-action/patient-track-action.component';
+import { PatientHealthLogFormActionComponent } from './patient/patient-health-log-form-action/patient-health-log-form-action.component';
+import { PatientDiagnosisFormComponent } from './patient/patient-diagnosis-form/patient-diagnosis-form.component';
+
 
 export const appRoutes: Routes = [
-  //set default landing page as /appointments
+  //default landing page
   {
     path: '',
     redirectTo : '/appointments',
@@ -24,55 +26,79 @@ export const appRoutes: Routes = [
   //appointments
   {
     path: 'appointments',
-    component : LayoutComponent,
     children : [
       {
         path : '',
         component: AppointmentsComponent,
-        outlet: 'content'
       }
-      //subnav component here...
     ]
   },
   //patients
   {
     path : 'patients',
-    component : LayoutComponent,
     children : [
       {
         path : '',
         component : PatientsComponent,
-        outlet : 'content'
       }
-      //insert subnav component here...
     ]
   },
   //patient
   {
     path: 'patient/:patientId',
-    component : LayoutComponent,
     children: [
+      //default landing page
+      {
+        path : '',
+        redirectTo : 'profile',
+        pathMatch : 'full'
+      },
       //subnav
       {
         path : '',
         component : PatientSubNavComponent,
         outlet: 'subnav'
       },
-      //content
+      //primary & action
+      //profile
       {
-        path  : 'profile', //default landing page for /patient/:patientId
+        path  : 'profile',
         component : PatientInfoComponent,
-        outlet : 'content'
       },
       {
         path : 'track',
-        component : PatientHistoryComponent,
-        outlet : 'content'
+        children : [
+          //primary
+          {
+            path : '',
+            component : PatientTrackComponent
+          },
+          {
+            path : '',
+            component : PatientTrackActionComponent,
+            outlet  : 'action'
+          }
+        ]
       },
+      //new-log
       {
         path : 'new-log',
-        component : PatientHealthLogFormComponent,
-        outlet : 'content'
+        children : [
+          {
+            path : '',
+            component : PatientHealthLogFormComponent,
+          },
+          {
+            path : '',
+            component : PatientHealthLogFormActionComponent,
+            outlet : 'action'
+          }
+        ]
+      }
+      //diagnosis
+      {
+        path : 'diagnosis',
+        component : PatientDiagnosisFormComponent,
       }
     ]
   }

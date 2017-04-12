@@ -4,9 +4,14 @@
       <!-- form -->
       <form [formGroup]="healthLogForm" (ngSubmit)="submitForm()" class="form-group">
 
-          <!--chief complaints table-->
-        <h2><strong>Chief Complaints</strong></h2><br>
+        <!--chief complaints table-->
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded static-top">
+          <div class="container">
+            <a class="navbar-brand" href="#">Chief Complaints</a>
+          </div>
+        </nav>
         <div>
+          <span class="anchor" id="chief-complaints"></span>
           <table class="table borderless" formArrayName="chiefComplaints">
             <tr>
               <th>#</th>
@@ -30,8 +35,13 @@
           </div>
         </div>
         <!--Examination-->
-        <h2><strong>Examination</strong></h2><br>
+        <nav class="navbar navbar-toggleable-md navbar-light sticky-top">
+          <div class="container">
+            <a class="navbar-brand" href="#">examination</a>
+          </div>
+        </nav>
           <div class="d-flex justify-content-end">
+            <span class="anchor" id="examination"></span>
             <div class="p-2">
               <input type="radio" formControlName="examination" value="concious">
               <label for="examination">concious</label>
@@ -44,6 +54,7 @@
         <!--Vitals-->
         <h2 ngbPanelTitle><strong>Vitals</strong></h2><br>
         <div formGroupName="vitals" class="d-flex justify-content-between">
+          <span class="anchor" id="vitals"></span>
           <div class="p-2">
             <input type="text" formControlName="pr" class="form-control" placeholder="PR">
           </div>
@@ -66,6 +77,7 @@
         <!--SystemicExamination-->
         <h2><strong>Systemic Examination</strong></h2><br>
         <div id="systemic-examination" formGroupName="systemicExamination" class="d-flex justify-content-between">
+          <span class="anchor" id="systemic-examination"></span>
           <div class="p-2">
             <input type="text" formControlName="cvs" class="form-control" placeholder="CVS">
           </div>
@@ -101,8 +113,8 @@
           </div>
         </div><br>
         <!--follow up-->
-        <h2><strong>Follow up</strong></h2><br>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between" id="follow-up">
+          <h2><strong>Follow up</strong></h2><br>
           <div class="p-2">
             <label for="nextFollowUp">Next Sitting Date if necessary</label>
           </div>
@@ -111,8 +123,8 @@
           </div>
         </div>
         <!--prescription-->
-        <h2><strong>Prescription</strong></h2><br>
         <div id="prescription">
+          <h2><strong>Prescription</strong></h2><br>
           <table class="table borderless" formArrayName="prescription">
             <tr>
               <th>#</th>
@@ -138,10 +150,11 @@
           <a href="javascript:void();" (click)="addPrescriptionItem()" id="add-prescription">+ add medicine</a>
         </div><br>
         <!--investifagations-->
-        <h2><strong>Investigations</strong></h2><br>
         <div id="investigations">
+          <h2><strong>Investigations</strong></h2><br>
           <textarea formControlName="investigations" class="form-control" rows=3></textarea>
-        </div><br>
+          <br>
+        </div>
         <!--form buttons-->
         <div>
           <button type="button" (click)="healthLogForm.reset()" class="btn btn-md">clear</button>
