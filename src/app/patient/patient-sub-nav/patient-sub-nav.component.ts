@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Track } from '../patient-track/track';
 
 import { PatientService } from '../patient.service';
 
@@ -8,23 +11,23 @@ import { PatientService } from '../patient.service';
   styleUrls: ['./patient-sub-nav.component.css']
 })
 export class PatientSubNavComponent implements OnInit {
-  patientPinned: boolean;
+  track: Track;
   constructor(
-    private patientService: PatientService
-  ) { }
-  get buttonName() {
-    return this.patientPinned == true ? 'unwatch' : 'watch';
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    this.track = new Track();
   }
-
-  updatePin(){
-    this.patientService.updatePin()
-    .catch(err => { console.log(err); });
+  selectAll() {
+    this.track.checkAll();
+    this.rebuildQueryParams();
+  }
+  rebuildQueryParams(){
+    this.router.navigate(['./track'],{ relativeTo: this.activatedRoute ,queryParams : this.track.buildQueryParams() });
   }
   ngOnInit() {
-    //subscribe to patientPinned
-    this.patientService.pinned.subscribe((value: boolean) => {
-      console.log(value);
-      this.patientPinned = value;
+    this.activatedRoute.queryParams.subscribe((query) => {
+      this.track.setQueryParams(query);
     });
   }
 }

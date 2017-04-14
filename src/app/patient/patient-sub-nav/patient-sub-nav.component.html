@@ -1,39 +1,83 @@
 <ul class="nav flex-column nav-pills">
+  <!--profile-->
   <li class="nav-item">
     <a class="nav-link" [routerLink]="['./profile']" routerLinkActive="active">
       <i class="fa fa-heart"></i>
       &nbsp;profile
     </a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['./','track']" routerLinkActive="active">
+  <!--history-->
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+    [routerLink]="['./','track']" [queryParams]="{bp:true,pr:true,rr:true,temp:true,cvs:true,rs:true,cns:true,pa:true,finalDiagnosis:true}"
+    routerLinkActive="active" role="button" aria-haspopup="true" aria-expanded="false">
       <i class="fa fa-table"></i>
-      &nbsp;track
+      &nbsp;history
     </a>
-  </li>
+    <!--dropdown-->
+    <div class="dropdown-menu">
+      <form class="form">
+          <div class="dropdown-item">
+            <input type="checkbox" name="bp" [(ngModel)]="track.bp" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="bp">BP</label>
+          </div>
+
+          <div class="dropdown-item">
+            <input type="checkbox" name="pr" [(ngModel)]="track.pr" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="pr">PR</label>
+          </div>
+
+          <div class="dropdown-item">
+            <input type="checkbox" name="rr" [(ngModel)]="track.rr" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="rr">RR</label>
+          </div>
+
+          <div class="dropdown-item">
+            <input type="checkbox" name="temp" [(ngModel)]="track.temp" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="temp">Temperature</label>
+          </div>
+
+          <div class="dropdown-item">
+            <input type="checkbox" name="cvs" [(ngModel)]="track.cvs" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="cvs">CVS</label>
+          </div>
+
+          <!--RS-->
+          <div class="dropdown-item">
+            <input type="checkbox" name="rs" [(ngModel)]="track.rs" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="rs">RS</label>
+          </div>
+
+          <!--CNS-->
+          <div class="dropdown-item">
+            <input type="checkbox" name="cns" [(ngModel)]="track.cns" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="cns">CNS</label>
+          </div>
+
+          <!--P/A-->
+          <div class="dropdown-item">
+            <input type="checkbox" name="pa" [(ngModel)]="track.pa" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="pa">P/A</label>
+          </div>
+
+          <!--diagnosis-->
+          <div class="dropdown-item">
+            <input type="checkbox" name="finalDiagnosis" [(ngModel)]="track.finalDiagnosis" (ngModelChange)="rebuildQueryParams()">
+            &nbsp;&nbsp;<label for="diagnosis">Final Diagnosis</label><br>
+          </div><br>
+          <div class="dropdown-divider"></div>
+          <div><a class="dropdown-item" href="javascript:void();" (click)="selectAll()">select all</a></div>
+          <div><a class="dropdown-item" href="javascript:void();" (click)="unselectAll()">unselect all</a></div>
+      </form>
+    </div>
+  </li><!--/.nav-iten dropdown-->
+  <!--charts-->
   <li class="nav-item">
     <a class="nav-link">
       <i class="fa fa-area-chart"></i>
       &nbsp;charts
     </a>
   </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" [routerLink]="['./','track']" routerLinkActive="active" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Separated link</a>
-    </div>
-  </li>
-  <!--<li class="nav-item">
-    <hr>
-    <button  type="button" class="nav-link btn btn-default btn-sm" (click)="updatePin()" href="javascript:void();">
-      <i class="fa" [ngClass]="{'fa-eye': !patientPinned,'fa-eye-slash': patientPinned}"></i>
-      {{ buttonName }}
-    </button>
-  </li>-->
 </ul>
 <hr>
 <!--health-log-->

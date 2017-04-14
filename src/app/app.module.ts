@@ -20,7 +20,6 @@ import { PatientInfoComponent } from './patient/patient-info/patient-info.compon
 import { PatientTrackComponent } from './patient/patient-track/patient-track.component';
 import { PatientHealthLogsComponent } from './patient/patient-health-logs/patient-health-logs.component';
 import { PatientSubNavComponent } from './patient/patient-sub-nav/patient-sub-nav.component';
-import { PatientTrackActionComponent } from './patient/patient-track-action/patient-track-action.component';
 import { PatientDiagnosisFormComponent } from './patient/patient-diagnosis-form/patient-diagnosis-form.component';
 import { PatientPrescriptionFormComponent } from './patient/patient-prescription-form/patient-prescription-form.component';
 import { PatientInvestigationsFormComponent } from './patient/patient-investigations-form/patient-investigations-form.component';
@@ -43,7 +42,6 @@ import { PatientService } from './patient/patient.service';
     PatientHealthLogsComponent,
     PatientSubNavComponent,
     PatientsComponent,
-    PatientTrackActionComponent,
     PatientDiagnosisFormComponent,
     PatientPrescriptionFormComponent,
     PatientInvestigationsFormComponent
