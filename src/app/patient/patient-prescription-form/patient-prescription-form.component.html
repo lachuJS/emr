@@ -1,0 +1,51 @@
+<h2><strong>Prescription</strong></h2><br>
+<div id="prescription" *ngIf="prescriptionForm">
+  <!--<div>{{ prescriptionForm.value | json }}</div>-->
+  <form [formGroup]="prescriptionForm" (ngSubmit)="saveForm()">
+    <table class="table table-hover">
+      <thead>
+        <tr class="row">
+          <th class="col-sm-1 col-md-1">#</th>
+          <th class="col-sm-4 col-md-4">Drug</th>
+          <th class="col-sm-2 col-md-2">Qty</th>
+          <th class="col-sm-5 col-md-5">Dosage Instructions</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="prescription">
+        <tr *ngFor="let item of prescription.controls;let i=index;" [formGroupName]="i" class="row">
+          <td scope="row" class="col-sm-1 col-md-1">{{ i + 1 }}</td>
+          <td class="col-sm-4 col-md-4">
+            <input type="text" formControlName="drug" placeholder="drug name" class="form-control">
+          </td>
+          <td class="col-sm-2 col-md-2">
+            <div class="input-group">
+              <input type="text" formControlName="quantity" placeholder="quantity" class="form-control">
+              <div class="input-group-addon">Nos.</div>
+            </div>
+          </td>
+          <td formGroupName="dosageInstruction" class="col-sm-5 col-md-5">
+            <div class="form-inline">
+              (&nbsp;Morning&nbsp;<input type="checkbox" formControlName="morning">&nbsp;/
+              Afternoon&nbsp;<input type="checkbox" formControlName="afternoon">&nbsp;/
+              Night&nbsp;<input type="checkbox" formControlName="night">&nbsp;)&nbsp;
+            </div>
+            <div class="form-inline">
+              before food&nbsp;<input type="checkbox" formControlName="beforeFood">&nbsp;
+              for&nbsp;
+              <div class="input-group">
+                <input type="text" formControlName="numberDays" class="form-control form-control-sm">
+                <div class="input-group-addon">days</div>
+              </div><!--/.input-group-->
+            </div><br>
+            <textarea rows="2" class="form-control" formControlName="vernacularNote" placeholder="Dosage insructions for patient (optional)"></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right"><a href="javascript:void();" (click)="addPrescription()">+ add drug</a></div>
+    <div>
+      <button type="button" class="btn btn-default" (click)="prescriptionForm.reset()">clear</button>
+      <button type="submit" class="btn btn-default" [disabled]="prescriptionForm.pristine">save</button>
+    </div>
+  </form>
+</div>

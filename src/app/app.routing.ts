@@ -8,13 +8,12 @@ import { PatientsComponent } from './patients/patients.component';
 //patient
 import { PatientInfoComponent } from './patient/patient-info/patient-info.component';
 import { PatientTrackComponent } from './patient/patient-track/patient-track.component';
-import { PatientHealthLogFormComponent } from './patient/patient-health-log-form/patient-health-log-form.component';
 import { PatientHealthLogsComponent } from './patient/patient-health-logs/patient-health-logs.component';
 import { PatientSubNavComponent } from './patient/patient-sub-nav/patient-sub-nav.component';
 import { PatientTrackActionComponent } from './patient/patient-track-action/patient-track-action.component';
-import { PatientHealthLogFormActionComponent } from './patient/patient-health-log-form-action/patient-health-log-form-action.component';
 import { PatientDiagnosisFormComponent } from './patient/patient-diagnosis-form/patient-diagnosis-form.component';
-
+import { PatientPrescriptionFormComponent } from './patient/patient-prescription-form/patient-prescription-form.component';
+import { PatientInvestigationsFormComponent } from './patient/patient-investigations-form/patient-investigations-form.component';
 
 export const appRoutes: Routes = [
   //default landing page
@@ -80,25 +79,20 @@ export const appRoutes: Routes = [
           }
         ]
       },
-      //new-log
-      {
-        path : 'new-log',
-        children : [
-          {
-            path : '',
-            component : PatientHealthLogFormComponent,
-          },
-          {
-            path : '',
-            component : PatientHealthLogFormActionComponent,
-            outlet : 'action'
-          }
-        ]
-      }
       //diagnosis
       {
         path : 'diagnosis',
-        component : PatientDiagnosisFormComponent,
+        component : PatientDiagnosisFormComponent
+      },
+      //prescription
+      {
+        path : 'prescription',
+        component : PatientPrescriptionFormComponent
+      },
+      //investigations
+      {
+        path : 'investigations',
+        component : PatientInvestigationsFormComponent
       }
     ]
   }

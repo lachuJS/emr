@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PatientService } from '../patient.service';
 
 import { Info } from './patient-info';
-import { PresentingIllness } from '../patient-health-log-form/patient-health-log-form.data-model';
+import { PresentingIllness } from '../patient-health-log-form.data-model';
 
 @Component({
   selector: 'app-patient-info',

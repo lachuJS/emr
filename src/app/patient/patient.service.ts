@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Info } from './patient-info/patient-info';
-import { HealthLogForm } from './patient-health-log-form/patient-health-log-form.data-model';
-import { PresentingIllness } from './patient-health-log-form/patient-health-log-form.data-model';
+import { HealthLogForm } from './patient-health-log-form.data-model';
+import { PresentingIllness } from './patient-health-log-form.data-model';
+
+import { Diagnosis } from './patient-diagnosis-form/diagnosis';
+import { Prescription } from './patient-prescription-form/prescription';
+import { Investigations } from './patient-investigations-form/investigations';
 
 @Injectable()
 export class PatientService {
@@ -234,5 +238,14 @@ export class PatientService {
     this.pinned.next(!this.pinned.value);
     return Promise.resolve(true);
   }
-
+  postDiagnosis(diagnosis: Diagnosis): Promise<boolean>{
+    //post diagnosis
+    return Promise.resolve(true);
+  }
+  postPrescriptions(prescriptions: Array<Prescription>): Promise<boolean>{
+    return Promise.resolve(true);
+  }
+  postInvestigations(investigations: Investigations): Promise<boolean> {
+    return Promise.resolve(true);
+  }
 }

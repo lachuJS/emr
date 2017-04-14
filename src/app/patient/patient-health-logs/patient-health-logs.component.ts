@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HealthLogForm } from '../patient-health-log-form/patient-health-log-form.data-model';
+import { HealthLogForm } from '../patient-health-log-form.data-model';
 
 import { PatientService } from '../patient.service';
 

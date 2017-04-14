@@ -1,0 +1,11 @@
+<h2><strong>Investigations</strong></h2><br>
+<!--<div>{{ investigationsForm.value | json }}</div>-->
+<div id="investigations">
+  <form [formGroup]="investigationsForm" (ngSubmit)="saveForm()">
+    <label for="investigations"><h5>Notes</h5></label>
+    <textarea class="form-control" formControlName="data" rows=10></textarea><br>
+
+    <button type="button" class="btn btn-default" (click)="investigationsForm.reset()">clear</button>
+    <button type="submit" class="btn btn-default" [disabled]="investigationsForm.pristine">save</button>
+  </form>
+</div>

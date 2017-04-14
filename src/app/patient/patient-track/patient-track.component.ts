@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { PatientService } from '../patient.service';
 
-import { HealthLogForm } from '../patient-health-log-form/patient-health-log-form.data-model';
+import { HealthLogForm } from '../patient-health-log-form.data-model';
 import { Track } from './track';
 
 @Component({
