@@ -1,18 +1,18 @@
 <div id="patients-container">
-  <h2><strong>Pinned Patients</strong></h2><br>
+  <h1><strong>Pinned Patients</strong></h1><br>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Diagnosed</th>
+        <th class="h5">#</th>
+        <th class="h5">name</th>
+        <th class="h5">admitted on</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let patient of patients;let i=index" (click)="goToPatient(patient.hid)">
         <td>{{ i+1 }}</td>
         <td><a>{{ patient.name }}</a></td>
-        <td>{{ patient.finalDiagnosis }}</td>
+        <td>{{ patient.admittedOn | date:'shortDate' }}</td>
       </tr>
     </tbody>
   </table>

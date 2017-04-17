@@ -1,0 +1,22 @@
+<div id="appointmets-container">
+  <h1><strong>Appointments</strong></h1><br>
+  <!--appointment links-->
+  <div *ngIf="appointments">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Patient</th>
+          <th>Checked in @</th>
+        <tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments;let i=index;" (click)="goToPatient(appointment.patient.patientId)">
+          <td>{{ i + 1 }}</td>
+          <td>{{ appointment.patient.name }}</td>
+          <td>{{ appointment.dateTimeCreated | date:'shortTime' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

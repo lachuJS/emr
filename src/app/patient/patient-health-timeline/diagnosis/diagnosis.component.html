@@ -1,0 +1,60 @@
+<div class="container">
+  <table class="table">
+    <thead class="thead-default">
+      <tr>
+        <th colspan="4">diagnosis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--chief complaints-->
+      <tr>
+        <th>chief complaints</th>
+        <td>
+          <span *ngFor="let chiefComplaint of diagnosisLog.chiefComplaints;">
+            {{ chiefComplaint.complaint }}&nbsp;
+          </span>
+        </td>
+      </tr>
+      <!--examintaion-->
+      <tr>
+        <th>examination</th>
+        <td>{{ diagnosisLog.examination }}</td>
+      </tr>
+      <!--vitals-->
+      <tr>
+        <th>vitals</th>
+        <td>
+          <span><strong>BP</strong> {{ diagnosisLog.vitals.bp }}</span>&nbsp;
+          <span><strong>PR</strong> {{ diagnosisLog.vitals.pr }}</span>&nbsp;
+          <span><strong>RR</strong> {{ diagnosisLog.vitals.rr }}</span>&nbsp;
+          <span><strong>temp</strong> {{ diagnosisLog.vitals.temp }}</span>&nbsp;
+        </td>
+      </tr>
+      <!--systemic examination-->
+      <tr>
+        <th>systemic examination</th>
+        <td>
+          <span><strong>CVS </strong> {{ diagnosisLog.systemicExamination.cvs }}</span>
+          <span><strong>CNS </strong>{{ diagnosisLog.systemicExamination.cvs }}</span>
+          <span><strong>RS </strong>{{ diagnosisLog.systemicExamination.cvs }}</span>
+          <span><strong>P/A</strong>{{ diagnosisLog.systemicExamination.cvs }}</span>
+        </td>
+      </tr>
+      <!--LE-->
+      <tr>
+        <th>LE</th>
+        <td>{{ diagnosisLog.le }}</td>
+      </tr>
+      <!--final diagnosis-->
+      <tr>
+        <th>final diagnosis</th>
+        <td>{{ diagnosisLog.finalDiagnosis }}</td>
+      </tr>
+      <!--follow up date-->
+      <tr>
+        <th>next sitting date</th>
+        <td>{{ diagnosisLog.followUpDate | date:'longDate' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

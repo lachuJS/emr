@@ -1,3 +1,7 @@
-.nav-pills > .active {
-    background-color: red !important;
+a {
+  color : #808080 !important;
+}
+.active {
+  background-color: #ECEEEF !important;
+  color : black !important;
 }

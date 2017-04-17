@@ -1,0 +1,12 @@
+<h1><strong>HealthLogs</strong></h1><br><br>
+<div id="logs">
+  <div *ngFor="let log of logs;">
+    <div *ngIf="log.type == logType.diagnosis">
+      <app-diagnosis [diagnosisLog]="log"></app-diagnosis>
+    </div>
+    <div *ngIf="log.type == logType.prescription">
+      <app-prescription [prescriptionLog]="log"></app-prescription>
+    </div>
+    <br>
+  </div>
+</div>

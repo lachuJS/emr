@@ -1,15 +1,14 @@
-<h2><strong>Diagnosis</strong></h2><br>
+<h1><strong>Diagnosis</strong></h1><br>
 <div id="diagnosis-form" *ngIf="diagnosisForm">
   <!--<div>{{ diagnosisForm.value | json }}</div>-->
   <form [formGroup]="diagnosisForm" (ngSubmit)="saveForm()" class="form-group">
     <!-- chief-complaints-->
     <div id="chief-complaints">
-      <h5>Chief Complaints</h5>
       <table class="table" formArrayName="chiefComplaints">
         <thead>
           <tr>
             <th>#</th>
-            <th>complaint</th>
+            <th>Chief Complaints</th>
             <th>duration</th>
             <th *ngIf="chiefComplaints.length > 1">delete</th>
           </tr>
@@ -32,77 +31,109 @@
         </tbody>
       </table>
       <div class="text-right"><a href="javascript:void();" (click)="addChiefComplaint()">+ add complaint</a></div>
-    </div><br>
+    </div>
     <!--examination-->
-    <div id="examination" class="form-group row">
-      <label for="examination" class="col-form-label col-sm-6 col-md-6"><h5>Examination</h5></label>
-      <div class="col-sm-6 col-md-6 form-inline">
-        <input type="radio" formControlName="examination" value="concious" class="form-control" checked>&nbsp;concious&nbsp;&nbsp;
-        <input type="radio" formControlName="examination" value="oriented" class="form-control">&nbsp;oriented&nbsp;&nbsp;
-      </div>
-    </div><br>
+    <div id="examination">
+      <table class="table borderless">
+        <tbody>
+          <tr>
+            <th>Examination</th>
+            <td>
+              <input type="radio" formControlName="examination" value="concious" checked>
+              <label for="examination">&nbsp;concious</label>
+            </td>
+            <td>
+              <input type="radio" formControlName="examination" value="oriented">
+              <label for="examination">&nbsp;oriented</label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!--vitals-->
     <div id="vitals" formGroupName="vitals" class="form-group">
-      <h5>Vitals</h5>
-      <div class="row">
-        <!--PR-->
-        <div class="col-sm-3 col-md-3">
-          <div class="input-group">
-            <input type="text" formControlName="pr" class="form-control" placeholder="PR">
-            <div class="input-group-addon">bpm</div>
-          </div>
-        </div>
-        <!--BP-->
-        <div class="col-sm-3 col-md-3">
-          <div class="input-group">
-            <input type="text" formControlName="bp" class="form-control" placeholder="BP">
-            <div class="input-group-addon">mmHg</div>
-          </div>
-        </div>
-        <!--RR-->
-        <div class="col-sm-3 col-md-3">
-          <div class="input-group">
-            <input type="text" formControlName="rr" class="form-control" placeholder="RR">
-            <div class="input-group-addon">bpm</div>
-          </div>
-        </div>
-        <!--temp-->
-        <div class="col-sm-3 col-md-3">
-          <div class="input-group">
-            <input type="text" formControlName="temp" class="form-control" placeholder="Temp">
-            <div class="input-group-addon">° F</div>
-          </div>
-        </div>
-      </div>
-    </div><br>
+      <table class="table borderless">
+        <tbody>
+          <tr>
+            <th>Vitals</th>
+          </tr>
+          <tr>
+            <td>
+              <div class="input-group">
+                <input type="text" formControlName="pr" class="form-control" placeholder="PR">
+                <div class="input-group-addon">bpm</div>
+              </div>
+            </td>
+            <td>
+              <div class="input-group">
+                <input type="text" formControlName="bp" class="form-control" placeholder="BP">
+                <div class="input-group-addon">mmHg</div>
+              </div>
+            </td>
+            <td>
+              <div class="input-group">
+                <input type="text" formControlName="temp" class="form-control" placeholder="Temp">
+                <div class="input-group-addon">° F</div>
+              </div>
+            </td>
+            <td>
+              <div class="input-group">
+                <input type="text" formControlName="temp" class="form-control" placeholder="Temp">
+                <div class="input-group-addon">° F</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!--systemic-examintion-->
     <div id="systemic-examination" formGroupName="systemicExamination" class="form-group">
-        <h5>Systemic Examination</h5>
-        <div class="row">
-          <div class="col-sm-3 col-md-3"><input type="text" formControlName="cvs" class="form-control" placeholder="CVS"></div>
-          <div class="col-sm-3 col-md-3"><input type="text" formControlName="cns" class="form-control" placeholder="CNS"></div>
-          <div class="col-sm-3 col-md-3"><input type="text" formControlName="rs" class="form-control" placeholder="RS"></div>
-          <div class="col-sm-3 col-md-3"><input type="text" formControlName="pa" class="form-control" placeholder="PA"></div>
-        </div>
-    </div><br>
+      <table class="table borderless">
+        <tbody>
+          <tr>
+            <th>Systemic Examination</th>
+          </tr>
+          <tr>
+            <td><input type="text" formControlName="cvs" class="form-control" placeholder="CVS"></td>
+            <td><input type="text" formControlName="cns" class="form-control" placeholder="CNS"></td>
+            <td><input type="text" formControlName="rs" class="form-control" placeholder="RS"></td>
+            <td><input type="text" formControlName="pa" class="form-control" placeholder="PA"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!--row finalDiagnosis & followUpDate-->
-    <div class="row">
-      <div class="col-sm-6 col-md-6" id="finalDiagnosis">
-        <h5>Final Diagnosis</h5>
-        <input type="text" formControlName="finalDiagnosis" placeholder="diagnosed" class="form-control">
-      </div>
-      <div class="col-sm-6 col-md-6" id="followUpDate">
-        <h5>Next Sitting Date</h5>
-        <input type="date" formControlName="followUpDate" class="form-control">
-      </div>
-    </div><br>
+    <div>
+      <table class="table borderless">
+        <tbody>
+          <tr>
+            <th>Final Diagnosis</th>
+            <td><input type="text" formControlName="finalDiagnosis" placeholder="diagnosed" class="form-control"></td>
+          </tr>
+          <tr>
+            <th>Next Sitting Date</th>
+            <td><input type="date" formControlName="followUpDate" class="form-control"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!--L/E-->
     <div id="le">
-      <h5>L/E</h5>
-      <textarea formControlName="le" class="form-control" rows="3"></textarea>
+      <table class="table borderless">
+        <tbody>
+          <tr>
+            <th>L/E</th>
+          </tr>
+          <tr>
+            <td>
+              <textarea formControlName="le" class="form-control" rows="3"></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div><br>
     <!--form actions-->
-    <div>
+    <div class="container">
       <button type="button" (click)="diagnosisForm.reset()" class="btn btn-default">clear</button>
       <button type="submit" [disabled]="diagnosisForm.pristine" class="btn btn-default">save</button>
     </div>

@@ -1,15 +1,16 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Appointment } from "./appointment";
 
-import { AppointmentsService } from './appointments.service';
+import { PatientsService } from '../patients.service';
 
 @Component({
-  selector: 'app-appointments',
-  templateUrl: './appointments.component.html',
-  styleUrls: ['./appointments.component.css']
+  selector: 'app-patients-appointment',
+  templateUrl: './patients-appointment.component.html',
+  styleUrls: ['./patients-appointment.component.css']
 })
-export class AppointmentsComponent implements OnInit {
+export class PatientsAppointmentComponent implements OnInit {
   //appointments list
   appointments: Array<Appointment>;
   //badge
@@ -18,15 +19,16 @@ export class AppointmentsComponent implements OnInit {
   }
 
   constructor(
-    private appointmentsService: AppointmentsService
+    private patientsService: PatientsService,
+    private router: Router
   ) {}
 
-  removeAppointment(index: number) {
-    this.appointments.splice(index,1);
+  goToPatient(patientId: number) {
+    this.router.navigate(['/patient',patientId]);
   }
   ngOnInit() {
     //get appointments of doctor
-    this.appointmentsService.getAppointments()
+    this.patientsService.getAppointments()
     .then((appointments: Array<Appointment>) => {
       this.appointments = appointments; //set property appointments
     })

@@ -11,10 +11,10 @@ import { appRoutes } from './app.routing';
 
 //components
 import { AppComponent } from './app.component';
-//appointments
-import { AppointmentsComponent } from './appointments/appointments.component';
 //patients
-import { PatientsComponent } from './patients/patients.component';
+import { PatientsAppointmentComponent } from './patients/patients-appointment/patients-appointment.component';
+import { PatientsPinnedComponent } from './patients/patients-pinned/patients-pinned.component';
+import { PatientsSubNavComponent } from './patients/patients-sub-nav/patients-sub-nav.component';
 //patient
 import { PatientInfoComponent } from './patient/patient-info/patient-info.component';
 import { PatientTrackComponent } from './patient/patient-track/patient-track.component';
@@ -23,28 +23,33 @@ import { PatientSubNavComponent } from './patient/patient-sub-nav/patient-sub-na
 import { PatientDiagnosisFormComponent } from './patient/patient-diagnosis-form/patient-diagnosis-form.component';
 import { PatientPrescriptionFormComponent } from './patient/patient-prescription-form/patient-prescription-form.component';
 import { PatientInvestigationsFormComponent } from './patient/patient-investigations-form/patient-investigations-form.component';
+import { PatientHealthTimelineComponent } from './patient/patient-health-timeline/patient-health-timeline.component';
 //services
-//appointments
-import { AppointmentsService } from './appointments/appointments.service';
 //patients
 import { PatientsService } from './patients/patients.service';
 //patient
 import { PatientService } from './patient/patient.service';
+import { DiagnosisComponent } from './patient/patient-health-timeline/diagnosis/diagnosis.component';
+import { PrescriptionComponent } from './patient/patient-health-timeline/prescription/prescription.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppointmentsComponent,
+    PatientsAppointmentComponent,
     PatientInfoComponent,
     PatientTrackComponent,
     PatientHealthLogsComponent,
     PatientSubNavComponent,
-    PatientsComponent,
+    PatientsPinnedComponent,
     PatientDiagnosisFormComponent,
     PatientPrescriptionFormComponent,
-    PatientInvestigationsFormComponent
+    PatientInvestigationsFormComponent,
+    PatientsSubNavComponent,
+    PatientHealthTimelineComponent,
+    DiagnosisComponent,
+    PrescriptionComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +62,6 @@ import { PatientService } from './patient/patient.service';
     NgbModule.forRoot() //ng-bootstrap module
   ],
   providers: [
-    AppointmentsService,
     PatientsService,
     PatientService
   ],

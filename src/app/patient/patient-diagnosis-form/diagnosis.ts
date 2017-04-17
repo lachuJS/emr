@@ -83,6 +83,7 @@ export interface IDiagnosis {
   le: string,
   finalDiagnosis: string,
   followUpDate: string
+  dateTime?: string
 }
 export class Diagnosis implements IDiagnosis {
   public chiefComplaints: Array<ChiefComplaint>;
@@ -92,6 +93,7 @@ export class Diagnosis implements IDiagnosis {
   public le: string;
   public finalDiagnosis: string;
   public followUpDate: string;
+  public dateTime?: string;
   constructor(obj?: IDiagnosis) {
     if(obj){
       this.chiefComplaints = obj.chiefComplaints;
@@ -101,6 +103,7 @@ export class Diagnosis implements IDiagnosis {
       this.le = obj.le;
       this.finalDiagnosis = obj.finalDiagnosis;
       this.followUpDate = obj.followUpDate;
+      this.dateTime = obj.dateTime;
     }
   }
 }

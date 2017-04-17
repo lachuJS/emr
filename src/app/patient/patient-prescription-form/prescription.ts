@@ -35,17 +35,20 @@ export class DosageInstruction {
 export interface IPrescription {
   drug: string,
   quantity: number,
-  dosageInstruction: DosageInstruction;
+  dosageInstruction: DosageInstruction,
+  dateTime?: string
 }
 export class Prescription {
   public drug: string;
   public quantity: number;
   public dosageInstruction: DosageInstruction;
+  public dateTime?: string;
   constructor(obj?: IPrescription) {
     if(obj) {
       this.drug = obj.drug;
       this.quantity = obj.quantity;
       this.dosageInstruction = obj.dosageInstruction;
+      this.dateTime = obj.dateTime;
     }
     else{
       this.drug = null;

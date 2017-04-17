@@ -5,7 +5,8 @@ import { Info } from './patient-info/patient-info';
 import { HealthLogForm } from './patient-health-log-form.data-model';
 import { PresentingIllness } from './patient-health-log-form.data-model';
 
-import { Diagnosis } from './patient-diagnosis-form/diagnosis';
+import { LogType,DiagnosisLog,PrescriptionLog } from './patient-health-timeline/log';
+import { Diagnosis,Examination } from './patient-diagnosis-form/diagnosis';
 import { Prescription } from './patient-prescription-form/prescription';
 import { Investigations } from './patient-investigations-form/investigations';
 
@@ -238,14 +239,104 @@ export class PatientService {
     this.pinned.next(!this.pinned.value);
     return Promise.resolve(true);
   }
+  getDiagnosisLogs(): Promise<DiagnosisLog> {
+    return Promise.resolve(new DiagnosisLog({
+      id: 12,
+      type: LogType.diagnosis,
+      dateTime: new Date().toString(),
+      chiefComplaints: [{complaint:'cold',duration:2}],
+      examination: Examination['concious'],
+      vitals: {bp:100,rr:100,pr:100,temp:100},
+      systemicExamination:{cvs:100,cns:100,rs:100,pa:100},
+      le:'lorem ipsum again again lazy brown cat jumped',
+      finalDiagnosis: 'flu',
+      followUpDate: '2018-01-01',
+    }));
+  }
   postDiagnosis(diagnosis: Diagnosis): Promise<boolean>{
     //post diagnosis
     return Promise.resolve(true);
+  }
+  getPrescriptionLogs(): Promise<PrescriptionLog[]> {
+    let prescriptions = [
+      {
+        drug : 'crocin',
+        quantity : 1,
+        dosageInstruction: {
+          morning : true,
+          afternoon : true,
+          night: true,
+          beforeFood : false,
+          numberDays : 3,
+          vernacularNote : 'to be taken with cold water'
+        }
+      },
+      {
+        drug : 'crocin',
+        quantity : 1,
+        dosageInstruction: {
+          morning : true,
+          afternoon : true,
+          night: true,
+          beforeFood : false,
+          numberDays : 3,
+          vernacularNote : 'to be taken with cold water'
+        }
+      }
+    ]
+    return Promise.resolve(new PrescriptionLog({id:12,type:LogType.prescription,dateTime:new Date().toString(),prescriptions:prescriptions}));
   }
   postPrescriptions(prescriptions: Array<Prescription>): Promise<boolean>{
     return Promise.resolve(true);
   }
   postInvestigations(investigations: Investigations): Promise<boolean> {
     return Promise.resolve(true);
+  }
+  getLogs(): Promise<any[]> {
+    return Promise.resolve([
+      {
+      id: 12,
+      type: LogType.diagnosis,
+      dateTime: new Date().toString(),
+      chiefComplaints: [{complaint:'cold',duration:2}],
+      examination: Examination['concious'],
+      vitals: {bp:100,rr:100,pr:100,temp:100},
+      systemicExamination:{cvs:100,cns:100,rs:100,pa:100},
+      le:'lorem ipsum again again lazy brown cat jumped',
+      finalDiagnosis: 'flu',
+      followUpDate: '2018-01-01',
+    },
+    {
+      id:123,
+      type: LogType.prescription,
+      dateTime: new Date().toString(),
+      prescriptions : [
+        {
+          drug : 'crocin',
+          quantity : 1,
+          dosageInstruction: {
+            morning : true,
+            afternoon : true,
+            night: true,
+            beforeFood : false,
+            numberDays : 3,
+            vernacularNote : 'to be taken with cold water'
+          }
+        }
+      ]
+    },
+    {
+    id: 12,
+    type: LogType.diagnosis,
+    dateTime: new Date().toString(),
+    chiefComplaints: [{complaint:'cold',duration:2}],
+    examination: Examination['concious'],
+    vitals: {bp:100,rr:100,pr:100,temp:100},
+    systemicExamination:{cvs:100,cns:100,rs:100,pa:100},
+    le:'lorem ipsum again again lazy brown cat jumped',
+    finalDiagnosis: 'flu',
+    followUpDate: '2018-01-01',
+    }
+  ]);
   }
 }

@@ -12,6 +12,7 @@ import { PatientService } from '../patient.service';
 })
 export class PatientSubNavComponent implements OnInit {
   track: Track;
+  logDate: Date = new Date();
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -20,6 +21,10 @@ export class PatientSubNavComponent implements OnInit {
   }
   selectAll() {
     this.track.checkAll();
+    this.rebuildQueryParams();
+  }
+  unselectAll() {
+    this.track.clear();
     this.rebuildQueryParams();
   }
   rebuildQueryParams(){

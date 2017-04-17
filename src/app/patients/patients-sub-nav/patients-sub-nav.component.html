@@ -1,0 +1,21 @@
+<br>
+<ul class="nav flex-column nav-pills">
+  <div class="container">
+    <li class="nav-item">
+      <div>
+        <a class="nav-link" [routerLink]="['./','appointments']" routerLinkActive="active">
+          appointments&nbsp;
+          <span  class="badge badge-pill badge-default" *ngIf="appointmentsCount">{{ appointmentsCount }}</span>
+        </a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <div>
+        <a class="nav-link" [routerLink]="['./','pinned']" routerLinkActive="active">
+          pinned&nbsp;
+          <span  class="badge badge-pill badge-default" *ngIf="pinnedCount">{{ pinnedCount }}</span>
+        </a>
+      </div>
+    </li>
+  </div>
+</ul>

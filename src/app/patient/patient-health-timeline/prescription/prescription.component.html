@@ -1,0 +1,24 @@
+<div class="container">
+  <table class="table">
+    <thead class="thead-default">
+      <tr>
+        <th colspan="4">prescription</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prescription of prescriptionLog.prescriptions;let i=index;">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ prescription.drug }}</td>
+        <td>{{ prescription.quantity }} (Nos.)</td>
+        <td>
+          <span *ngIf="prescription.dosageInstruction.morning">Morning</span>
+          <span *ngIf="prescription.dosageInstruction.afternoon">Afternoon</span>
+          <span *ngIf="prescription.dosageInstruction.night">Night</span>
+          <span *ngIf="prescription.dosageInstruction.beforeFood">before food</span>
+          <span *ngIf="prescription.dosageInstruction.numberDays">for {{ prescription.dosageInstruction.numberDays }} days</span>
+          <p *ngIf="prescription.dosageInstruction.vernacularNote">{{ prescription.dosageInstruction.vernacularNote }}</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
