@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 import { Prescription, DosageInstruction } from './prescription';
-
+import { TillDatePipe } from '../../pipes/till-date.pipe';
 import { PatientService } from '../patient.service';
 
 @Component({
@@ -12,8 +12,9 @@ import { PatientService } from '../patient.service';
 })
 export class PatientPrescriptionFormComponent implements OnInit {
   prescriptionForm: FormGroup;
-  get prescription() {
-    return this.prescriptionForm.get('prescription') as FormArray;
+  tillDatePipe: TillDatePipe = new TillDatePipe();
+  get prescriptions() {
+    return this.prescriptionForm.get('prescriptions') as FormArray;
   }
   constructor(
     private patientService: PatientService,
@@ -23,24 +24,41 @@ export class PatientPrescriptionFormComponent implements OnInit {
   }
   createForm() {
     this.prescriptionForm = this.fb.group({
-      prescription : this.fb.array([])
+      prescriptions : this.fb.array([])
     })
     this.addPrescription();
   }
   addPrescription() {
-    this.prescription.push(this.fb.group({
+    this.prescriptions.push(this.fb.group({
       drug: undefined,
       quantity: undefined,
-      dosageInstruction: this.fb.group(new DosageInstruction())
+      dosageInstruction: this.fb.group({
+        morning : null,
+        afternoon: null,
+        night: null,
+        beforeFood: null,
+        numberDays: null, //tillDate in prescription interface
+        vernacularNote: null
+      })
     }));
   }
   removePrescription(index: number) {
-    this.prescription.removeAt(index);
+    this.prescriptions.removeAt(index);
   }
   captureForm() {
     const formModel = this.prescriptionForm.value;
-    return formModel.prescription.map((each) => {
-      return new Prescription(each);
+    return formModel.prescriptions.map((prescription) => {
+      return {
+        drug : prescription.drug,
+        quantity : prescription.quantity,
+        dosageInstruction : {
+          morning : prescription.dosageInstruction.morning,
+          afternoon : prescription.dosageInstruction.afternoon,
+          night : prescription.dosageInstruction.night,
+          beforeFood : prescription.dosageInstruction.beforeFood,
+          tillDate : this.tillDatePipe.transform(prescription.dosageInstruction.numberDays)
+        }
+      };
     })
   }
   saveForm() {

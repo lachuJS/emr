@@ -1,0 +1,32 @@
+<br><br>
+<div class="row" *ngIf="data">
+  <div class="col-md-12 col-sm-12 col-lg-6">
+    <div style="display: block;">
+    <canvas baseChart width="400" height="400"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+  <div class="col-md-12 col-sm-12 col-lg-6" style="margin-bottom: 10px">
+    <table class="table table-responsive table-condensed">
+      <thead>
+        <tr>
+          <th>timestamp</th>
+          <th>low</th>
+          <th>high</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let row of data;">
+        <th scope="row">{{ row[0] | date:'dd MMM yy' }}</th>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

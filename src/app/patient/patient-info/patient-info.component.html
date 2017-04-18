@@ -22,19 +22,19 @@
   </table>
 </div><br>
 <!--presenting illness-->
-<h1><strong>Presenting Illness</strong></h1><br>
-<div *ngIf="presentingIllness">
+<h1><strong>Active Medications</strong></h1><br>
+<div *ngIf="activeMedications">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Diagnosis</th>
-        <th>Medications</th>
+        <th>Drug</th>
+        <th>Prescribed till</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>{{ presentingIllness.finalDiagnosis }}</td>
-        <td>{{ presentingIllness.medications | json }}</td>
+      <tr *ngFor="let activeMedication of activeMedications;">
+        <td>{{ activeMedication.drug }}</td>
+        <td>{{ activeMedication.tillDate | date : 'dd MMMM yy' }}</td>
       </tr>
     </tbody>
   </table>

@@ -8,7 +8,6 @@ import { PatientsSubNavComponent } from './patients/patients-sub-nav/patients-su
 //patient
 import { PatientInfoComponent } from './patient/patient-info/patient-info.component';
 import { PatientTrackComponent } from './patient/patient-track/patient-track.component';
-import { PatientHealthLogsComponent } from './patient/patient-health-logs/patient-health-logs.component';
 import { PatientSubNavComponent } from './patient/patient-sub-nav/patient-sub-nav.component';
 import { PatientHealthTimelineComponent } from './patient/patient-health-timeline/patient-health-timeline.component';
 import { PatientDiagnosisFormComponent } from './patient/patient-diagnosis-form/patient-diagnosis-form.component';

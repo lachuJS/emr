@@ -34,257 +34,15 @@ export class PatientService {
     //get personal, and pin flag from patient table
     return Promise.resolve(info);
   }
-  getPresentingIllness(): Promise<PresentingIllness> {
-    return Promise.resolve({
-      healthLogId: 1,
-      finalDiagnosis: 'hypertension',
-      medications: ['drugA-25mg']
-    });
-  }
-  getHistory(): Promise<HealthLogForm[]> {
-    return Promise.resolve([
-      {
-          chiefComplaints: [
-            {
-              complaint: 'fever',
-              duration :2 //days
-            }
-          ],
-          examination: 'concious',
-          //form builder replaces undefined with null values
-          vitals: {
-            pr:1,
-            bp:1,
-            rr:1,
-            temp:1
-          },
-          systemicExamination: {
-            cvs:1,
-            rs:1,
-            cns:null,
-            pa:1
-          },
-          le:'lazy brown fox jumped',
-          finalDiagnosis:'lrem ipsum',
-          presentingIllness : false,
-          nextFollowUp: '1995-08-17',
-          investigations: 'lab data',
-          prescription:[
-            {
-              item: 'crocin',
-              breakfast: true,
-              lunch: false,
-              dinner: true,
-              beforeMeal: true
-            },
-            {
-              item: 'cetrizin',
-              dinner: true
-            }
-          ],
-          dateCreated: '1990-08-01'
-        },
-        {
-            chiefComplaints: [],
-            examination: 'concious',
-            //form builder replaces undefined with null values
-            vitals: {
-              pr:undefined,
-              bp:undefined,
-              rr:undefined,
-              temp:undefined
-            },
-            systemicExamination: {
-              cvs:1,
-              rs:1,
-              cns:null,
-              pa:1
-            },
-            le:undefined,
-            finalDiagnosis:'lrem ipsum',
-            presentingIllness : false,
-            nextFollowUp: '1995-08-17',
-            investigations: 'lab data',
-            prescription: [],
-          dateCreated: '1990-08-01'
-        }
-    ]);
-  }
-  getHealthLog(): Promise<HealthLogForm> {
-    return Promise.resolve({
-        chiefComplaints: [
-          {
-            complaint: 'fever',
-            duration: 2 //days
-          },
-          {
-            complaint: 'nausea',
-            duration: 3 //days
-          }
-      ],
-        examination: 'concious',
-        //form builder replaces undefined with null values
-        vitals: {
-          pr:1,
-          bp:1,
-          rr:1,
-          temp:1
-        },
-        systemicExamination: {
-          cvs:1,
-          rs:1,
-          cns:null,
-          pa:1
-        },
-        le:'lazy brown fox jumped',
-        finalDiagnosis:'lrem ipsum',
-        nextFollowUp: '1995-08-17',
-        investigations: 'lab data',
-        prescription: [
-          {
-            item: 'crocin',
-            breakfast: true,
-            lunch: false,
-            dinner: true,
-            beforeMeal: false
-          },
-          {
-            item: 'cetrizin',
-            breakfast: false,
-            lunch: false,
-            dinner: true,
-            beforeMeal: false
-          }
-        ],
-        dateCreated: '1990-08-01'
-      });
-  }
-  postHealthLog(healthLog: HealthLogForm): Promise<number> {
-    return Promise.resolve(2); //returns insertId of form
-  }
-  getHealthLogs(): Promise<HealthLogForm[]> {
-    return Promise.resolve([
-      {
-          id:1,
-          chiefComplaints: [
-            {
-              complaint: 'fever',
-              duration :2 //days
-            }
-          ],
-          examination: 'concious',
-          //form builder replaces undefined with null values
-          vitals: {
-            pr:1,
-            bp:1,
-            rr:1,
-            temp:1
-          },
-          systemicExamination: {
-            cvs:1,
-            rs:1,
-            cns:null,
-            pa:1
-          },
-          le:'lazy brown fox jumped',
-          finalDiagnosis:'lrem ipsum',
-          presentingIllness : false,
-          nextFollowUp: '1995-08-17',
-          investigations: 'lab data',
-          prescription:[
-            {
-              item: 'crocin',
-              breakfast: true,
-              lunch: false,
-              dinner: true,
-              beforeMeal: true
-            },
-            {
-              item: 'cetrizin',
-              dinner: true
-            }
-          ],
-          dateCreated: '1990-08-01'
-        },
-        {
-            id:2,
-            chiefComplaints: [],
-            examination: 'concious',
-            //form builder replaces undefined with null values
-            vitals: {
-              pr:undefined,
-              bp:undefined,
-              rr:undefined,
-              temp:undefined
-            },
-            systemicExamination: {
-              cvs:1,
-              rs:1,
-              cns:null,
-              pa:1
-            },
-            le:undefined,
-            finalDiagnosis:'lrem ipsum',
-            presentingIllness : false,
-            nextFollowUp: '1995-08-17',
-            investigations: 'lab data',
-            prescription: [],
-          dateCreated: '1990-08-01'
-        }
-    ]);
-  }
   updatePin(): Promise<boolean>{
     //send http request to set pin of this.patientId of patient table true
     //return status
     this.pinned.next(!this.pinned.value);
     return Promise.resolve(true);
   }
-  getDiagnosisLogs(): Promise<DiagnosisLog> {
-    return Promise.resolve(new DiagnosisLog({
-      id: 12,
-      type: LogType.diagnosis,
-      dateTime: new Date().toString(),
-      chiefComplaints: [{complaint:'cold',duration:2}],
-      examination: Examination['concious'],
-      vitals: {bp:100,rr:100,pr:100,temp:100},
-      systemicExamination:{cvs:100,cns:100,rs:100,pa:100},
-      le:'lorem ipsum again again lazy brown cat jumped',
-      finalDiagnosis: 'flu',
-      followUpDate: '2018-01-01',
-    }));
-  }
   postDiagnosis(diagnosis: Diagnosis): Promise<boolean>{
     //post diagnosis
     return Promise.resolve(true);
-  }
-  getPrescriptionLogs(): Promise<PrescriptionLog[]> {
-    let prescriptions = [
-      {
-        drug : 'crocin',
-        quantity : 1,
-        dosageInstruction: {
-          morning : true,
-          afternoon : true,
-          night: true,
-          beforeFood : false,
-          numberDays : 3,
-          vernacularNote : 'to be taken with cold water'
-        }
-      },
-      {
-        drug : 'crocin',
-        quantity : 1,
-        dosageInstruction: {
-          morning : true,
-          afternoon : true,
-          night: true,
-          beforeFood : false,
-          numberDays : 3,
-          vernacularNote : 'to be taken with cold water'
-        }
-      }
-    ]
-    return Promise.resolve(new PrescriptionLog({id:12,type:LogType.prescription,dateTime:new Date().toString(),prescriptions:prescriptions}));
   }
   postPrescriptions(prescriptions: Array<Prescription>): Promise<boolean>{
     return Promise.resolve(true);
@@ -338,5 +96,31 @@ export class PatientService {
     followUpDate: '2018-01-01',
     }
   ]);
+  }
+  //get track data for BP
+  getBpTrack(): Promise<any[][]>{
+    return Promise.resolve(
+      [ ['1995-08-12','80','110'],
+        ['1996-03-12','76','140'],
+        ['1997-09-12','65','90'],
+        ['2001-06-12','80','110'],
+        ['2002-01-12','50','150'],
+        ['2005-05-12','80','160'],
+        ['2016-02-12','76','180'] ]
+    );
+  }
+  //get active medications
+  getActiveMedications(): Promise<any[]> {
+    //query prescriptions (drug, tillDate) where tillDate >= curDate()
+    return Promise.resolve([
+      {
+        drug : 'crocin',
+        tillDate : '2018-01-01',
+      },
+      {
+        drug : 'metacin',
+        tillDate : '2017-12-12'
+      }
+    ]);
   }
 }

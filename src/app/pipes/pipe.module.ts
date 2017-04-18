@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AgifyPipe } from './agify.pipe';
 import { GenderifyPipe } from './genderify.pipe';
+import { TillDatePipe } from './till-date.pipe';
 
 @NgModule({
   imports: [
@@ -10,11 +11,13 @@ import { GenderifyPipe } from './genderify.pipe';
   ],
   declarations: [
     AgifyPipe,
-    GenderifyPipe
+    GenderifyPipe,
+    TillDatePipe
   ],
   exports: [
     AgifyPipe,
-    GenderifyPipe
+    GenderifyPipe,
+    TillDatePipe
   ]
 })
 export class PipeModule { }

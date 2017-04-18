@@ -12,7 +12,7 @@ import { PresentingIllness } from '../patient-health-log-form.data-model';
 })
 export class PatientInfoComponent implements OnInit {
   info: Info;
-  presentingIllness: PresentingIllness;
+  activeMedications: Array<any>;
 
   constructor(
     private patientService: PatientService
@@ -26,9 +26,10 @@ export class PatientInfoComponent implements OnInit {
     })
     .catch((err) => { console.log(err); });
     //presenting illness
-    this.patientService.getPresentingIllness()
-    .then((presentingIllness: PresentingIllness) => {
-      this.presentingIllness = presentingIllness;
+    this.patientService.getActiveMedications()
+    .then((medications: Array<any>) => {
+      console.log(medications);
+      this.activeMedications = medications;
     })
     .catch((err) => { console.log(err) });
   }

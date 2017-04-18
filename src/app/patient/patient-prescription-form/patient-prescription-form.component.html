@@ -11,8 +11,8 @@
           <th class="col-sm-5 col-md-5">Dosage Instructions</th>
         </tr>
       </thead>
-      <tbody formArrayName="prescription">
-        <tr *ngFor="let item of prescription.controls;let i=index;" [formGroupName]="i" class="row">
+      <tbody formArrayName="prescriptions">
+        <tr *ngFor="let item of prescriptions.controls;let i=index;" [formGroupName]="i" class="row">
           <td scope="row" class="col-sm-1 col-md-1">{{ i + 1 }}</td>
           <td class="col-sm-4 col-md-4">
             <input type="text" formControlName="drug" placeholder="drug name" class="form-control">
@@ -36,6 +36,12 @@
                 <input type="text" formControlName="numberDays" class="form-control form-control-sm">
                 <div class="input-group-addon">days</div>
               </div><!--/.input-group-->
+              <span *ngIf="prescriptions.value[i].dosageInstruction.numberDays">
+                <em>
+                  <strong>till </strong>:
+                  {{ prescriptions.value[i].dosageInstruction.numberDays | tillDate | date:'dd MMMM yy' }}
+                </em>
+              </span>
             </div><br>
             <textarea rows="2" class="form-control" formControlName="vernacularNote" placeholder="Dosage insructions for patient (optional)"></textarea>
           </td>

@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { PipeModule } from './pipes/pipe.module';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; //ng-bootstrap
+import { ChartsModule } from 'ng2-charts';
 
 //routing
 import { RouterModule } from '@angular/router';
@@ -18,7 +19,6 @@ import { PatientsSubNavComponent } from './patients/patients-sub-nav/patients-su
 //patient
 import { PatientInfoComponent } from './patient/patient-info/patient-info.component';
 import { PatientTrackComponent } from './patient/patient-track/patient-track.component';
-import { PatientHealthLogsComponent } from './patient/patient-health-logs/patient-health-logs.component';
 import { PatientSubNavComponent } from './patient/patient-sub-nav/patient-sub-nav.component';
 import { PatientDiagnosisFormComponent } from './patient/patient-diagnosis-form/patient-diagnosis-form.component';
 import { PatientPrescriptionFormComponent } from './patient/patient-prescription-form/patient-prescription-form.component';
@@ -31,6 +31,7 @@ import { PatientsService } from './patients/patients.service';
 import { PatientService } from './patient/patient.service';
 import { DiagnosisComponent } from './patient/patient-health-timeline/diagnosis/diagnosis.component';
 import { PrescriptionComponent } from './patient/patient-health-timeline/prescription/prescription.component';
+import { BpComponent } from './patient/patient-track/bp/bp.component';
 
 
 
@@ -40,7 +41,6 @@ import { PrescriptionComponent } from './patient/patient-health-timeline/prescri
     PatientsAppointmentComponent,
     PatientInfoComponent,
     PatientTrackComponent,
-    PatientHealthLogsComponent,
     PatientSubNavComponent,
     PatientsPinnedComponent,
     PatientDiagnosisFormComponent,
@@ -49,7 +49,9 @@ import { PrescriptionComponent } from './patient/patient-health-timeline/prescri
     PatientsSubNavComponent,
     PatientHealthTimelineComponent,
     DiagnosisComponent,
-    PrescriptionComponent
+    PrescriptionComponent,
+    PatientTrackComponent,
+    BpComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import { PrescriptionComponent } from './patient/patient-health-timeline/prescri
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot(appRoutes), //routes
-    NgbModule.forRoot() //ng-bootstrap module
+    NgbModule.forRoot(), //ng-bootstrap module
+    ChartsModule
   ],
   providers: [
     PatientsService,
